@@ -14,9 +14,9 @@ import de.maanex.magic.missile.BridgeDrawMissile;
 import de.maanex.magic.wandsuse.WandType;
 
 
-public class BridgeBend extends MagicSpell {
+public class EarthBenderBridge extends MagicSpell {
 
-	public BridgeBend() {
+	public EarthBenderBridge() {
 		super(16, "Erdbendigung - Brücke", "Schmiede eine mächtige Brücke!", 18, new BuildRequirements(0, 0, 0, 0, 5, 10, 16, 20, 0, 0, 110));
 	}
 

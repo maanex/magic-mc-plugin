@@ -29,9 +29,10 @@ import de.maanex.magic.generators.ItemElements;
 import de.maanex.magic.items.DefaultItems;
 import de.maanex.magic.spells.AirBlast;
 import de.maanex.magic.spells.ArrowStorm;
-import de.maanex.magic.spells.BridgeBend;
 import de.maanex.magic.spells.Comet;
 import de.maanex.magic.spells.DarkSeal;
+import de.maanex.magic.spells.EarthBenderBridge;
+import de.maanex.magic.spells.EarthBenderCannon;
 import de.maanex.magic.spells.Fireball;
 import de.maanex.magic.spells.Firepunch;
 import de.maanex.magic.spells.Frostwave;
@@ -42,12 +43,12 @@ import de.maanex.magic.spells.MagmaWorm;
 import de.maanex.magic.spells.Nitro;
 import de.maanex.magic.spells.PainfullSting;
 import de.maanex.magic.spells.ProtectionWall;
-import de.maanex.magic.spells.StoneCannonBend;
 import de.maanex.magic.spells.Strike;
 import de.maanex.magic.spells.Stun;
 import de.maanex.magic.spells.TheSeeker;
 import de.maanex.magic.spells.TrueSight;
 import de.maanex.magic.spells.Warp;
+import de.maanex.magic.spells.WaterBenderSplash;
 import de.maanex.magic.structures.RunicTableSpotter;
 import de.maanex.main.Main;
 
@@ -94,12 +95,13 @@ public class RunicTableUse implements Listener {
 		spells.add(new Frostwave());
 		spells.add(new PainfullSting());
 		spells.add(new MagmaWorm());
-		spells.add(new BridgeBend());
-		spells.add(new StoneCannonBend());
+		spells.add(new EarthBenderBridge());
+		spells.add(new EarthBenderCannon());
 		spells.add(new DarkSeal());
 		spells.add(new Levitate());
 		spells.add(new Stun());
 		spells.add(new Firepunch());
+		spells.add(new WaterBenderSplash());
 	}
 
 	public RunicTableUse() {

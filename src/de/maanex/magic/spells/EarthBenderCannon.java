@@ -27,9 +27,9 @@ import de.maanex.utils.Particle;
 import net.minecraft.server.v1_12_R1.EnumParticle;
 
 
-public class StoneCannonBend extends MagicSpell implements Listener {
+public class EarthBenderCannon extends MagicSpell implements Listener {
 
-	public StoneCannonBend() {
+	public EarthBenderCannon() {
 		super(17, "Erdbendigung - Schleuder", "Hepp... UUUuunnd SCHUSS!", 5, new BuildRequirements(0, 0, 5, 10, 0, 0, 16, 20, 0, 0, 110));
 	}
 

@@ -18,7 +18,7 @@ import de.maanex.magic.listener.ManapotDrink;
 import de.maanex.magic.listener.RunicTableUse;
 import de.maanex.magic.missile.MagicMissile;
 import de.maanex.magic.spells.Levitate;
-import de.maanex.magic.spells.StoneCannonBend;
+import de.maanex.magic.spells.EarthBenderCannon;
 import de.maanex.magic.wandsuse.UseWand;
 import de.maanex.news.News;
 import de.maanex.survival.AntiExplode;
@@ -68,7 +68,7 @@ public class Main extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new RunicTableUse(), this);
 		Bukkit.getPluginManager().registerEvents(new Spellbook(), this);
 		Bukkit.getPluginManager().registerEvents(new ManapotDrink(), this);
-		Bukkit.getPluginManager().registerEvents(new StoneCannonBend(), this);
+		Bukkit.getPluginManager().registerEvents(new EarthBenderCannon(), this);
 
 		// Survival
 		// Bukkit.getPluginManager().registerEvents(new ServerlistPing(), this);
