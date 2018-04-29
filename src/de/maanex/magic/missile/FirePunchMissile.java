@@ -44,7 +44,7 @@ public class FirePunchMissile extends MagicMissile {
 					if (n instanceof LivingEntity) {
 						((LivingEntity) n).addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20, 3));
 						((LivingEntity) n).setFireTicks(60);
-						((LivingEntity) n).damage(2);
+						((LivingEntity) n).damage(2, sender.getMCPlayer());
 					}
 
 					new Particle(EnumParticle.LAVA, n.getLocation(), true, .3f, 0, .3f, 1, 5).sendAll();

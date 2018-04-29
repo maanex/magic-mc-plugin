@@ -17,8 +17,8 @@ import de.maanex.magic.listener.JoinLeave;
 import de.maanex.magic.listener.ManapotDrink;
 import de.maanex.magic.listener.RunicTableUse;
 import de.maanex.magic.missile.MagicMissile;
-import de.maanex.magic.spells.Levitate;
 import de.maanex.magic.spells.EarthBenderCannon;
+import de.maanex.magic.spells.Levitate;
 import de.maanex.magic.wandsuse.UseWand;
 import de.maanex.news.News;
 import de.maanex.survival.AntiExplode;
@@ -27,6 +27,7 @@ import de.maanex.survival.Jetpack;
 import de.maanex.survival.JoinNames;
 import de.maanex.survival.Schlafenszeit;
 import de.maanex.sysad.Backdoor;
+import de.maanex.sysad.CpuTerminal;
 import de.maanex.whitehell.WorldsAmbient;
 import de.maanex.whitehell.generator.WhiteHellGenerator;
 
@@ -48,9 +49,12 @@ public class Main extends JavaPlugin {
 
 		News.init();
 		getCommand("news").setExecutor(new News());
+		getCommand("cpu").setExecutor(new CpuTerminal());
 
 		registerListeners();
 		startTimers();
+
+		Bukkit.getOnlinePlayers().forEach(p -> Bukkit.getOnlinePlayers().forEach(r -> r.showPlayer(p)));
 	}
 
 	@Override

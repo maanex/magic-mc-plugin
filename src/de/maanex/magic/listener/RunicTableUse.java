@@ -126,9 +126,10 @@ public class RunicTableUse implements Listener {
 
 	@EventHandler
 	public void onInvClick(InventoryClickEvent e) {
-		Bukkit.broadcastMessage(e.getInventory().getName() + "§f + " + e.getClickedInventory().getName());
+		// Bukkit.broadcastMessage(e.getInventory().getName() + "§f + " +
+		// e.getClickedInventory().getName());
 		if (e.getInventory().getName().equalsIgnoreCase(TABLE_NAME)) {
-			Bukkit.broadcastMessage("JA");
+			// Bukkit.broadcastMessage("JA");
 			Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> {
 				updateRes(e.getClickedInventory());
 				if (e.getWhoClicked() instanceof Player) ((Player) e.getWhoClicked()).updateInventory();

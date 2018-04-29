@@ -10,3 +10,5 @@ commands:
   news:
     description: Nur die neusten aller neuen Neuigkeiten im Neuland!
     aliases: [neuigkeiten, neues]
+  cpu:
+    description: CPU-Auslastung des Servers! (Und andere nützliche fakten!)

@@ -2,6 +2,7 @@ package de.maanex.magic.spells;
 
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Creature;
@@ -32,7 +33,7 @@ public class DarkSeal extends MagicSpell {
 		Entity tar = TargetEntityFinder.find(b);
 		if (tar == null) return;
 
-		for (int i = 0; i < 40; i++) {
+		for (int i = 0; i < 40; i += 2) {
 			partDel(tar, i);
 		}
 
@@ -49,9 +50,32 @@ public class DarkSeal extends MagicSpell {
 	@SuppressWarnings("deprecation")
 	private void partDel(Entity tar, int i) {
 		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> {
-			Particle pa = new Particle(EnumParticle.BLOCK_DUST, tar.getLocation().clone().add(0, 1, 0), true, 2, 0, 2, 0, 100);
-			pa.setC(Material.COAL_BLOCK.getId());
-			pa.sendAll();
+			Location loc = tar.getLocation().clone().add(0, 1, 0);
+			int points = 5;
+			for (int iteration = 0; iteration < points; iteration++) {
+				double angle = 360.0 / points * iteration;
+				double nextAngle = 360.0 / points * (iteration + 1);
+				angle = Math.toRadians(angle);
+				nextAngle = Math.toRadians(nextAngle);
+				double x = Math.cos(angle) * 2;
+				double z = Math.sin(angle) * 2;
+				double x2 = Math.cos(nextAngle) * 2;
+				double z2 = Math.sin(nextAngle) * 2;
+				double deltaX = x2 - x;
+				double deltaZ = z2 - z;
+
+				Particle pa2 = new Particle(EnumParticle.BLOCK_DUST, loc.clone().add(x, 0, z), true, .1f, 0, .1f, 0, 5);
+				pa2.setC(Material.LAVA.getId());
+				pa2.sendAll();
+
+				for (double d = 0; d < 1; d += .1) {
+					loc.add(x + deltaX * d, 0, z + deltaZ * d);
+					Particle pa = new Particle(EnumParticle.BLOCK_DUST, loc, true, 0, 0, 0, 0, 1);
+					pa.setC(Material.COAL_BLOCK.getId());
+					pa.sendAll();
+					loc.subtract(x + deltaX * d, 0, z + deltaZ * d);
+				}
+			}
 		}, i);
 	}
 

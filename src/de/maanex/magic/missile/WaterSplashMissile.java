@@ -53,7 +53,7 @@ public class WaterSplashMissile extends MagicMissile {
 
 				if (n instanceof LivingEntity) {
 					((LivingEntity) n).addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 20 * 5, 2));
-					((LivingEntity) n).damage(6);
+					((LivingEntity) n).damage(6, sender.getMCPlayer());
 					((LivingEntity) n).setRemainingAir(0);
 				}
 
