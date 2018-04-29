@@ -28,6 +28,7 @@ import de.maanex.survival.JoinNames;
 import de.maanex.survival.Schlafenszeit;
 import de.maanex.sysad.Backdoor;
 import de.maanex.sysad.CpuTerminal;
+import de.maanex.test.ItemsWithTextures;
 import de.maanex.whitehell.WorldsAmbient;
 import de.maanex.whitehell.generator.WhiteHellGenerator;
 
@@ -50,6 +51,7 @@ public class Main extends JavaPlugin {
 		News.init();
 		getCommand("news").setExecutor(new News());
 		getCommand("cpu").setExecutor(new CpuTerminal());
+		getCommand("test").setExecutor(new ItemsWithTextures());
 
 		registerListeners();
 		startTimers();

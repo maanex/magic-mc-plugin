@@ -12,3 +12,5 @@ commands:
     aliases: [neuigkeiten, neues]
   cpu:
     description: CPU-Auslastung des Servers! (Und andere nützliche fakten!)
+  test:
+    description: Nicht für dich!
