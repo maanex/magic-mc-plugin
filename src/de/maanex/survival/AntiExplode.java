@@ -65,7 +65,7 @@ public class AntiExplode implements Listener {
 					}
 				}, new Random().nextInt(40) + 60);
 
-				if (new Random().nextInt(e.blockList().size() < 20 ? 1 : 3) == 0) {
+				if (b.getType().isSolid() && new Random().nextInt(e.blockList().size() < 20 ? 1 : 2) == 0) {
 					Location l = b.getLocation();
 					FallingBlock f = l.getWorld().spawnFallingBlock(l, b.getType(), b.getData());
 
