@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Material;
+import org.bukkit.World.Environment;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -23,18 +24,10 @@ public class DefaultItems {
 	public static final String	MANAPOT_NAME	= "§3Mana Trank";
 
 	public static ItemStack getBasicWand(WandModifiers modifiers) {
-		ItemStack out = new ItemStack(Material.STICK);
-		ItemMeta m = out.getItemMeta();
-
-		m.setDisplayName(WandType.WOODEN.getDisplayname());
-		m.addEnchant(Enchantment.MENDING, 1, false);
-		applyWandModifiers(m, modifiers, WandType.WOODEN);
-
-		out.setItemMeta(m);
-		return out;
+		return WandBuilder.get(Environment.NORMAL).withMods(modifiers).build();
 	}
 
-	public static ItemMeta applyWandModifiers(ItemMeta m, WandModifiers mod, WandType type) {
+	public static ItemMeta applyWandModifiersr(ItemMeta m, WandModifiers mod, WandType type) {
 		List<String> lore = new ArrayList<>();
 
 		lore.add("§0" + type.getLoreName());

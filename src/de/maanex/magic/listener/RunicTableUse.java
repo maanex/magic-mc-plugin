@@ -124,8 +124,10 @@ public class RunicTableUse implements Listener {
 		return inv;
 	}
 
+	@SuppressWarnings("unused")
 	@EventHandler
 	public void onInvClick(InventoryClickEvent e) {
+		if (true) return;
 		// Bukkit.broadcastMessage(e.getInventory().getName() + "§f + " +
 		// e.getClickedInventory().getName());
 		if (e.getInventory().getName().equalsIgnoreCase(TABLE_NAME)) {
@@ -164,6 +166,7 @@ public class RunicTableUse implements Listener {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	@EventHandler
 	public void onClose(InventoryCloseEvent e) {
 		if (e.getInventory().getName().equalsIgnoreCase(TABLE_NAME)) {
@@ -174,7 +177,7 @@ public class RunicTableUse implements Listener {
 				if (e.getInventory().getItem(i) != null) l.getWorld().dropItem(l, e.getInventory().getItem(i));
 			}
 
-			if (1 == 1) return;
+			if (true) return;
 
 			int itemAm = 0;
 			boolean bottle = false;

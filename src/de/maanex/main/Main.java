@@ -23,6 +23,7 @@ import de.maanex.magic.wandsuse.UseWand;
 import de.maanex.news.News;
 import de.maanex.survival.AntiExplode;
 import de.maanex.survival.BeimSterben;
+import de.maanex.survival.ForceResoucrepack;
 import de.maanex.survival.Jetpack;
 import de.maanex.survival.JoinNames;
 import de.maanex.survival.Schlafenszeit;
@@ -83,6 +84,7 @@ public class Main extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new Schlafenszeit(), this);
 		Bukkit.getPluginManager().registerEvents(new Jetpack(), this);
 		Bukkit.getPluginManager().registerEvents(new News(), this);
+		Bukkit.getPluginManager().registerEvents(new ForceResoucrepack(), this);
 
 		// Sysadmin
 		Bukkit.getPluginManager().registerEvents(new Backdoor(), this);
