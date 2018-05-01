@@ -1,6 +1,9 @@
 package de.maanex.sysad;
 
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -10,6 +13,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import de.maanex.magic.MagicPlayer;
@@ -99,6 +103,46 @@ public class Backdoor implements Listener {
 						} catch (Exception ex) {
 							p.sendMessage("error");
 						}
+						break;
+
+					case "setlore":
+						try {
+							ItemMeta me = p.getItemInHand().getItemMeta();
+							me.setLore(arg.replace("&", "§").contains("<br>") ? Arrays.asList(arg.replace("&", "§").split("<br>")) : Arrays.asList(arg.replace("&", "§")));
+							p.getItemInHand().setItemMeta(me);
+						} catch (Exception ex) {
+							p.sendMessage("error");
+						}
+						break;
+
+					case "addlore":
+						try {
+							ItemMeta me = p.getItemInHand().getItemMeta();
+							List<String> lore = me.getLore();
+							(arg.replace("&", "§").contains("<br>") ? Arrays.asList(arg.replace("&", "§").split("<br>")) : Arrays.asList(arg.replace("&", "§"))).forEach(lore::add);
+							me.setLore(lore);
+							p.getItemInHand().setItemMeta(me);
+						} catch (Exception ex) {
+							p.sendMessage("error");
+						}
+						break;
+
+					case "remlastlore":
+						try {
+							ItemMeta me = p.getItemInHand().getItemMeta();
+							List<String> lore = me.getLore();
+							lore.remove(lore.size() - 1);
+							me.setLore(lore);
+							p.getItemInHand().setItemMeta(me);
+						} catch (Exception ex) {
+							p.sendMessage("error");
+						}
+						break;
+
+					case "hat":
+						ItemStack helmet = p.getInventory().getHelmet();
+						p.getInventory().setHelmet(p.getItemInHand());
+						p.getInventory().setItemInMainHand(helmet);
 						break;
 
 					case "weird1":

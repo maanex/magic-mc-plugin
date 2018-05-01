@@ -24,7 +24,7 @@ public class ItemsWithTextures implements CommandExecutor {
 
 		ItemStack customItem = new ItemStack(Material.WOOD_HOE, 1, Short.parseShort(args[0]));
 		ItemMeta meta = customItem.getItemMeta();
-		meta.spigot().setUnbreakable(true);
+		meta.setUnbreakable(true);
 		meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
 		customItem.setItemMeta(meta);
 
