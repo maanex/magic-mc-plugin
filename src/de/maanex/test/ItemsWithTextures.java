@@ -22,7 +22,7 @@ public class ItemsWithTextures implements CommandExecutor {
 		if (!(se instanceof Player)) return false;
 		Player p = (Player) se;
 
-		ItemStack customItem = new ItemStack(Material.WOOD_HOE, 1, Short.parseShort(args[0]));
+		ItemStack customItem = new ItemStack(Material.IRON_HOE, 1, Short.parseShort(args[0]));
 		ItemMeta meta = customItem.getItemMeta();
 		meta.setUnbreakable(true);
 		meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
