@@ -23,7 +23,6 @@ public class ForceResoucrepack implements Listener {
 
 	@EventHandler
 	public void packDeny(PlayerResourcePackStatusEvent e) {
-		System.err.println(e.getStatus().toString());
 		if (e.getStatus().equals(Status.DECLINED)) e.getPlayer().kickPlayer(
 				"§3§nHey!\n\n§bDie Zauberstäbe haben jetzt eigene Texturen! Juhu!\n§bDamit du die aber sehen kannst, müsstest du das Resoucepack runterladen!\n\n§7Klingt nach nem Deal?\n§7Klicke in der Serverliste auf den Server, dann auf\n§7bearbeiten und setze \"Server-Resoucenpackete\" auf Aktiviert!");
 	}
