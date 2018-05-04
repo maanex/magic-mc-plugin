@@ -15,6 +15,7 @@ public class ForceResoucrepack implements Listener {
 
 	@EventHandler
 	public void join(PlayerJoinEvent e) {
+		@SuppressWarnings("unused")
 		String s = "https://www.dropbox.com/s/53cx7ykd2yv83su/tdmp.zip?dl=1";
 		// Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () ->
 		// e.getPlayer().setResourcePack(s), 40);

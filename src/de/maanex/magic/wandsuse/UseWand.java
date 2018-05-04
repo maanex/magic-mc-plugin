@@ -31,7 +31,6 @@ public class UseWand implements Listener {
 	public UseWand() {
 	}
 
-	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onInteract(PlayerInteractEvent e) {
 		WandType t = WandType.getFromItem(e.getItem());
