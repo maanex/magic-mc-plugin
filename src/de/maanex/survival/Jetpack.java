@@ -110,7 +110,8 @@ public class Jetpack implements Listener {
 
 	public static void tick() {
 		for (Player p : Bukkit.getOnlinePlayers()) {
-			if (p.isFlying() && isSurvival(p) && p.getInventory().getChestplate().getItemMeta().hasLore() && p.getInventory().getChestplate().getItemMeta().getLore().contains("§0jetpack")) {
+			if (p.isFlying() && isSurvival(p) && p.getInventory().getChestplate() != null && p.getInventory().getChestplate().getItemMeta().hasLore()
+					&& p.getInventory().getChestplate().getItemMeta().getLore().contains("§0jetpack")) {
 				if (!fuel.containsKey(p)) fuel.put(p, 0);
 				if (fuel.get(p) <= 0) {
 					if (hasFuelItem(p)) {
