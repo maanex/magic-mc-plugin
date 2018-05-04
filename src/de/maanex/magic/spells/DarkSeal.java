@@ -24,7 +24,7 @@ import net.minecraft.server.v1_12_R1.EnumParticle;
 public class DarkSeal extends MagicSpell {
 
 	public DarkSeal() {
-		super(18, "Dunkles Siegel", "Markiere einen Gegner mit dem Dunklen Siegel!", 7, new BuildRequirements(0, 0, 10, 20, 0, 0, 0, 0, 10, 20, 120), WandType.DARK);
+		super(18, "Dunkles Siegel", "Markiere einen Gegner mit dem Dunklen Siegel!", 7, WandType.DARK);
 	}
 
 	@Override

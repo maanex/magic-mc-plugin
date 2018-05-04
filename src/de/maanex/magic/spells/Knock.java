@@ -15,7 +15,7 @@ import net.minecraft.server.v1_12_R1.EnumParticle;
 public class Knock extends MagicSpell {
 
 	public Knock() {
-		super(4, "Knock", "KNOCK KNOCK!", 1, new BuildRequirements(0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 30));
+		super(4, "Knock", "KNOCK KNOCK!", 1);
 	}
 
 	@Override

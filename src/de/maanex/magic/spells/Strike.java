@@ -13,7 +13,7 @@ import de.maanex.magic.wandsuse.WandType;
 public class Strike extends MagicSpell {
 
 	public Strike() {
-		super(1, "Strike", "Ein Blitz!", 10, new BuildRequirements(2, 100, 0, 10, 0, 40, 0, 40, 10, 300, 100));
+		super(1, "Strike", "Ein Blitz!", 10);
 	}
 
 	@Override

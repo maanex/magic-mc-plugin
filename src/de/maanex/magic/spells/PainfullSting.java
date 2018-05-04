@@ -19,7 +19,7 @@ import net.minecraft.server.v1_12_R1.EnumParticle;
 public class PainfullSting extends MagicSpell {
 
 	public PainfullSting() {
-		super(14, "Schmerzhafter Stich", "Autsch!", 5, new BuildRequirements(0, 10, 5, 20, 5, 20, 0, 5, 5, 30, 110));
+		super(14, "Schmerzhafter Stich", "Autsch!", 5);
 	}
 
 	@Override

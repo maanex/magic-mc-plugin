@@ -23,7 +23,7 @@ import net.minecraft.server.v1_12_R1.EnumParticle;
 public class TheSeeker extends MagicSpell {
 
 	public TheSeeker() {
-		super(11, "Der Sucher", "Er sucht und schnappt zu!", 20, new BuildRequirements(0, 10, 0, 10, 5, 30, 5, 30, 15, 100, 70), WandType.DARK);
+		super(11, "Der Sucher", "Er sucht und schnappt zu!", 20, WandType.DARK);
 	}
 
 	@Override

@@ -16,7 +16,7 @@ import de.maanex.magic.wandsuse.WandType;
 public class ArrowStorm extends MagicSpell {
 
 	public ArrowStorm() {
-		super(7, "Pfeilsturm", "Au, au, aua, AUTSCH! STOP!", 4, new BuildRequirements(0, 20, 20, 100, 2, 100, 2, 100, 10, 100, 120));
+		super(7, "Pfeilsturm", "Au, au, aua, AUTSCH! STOP!", 4);
 	}
 
 	@Override

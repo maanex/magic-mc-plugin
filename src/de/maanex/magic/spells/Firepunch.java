@@ -11,7 +11,7 @@ import de.maanex.magic.wandsuse.WandType;
 public class Firepunch extends MagicSpell {
 
 	public Firepunch() {
-		super(21, "Feuerschlag", "Knock, nur 1000x besser!", 4, new BuildRequirements(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
+		super(21, "Feuerschlag", "Knock, nur 1000x besser!", 4);
 	}
 
 	@Override

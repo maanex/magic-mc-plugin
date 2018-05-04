@@ -14,7 +14,7 @@ import de.maanex.magic.wandsuse.WandType;
 public class WaterBenderSplash extends MagicSpell {
 
 	public WaterBenderSplash() {
-		super(22, "Wasserbendigung - Platscher", "Eine GIGANTISCHE Welle...", 5, new BuildRequirements(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
+		super(22, "Wasserbendigung - Platscher", "Eine GIGANTISCHE Welle...", 5);
 	}
 
 	@Override

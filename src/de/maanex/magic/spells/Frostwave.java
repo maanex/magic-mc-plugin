@@ -27,7 +27,7 @@ import net.minecraft.server.v1_12_R1.EnumParticle;
 public class Frostwave extends MagicSpell {
 
 	public Frostwave() {
-		super(13, "Frostwelle", "Brrrr!", 7, new BuildRequirements(10, 40, 0, 10, 0, 0, 5, 10, 0, 10, 95));
+		super(13, "Frostwelle", "Brrrr!", 7);
 	}
 
 	@SuppressWarnings("deprecation")

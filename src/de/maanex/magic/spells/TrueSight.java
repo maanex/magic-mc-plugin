@@ -18,7 +18,7 @@ import de.maanex.main.Main;
 public class TrueSight extends MagicSpell {
 
 	public TrueSight() {
-		super(12, "Wahre Einsicht", "Sieh an, sieh an!", 6, new BuildRequirements(5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 140), WandType.LIGHT);
+		super(12, "Wahre Einsicht", "Sieh an, sieh an!", 6, WandType.LIGHT);
 	}
 
 	@SuppressWarnings("deprecation")

@@ -16,7 +16,7 @@ import net.minecraft.server.v1_12_R1.EnumParticle;
 public class AirBlast extends MagicSpell {
 
 	public AirBlast() {
-		super(5, "Air Blast", "Wusch! Weg von mir!", 15, new BuildRequirements(9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 200));
+		super(5, "Air Blast", "Wusch! Weg von mir!", 15);
 	}
 
 	@Override

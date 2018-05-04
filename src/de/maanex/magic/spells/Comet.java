@@ -17,7 +17,7 @@ import net.minecraft.server.v1_12_R1.EnumParticle;
 public class Comet extends MagicSpell {
 
 	public Comet() {
-		super(2, "Komet", "Juhu! Ein Komet!... Oh warte!", 10, new BuildRequirements(0, 0, 0, 20, 20, 300, 5, 100, 1, 100, 80));
+		super(2, "Komet", "Juhu! Ein Komet!... Oh warte!", 10);
 	}
 
 	@Override

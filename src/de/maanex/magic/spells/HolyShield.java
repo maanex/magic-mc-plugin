@@ -14,7 +14,7 @@ import de.maanex.magic.wandsuse.WandType;
 public class HolyShield extends MagicSpell {
 
 	public HolyShield() {
-		super(9, "Heiliges Schild!", "Es Schützt!", 11, new BuildRequirements(0, 20, 5, 20, 0, 20, 10, 100, 0, 20, 80));
+		super(9, "Heiliges Schild!", "Es Schützt!", 11);
 	}
 
 	@Override

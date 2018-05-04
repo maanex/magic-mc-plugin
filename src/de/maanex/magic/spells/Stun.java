@@ -11,7 +11,7 @@ import de.maanex.magic.wandsuse.WandType;
 public class Stun extends MagicSpell {
 
 	public Stun() {
-		super(20, "Stun", "Hält fest!", 3, new BuildRequirements(0, 5, 15, 30, 0, 0, 5, 20, 0, 5, 90));
+		super(20, "Stun", "Hält fest!", 3);
 	}
 
 	@Override

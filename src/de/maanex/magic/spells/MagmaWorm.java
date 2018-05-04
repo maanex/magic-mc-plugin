@@ -20,7 +20,7 @@ import net.minecraft.server.v1_12_R1.EnumParticle;
 public class MagmaWorm extends MagicSpell {
 
 	public MagmaWorm() {
-		super(15, "Magma Wurm", "Igitt!", 16, new BuildRequirements(0, 0, 0, 5, 45, 100, 5, 100, 0, 10, 70), WandType.DARK);
+		super(15, "Magma Wurm", "Igitt!", 16, WandType.DARK);
 	}
 
 	@Override

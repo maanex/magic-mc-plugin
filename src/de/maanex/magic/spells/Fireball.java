@@ -10,7 +10,7 @@ import de.maanex.magic.wandsuse.WandType;
 public class Fireball extends MagicSpell {
 
 	public Fireball() {
-		super(10, "Feuerball", "Schieﬂt einen Feuerball", 8, new BuildRequirements(0, 10, 0, 20, 15, 30, 5, 20, 0, 0, 105));
+		super(10, "Feuerball", "Schieﬂt einen Feuerball", 8);
 	}
 
 	@Override

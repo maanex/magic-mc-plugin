@@ -13,7 +13,7 @@ import de.maanex.magic.wandsuse.WandType;
 public class Nitro extends MagicSpell {
 
 	public Nitro() {
-		super(6, "Nitro", "Gotta go faster!", 10, new BuildRequirements(5, 20, 5, 20, 0, 20, 5, 20, 0, 20, 105));
+		super(6, "Nitro", "Gotta go faster!", 10);
 	}
 
 	@Override

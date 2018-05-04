@@ -20,7 +20,7 @@ import net.minecraft.server.v1_12_R1.EnumParticle;
 public class Levitate extends MagicSpell {
 
 	public Levitate() {
-		super(19, "Übersicht", "Gut Aussicht von hier oben!", 2, new BuildRequirements(0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 90));
+		super(19, "Übersicht", "Gut Aussicht von hier oben!", 2);
 	}
 
 	public static List<Player> inAir = new ArrayList<>();

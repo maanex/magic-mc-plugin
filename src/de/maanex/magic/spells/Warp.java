@@ -22,7 +22,7 @@ import net.minecraft.server.v1_12_R1.EnumParticle;
 public class Warp extends MagicSpell {
 
 	public Warp() {
-		super(8, "Warp", "Zack, Zack - Hier, Dort", 2, new BuildRequirements(5, 20, 0, 20, 5, 20, 0, 20, 0, 20, 105));
+		super(8, "Warp", "Zack, Zack - Hier, Dort", 2);
 	}
 
 	private static HashMap<Player, Integer> dark_wand_show_tasks = new HashMap<>();

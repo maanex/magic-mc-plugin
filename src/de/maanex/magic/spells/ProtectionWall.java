@@ -16,7 +16,7 @@ import de.maanex.main.Main;
 public class ProtectionWall extends MagicSpell {
 
 	public ProtectionWall() {
-		super(3, "Schutzwand", "Schützt dich! (TÜV-Geprüft)", 3, new BuildRequirements(0, 20, 0, 20, 0, 20, 10, 30, 1, 20, 110));
+		super(3, "Schutzwand", "Schützt dich! (TÜV-Geprüft)", 3);
 	}
 
 	@Override
