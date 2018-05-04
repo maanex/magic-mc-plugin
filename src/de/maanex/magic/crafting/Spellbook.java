@@ -17,9 +17,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import de.maanex.magic.ClsManager;
 import de.maanex.magic.MagicSpell;
 import de.maanex.magic.items.DefaultItems;
-import de.maanex.magic.listener.RunicTableUse;
 
 
 public class Spellbook implements Listener {
@@ -49,7 +49,7 @@ public class Spellbook implements Listener {
 			Inventory inv = Bukkit.createInventory(e.getPlayer(), InventoryType.HOPPER, DefaultItems.SPELLBOOK_NAME);
 			int c = 0;
 			for (MagicSpell s : spells)
-				inv.setItem(c++, DefaultItems.getBasicSpell(s));
+				inv.setItem(c++, s.getItemStack());
 			e.getPlayer().openInventory(inv);
 		}
 	}
@@ -78,7 +78,7 @@ public class Spellbook implements Listener {
 					if (!l.startsWith("§0")) continue;
 					try {
 						int i = Integer.parseInt(l.replace("§0", ""));
-						for (MagicSpell p : RunicTableUse.spells)
+						for (MagicSpell p : ClsManager.spells)
 							if (p.getID() == i) spells.add(p);
 					} catch (Exception ex) {
 						continue;
@@ -98,7 +98,7 @@ public class Spellbook implements Listener {
 			s = s.replace("§0", "");
 			if (s.equalsIgnoreCase("")) continue;
 			int i = Integer.parseInt(s);
-			for (MagicSpell p : RunicTableUse.spells)
+			for (MagicSpell p : ClsManager.spells)
 				if (p.getID() == i) out.add(p);
 		}
 		return out;

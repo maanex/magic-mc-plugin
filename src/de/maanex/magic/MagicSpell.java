@@ -1,32 +1,36 @@
 package de.maanex.magic;
 
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import de.maanex.magic.wandsuse.WandType;
 
 
 public abstract class MagicSpell {
 
-	private String				name, desc;
-	private BuildRequirements	req;
-	private int					id, manacost;
-	private WandType			reqWandType	= null;
+	private String		name, desc;
+	private int			id, manacost;
+	private WandType	reqWandType	= null;
 
-	public MagicSpell(int id, String name, String desc, int manacost, BuildRequirements req) {
+	public MagicSpell(int id, String name, String desc, int manacost) {
 		this.id = id;
 		this.name = name;
 		this.desc = desc;
 		this.manacost = manacost;
-		this.req = req;
 	}
 
-	public MagicSpell(int id, String name, String desc, int manacost, BuildRequirements req, WandType reqWandType) {
+	public MagicSpell(int id, String name, String desc, int manacost, WandType reqWandType) {
 		this.id = id;
 		this.name = name;
 		this.desc = desc;
 		this.manacost = manacost;
-		this.req = req;
 		this.reqWandType = reqWandType;
 	}
 
@@ -47,10 +51,6 @@ public abstract class MagicSpell {
 				else player.getMCPlayer().sendMessage("§7Du benötigst für diesen Zauber einen geeigneten Zauberstab!");
 			} else onCastPerform(player, type, mod);
 		} else player.getMCPlayer().sendMessage("§7Du hast nicht genug Mana!");
-	}
-
-	public BuildRequirements getBuildRequirements() {
-		return this.req;
 	}
 
 	public String getName() {
@@ -77,77 +77,61 @@ public abstract class MagicSpell {
 	 * 
 	 */
 
-	public static class BuildRequirements {
+	private static ItemStack setSkin(ItemStack s, short skin) {
+		s.setDurability(skin);
+		ItemMeta meta = s.getItemMeta();
+		meta.setUnbreakable(true);
+		meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
+		s.setItemMeta(meta);
+		return s;
+	}
 
-		int water_min, water_max, wood_min, wood_max, fire_min, fire_max, earth_min, earth_max, metal_min, metal_max, common;
+	public ItemStack getItemStack() {
+		ItemStack out = new ItemStack(Material.IRON_HOE);
 
-		public BuildRequirements(int water_min, int water_max, int wood_min, int wood_max, int fire_min, int fire_max, int earth_min, int earth_max, int metal_min, int metal_max, int common) {
-			this.water_min = water_min;
-			this.water_max = water_max;
-			this.wood_min = wood_min;
-			this.wood_max = wood_max;
-			this.fire_min = fire_min;
-			this.fire_max = fire_max;
-			this.earth_min = earth_min;
-			this.earth_max = earth_max;
-			this.metal_min = metal_min;
-			this.metal_max = metal_max;
-			this.common = common;
-		}
+		setSkin(out, (short) id);
 
-		public int getWater_min() {
-			return water_min;
-		}
+		ItemMeta m = out.getItemMeta();
 
-		public int getWater_max() {
-			return water_max;
-		}
+		String namecc = "§3";
+		if (getRequiredWandType() != null) namecc = getRequiredWandType().getDisplayname().substring(0, 2);
+		m.setDisplayName(namecc + getName());
+		m.addEnchant(Enchantment.MENDING, 1, false);
 
-		public int getWood_min() {
-			return wood_min;
-		}
+		List<String> lore = new ArrayList<>();
 
-		public int getWood_max() {
-			return wood_max;
-		}
+		lore.add("§0" + getID());
+		lore.add("§d" + getDesc());
+		lore.add("§0");
+		lore.add("§6" + getManacost() + " Mana");
 
-		public int getFire_min() {
-			return fire_min;
-		}
+		m.setLore(lore);
 
-		public int getFire_max() {
-			return fire_max;
-		}
+		out.setItemMeta(m);
+		return out;
+	}
 
-		public int getEarth_min() {
-			return earth_min;
-		}
+	public void updateExistingItemStack(ItemStack stack) {
 
-		public int getEarth_max() {
-			return earth_max;
-		}
+		setSkin(stack, (short) id);
 
-		public int getMetal_min() {
-			return metal_min;
-		}
+		ItemMeta m = stack.getItemMeta();
 
-		public int getMetal_max() {
-			return metal_max;
-		}
+		String namecc = "§3";
+		if (getRequiredWandType() != null) namecc = getRequiredWandType().getDisplayname().substring(0, 2);
+		m.setDisplayName(namecc + getName());
+		m.addEnchant(Enchantment.MENDING, 1, false);
 
-		public int getCommon() {
-			return common;
-		}
+		List<String> lore = new ArrayList<>();
 
-		public boolean doesMeetRequirements(HashMap<Elements, Integer> in) {
-			return in.get(Elements.WATER) >= water_min && in.get(Elements.WATER) <= water_max //
-					&& in.get(Elements.WOOD) >= wood_min && in.get(Elements.WOOD) <= wood_max //
-					&& in.get(Elements.FIRE) >= fire_min && in.get(Elements.FIRE) <= fire_max //
-					&& in.get(Elements.EARTH) >= earth_min && in.get(Elements.EARTH) <= earth_max //
-					&& in.get(Elements.METAL) >= metal_min && in.get(Elements.METAL) <= metal_max //
-			;
-		}
+		lore.add("§0" + getID());
+		lore.add("§d" + getDesc());
+		lore.add("§0");
+		lore.add("§6" + getManacost() + " Mana");
 
+		m.setLore(lore);
+
+		stack.setItemMeta(m);
 	}
 
 }
