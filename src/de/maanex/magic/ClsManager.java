@@ -19,6 +19,11 @@ import de.maanex.magic.spells.ProtectionWall;
 import de.maanex.magic.spells.Strike;
 import de.maanex.magic.spells.Stun;
 import de.maanex.magic.spells.Warp;
+import de.maanex.magic.spells.basic.AirSpirit;
+import de.maanex.magic.spells.basic.EarthSpirit;
+import de.maanex.magic.spells.basic.Elementum;
+import de.maanex.magic.spells.basic.FireSpirit;
+import de.maanex.magic.spells.basic.WaterSpirit;
 import de.maanex.magic.spells.darkmagic.DarkSeal;
 import de.maanex.magic.spells.darkmagic.MagmaWorm;
 import de.maanex.magic.spells.earthbender.EarthBenderBridge;
@@ -60,5 +65,10 @@ public class ClsManager {
 		spells.add(new Stun());
 		spells.add(new Firepunch());
 		spells.add(new WaterBenderSplash());
+		spells.add(new Elementum());
+		spells.add(new FireSpirit());
+		spells.add(new EarthSpirit());
+		spells.add(new WaterSpirit());
+		spells.add(new AirSpirit());
 	}
 }
