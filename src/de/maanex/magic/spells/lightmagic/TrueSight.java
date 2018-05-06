@@ -1,4 +1,4 @@
-package de.maanex.magic.spells;
+package de.maanex.magic.spells.lightmagic;
 
 
 import java.util.Random;

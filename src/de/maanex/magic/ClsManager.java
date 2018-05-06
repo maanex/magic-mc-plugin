@@ -7,25 +7,25 @@ import java.util.List;
 import de.maanex.magic.spells.AirBlast;
 import de.maanex.magic.spells.ArrowStorm;
 import de.maanex.magic.spells.Comet;
-import de.maanex.magic.spells.DarkSeal;
-import de.maanex.magic.spells.EarthBenderBridge;
-import de.maanex.magic.spells.EarthBenderCannon;
 import de.maanex.magic.spells.Fireball;
 import de.maanex.magic.spells.Firepunch;
 import de.maanex.magic.spells.Frostwave;
 import de.maanex.magic.spells.HolyShield;
 import de.maanex.magic.spells.Knock;
 import de.maanex.magic.spells.Levitate;
-import de.maanex.magic.spells.MagmaWorm;
 import de.maanex.magic.spells.Nitro;
 import de.maanex.magic.spells.PainfullSting;
 import de.maanex.magic.spells.ProtectionWall;
 import de.maanex.magic.spells.Strike;
 import de.maanex.magic.spells.Stun;
-import de.maanex.magic.spells.TheSeeker;
-import de.maanex.magic.spells.TrueSight;
 import de.maanex.magic.spells.Warp;
-import de.maanex.magic.spells.WaterBenderSplash;
+import de.maanex.magic.spells.darkmagic.DarkSeal;
+import de.maanex.magic.spells.darkmagic.MagmaWorm;
+import de.maanex.magic.spells.earthbender.EarthBenderBridge;
+import de.maanex.magic.spells.earthbender.EarthBenderCannon;
+import de.maanex.magic.spells.earthbender.TheSeeker;
+import de.maanex.magic.spells.lightmagic.TrueSight;
+import de.maanex.magic.spells.waterbender.WaterBenderSplash;
 
 
 public class ClsManager {

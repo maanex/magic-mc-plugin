@@ -1,4 +1,4 @@
-package de.maanex.magic.spells;
+package de.maanex.magic.spells.waterbender;
 
 
 import org.bukkit.Location;

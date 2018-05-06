@@ -42,8 +42,12 @@ public class Spellbook implements Listener {
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onInteract(PlayerInteractEvent e) {
-		if (e.getPlayer().getItemInHand() == null || !e.getPlayer().getItemInHand().getType().equals(Material.BOOK) || e.getPlayer().getInventory().getItemInOffHand().getType().equals(Material.BOOK))
-			return;
+		if (e.getPlayer().getItemInHand() == null || e.getItem() == null) return;
+
+		// Prevent Hoe Function With Spell Items
+		if (e.getItem().getType().equals(Material.IRON_HOE) && e.getItem().getItemMeta().isUnbreakable()) e.setCancelled(true);
+
+		if (!e.getPlayer().getItemInHand().getType().equals(Material.BOOK) || e.getPlayer().getInventory().getItemInOffHand().getType().equals(Material.BOOK)) return;
 		if (e.getItem() != null && e.getItem().hasItemMeta() && e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(DefaultItems.SPELLBOOK_NAME)) {
 			List<MagicSpell> spells = parseSpells(e.getItem().getItemMeta());
 			Inventory inv = Bukkit.createInventory(e.getPlayer(), InventoryType.HOPPER, DefaultItems.SPELLBOOK_NAME);
@@ -71,7 +75,12 @@ public class Spellbook implements Listener {
 				List<MagicSpell> spells = new ArrayList<>();
 
 				for (ItemStack s : e.getInventory().getContents()) {
-					if (s == null || !s.getType().equals(Material.PAPER) || !s.hasItemMeta()) continue;
+					if (s == null) continue;
+					if (!s.getType().equals(Material.IRON_HOE) || !s.hasItemMeta()) {
+						e.getPlayer().getWorld().dropItem(e.getPlayer().getEyeLocation(), s);
+						continue;
+					}
+
 					ItemMeta me = s.getItemMeta();
 					if (!me.hasLore()) continue;
 					String l = me.getLore().get(0);

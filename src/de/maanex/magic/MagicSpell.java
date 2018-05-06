@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -96,7 +95,6 @@ public abstract class MagicSpell {
 		String namecc = "§3";
 		if (getRequiredWandType() != null) namecc = getRequiredWandType().getDisplayname().substring(0, 2);
 		m.setDisplayName(namecc + getName());
-		m.addEnchant(Enchantment.MENDING, 1, false);
 
 		List<String> lore = new ArrayList<>();
 
@@ -120,7 +118,6 @@ public abstract class MagicSpell {
 		String namecc = "§3";
 		if (getRequiredWandType() != null) namecc = getRequiredWandType().getDisplayname().substring(0, 2);
 		m.setDisplayName(namecc + getName());
-		m.addEnchant(Enchantment.MENDING, 1, false);
 
 		List<String> lore = new ArrayList<>();
 
