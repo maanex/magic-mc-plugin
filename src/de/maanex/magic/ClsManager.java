@@ -71,4 +71,13 @@ public class ClsManager {
 		spells.add(new WaterSpirit());
 		spells.add(new AirSpirit());
 	}
+
+	//
+
+	@SuppressWarnings("unchecked")
+	public static <T extends MagicSpell> T getSpell(Class<T> cls) {
+		for (MagicSpell s : spells)
+			if (cls.isInstance(s)) return (T) s;
+		return null;
+	}
 }
