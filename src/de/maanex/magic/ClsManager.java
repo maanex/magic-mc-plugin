@@ -26,9 +26,9 @@ import de.maanex.magic.spells.basic.FireSpirit;
 import de.maanex.magic.spells.basic.WaterSpirit;
 import de.maanex.magic.spells.darkmagic.DarkSeal;
 import de.maanex.magic.spells.darkmagic.MagmaWorm;
+import de.maanex.magic.spells.darkmagic.TheSeeker;
 import de.maanex.magic.spells.earthbender.EarthBenderBridge;
 import de.maanex.magic.spells.earthbender.EarthBenderCannon;
-import de.maanex.magic.spells.earthbender.TheSeeker;
 import de.maanex.magic.spells.lightmagic.TrueSight;
 import de.maanex.magic.spells.waterbender.WaterBenderSplash;
 

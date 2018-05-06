@@ -1,4 +1,4 @@
-package de.maanex.magic.spells.earthbender;
+package de.maanex.magic.spells.darkmagic;
 
 
 import java.util.Random;
