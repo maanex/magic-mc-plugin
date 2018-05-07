@@ -10,6 +10,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
@@ -19,7 +20,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import de.maanex.magic.ClsManager;
+import de.maanex.magic.MagicManager;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.spells.basic.Elementum;
 import de.maanex.magic.structures.RunicTableSpotter;
@@ -31,15 +32,6 @@ public class RunicTableUse implements Listener {
 
 	private static String TABLE_NAME = "§dRunic Table";
 
-	private static ItemStack TABLE_INV_PLACEHOLDER;
-
-	static {
-		TABLE_INV_PLACEHOLDER = new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte) 15);
-		ItemMeta m1 = TABLE_INV_PLACEHOLDER.getItemMeta();
-		m1.setDisplayName("§0");
-		TABLE_INV_PLACEHOLDER.setItemMeta(m1);
-	}
-
 	public RunicTableUse() {
 	}
 
@@ -50,7 +42,7 @@ public class RunicTableUse implements Listener {
 			if (MagicPlayer.get(e.getPlayer()).getMana() > 0) {
 				MagicPlayer.get(e.getPlayer()).addMana(-1);
 				e.getItem().setAmount(e.getItem().getAmount() - 1);
-				e.getPlayer().getWorld().dropItem(e.getPlayer().getEyeLocation(), ClsManager.getSpell(Elementum.class).getItemStack());
+				e.getPlayer().getWorld().dropItem(e.getPlayer().getEyeLocation(), MagicManager.getSpell(Elementum.class).getItemStack());
 			} else {
 				Particle pa = new Particle(EnumParticle.SMOKE_NORMAL, e.getClickedBlock().getLocation(), false, 1, 1, 1, .2f, 50);
 				pa.sendPlayer(e.getPlayer());
@@ -67,9 +59,15 @@ public class RunicTableUse implements Listener {
 	private static Inventory buildInv(HumanEntity player) {
 		Inventory inv = Bukkit.createInventory(player, InventoryType.HOPPER, TABLE_NAME);
 
+		ItemStack empty = new ItemStack(Material.STONE_HOE);
+		setSkin(empty, (short) 3);
+		ItemMeta m = empty.getItemMeta();
+		m.setDisplayName("§0");
+		empty.setItemMeta(m);
+
 		ItemStack guiBackground = new ItemStack(Material.STONE_HOE);
 		setSkin(guiBackground, (short) 1);
-		ItemMeta m = guiBackground.getItemMeta();
+		m = guiBackground.getItemMeta();
 		m.setDisplayName(new Random().nextInt(30) == 0 ? "§cHallo, ich bin ein Pfeil!" : "§0");
 		guiBackground.setItemMeta(m);
 
@@ -80,6 +78,7 @@ public class RunicTableUse implements Listener {
 		m.setLore(Arrays.asList("§5Rechtsklicken um Wahrscheinlichkeiten", "   §5anzuzeigen! (1 Mana)"));
 		res.setItemMeta(m);
 
+		inv.setItem(2, empty);
 		inv.setItem(3, guiBackground);
 		inv.setItem(4, res);
 		return inv;
@@ -88,7 +87,17 @@ public class RunicTableUse implements Listener {
 	@EventHandler
 	public void onInvClick(InventoryClickEvent e) {
 		if (e.getClickedInventory().getName().equalsIgnoreCase(TABLE_NAME)) {
+			if (e.getSlot() <= 1) return;
+			if (e.getSlot() <= 3) {
+				e.setCancelled(true);
+				return;
+			} else {
+				if (e.getClick().equals(ClickType.LEFT)) {
 
+				} else if (e.getClick().equals(ClickType.RIGHT)) {
+
+				}
+			}
 		}
 	}
 

@@ -16,7 +16,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import de.maanex.magic.ClsManager;
+import de.maanex.magic.MagicManager;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
 import de.maanex.magic.customEffects.RealityWarpEffect;
@@ -88,7 +88,7 @@ public class Backdoor implements Listener {
 
 					case "allspells":
 						Inventory i = Bukkit.createInventory(null, 9 * 6);
-						for (MagicSpell s : ClsManager.spells) {
+						for (MagicSpell s : MagicManager.getAllSpells()) {
 							i.addItem(s.getItemStack());
 						}
 						p.openInventory(i);

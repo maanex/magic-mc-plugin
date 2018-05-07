@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import de.maanex.magic.MagicManager;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.ManaRegeneration;
 import de.maanex.magic.VisualUpdater;
@@ -17,8 +18,33 @@ import de.maanex.magic.listener.JoinLeave;
 import de.maanex.magic.listener.ManapotDrink;
 import de.maanex.magic.listener.RunicTableUse;
 import de.maanex.magic.missile.MagicMissile;
+import de.maanex.magic.spells.AirBlast;
+import de.maanex.magic.spells.ArrowStorm;
+import de.maanex.magic.spells.Comet;
+import de.maanex.magic.spells.Fireball;
+import de.maanex.magic.spells.Firepunch;
+import de.maanex.magic.spells.Frostwave;
+import de.maanex.magic.spells.HolyShield;
+import de.maanex.magic.spells.Knock;
 import de.maanex.magic.spells.Levitate;
+import de.maanex.magic.spells.Nitro;
+import de.maanex.magic.spells.PainfullSting;
+import de.maanex.magic.spells.ProtectionWall;
+import de.maanex.magic.spells.Strike;
+import de.maanex.magic.spells.Stun;
+import de.maanex.magic.spells.Warp;
+import de.maanex.magic.spells.basic.AirSpirit;
+import de.maanex.magic.spells.basic.EarthSpirit;
+import de.maanex.magic.spells.basic.Elementum;
+import de.maanex.magic.spells.basic.FireSpirit;
+import de.maanex.magic.spells.basic.WaterSpirit;
+import de.maanex.magic.spells.darkmagic.DarkSeal;
+import de.maanex.magic.spells.darkmagic.MagmaWorm;
+import de.maanex.magic.spells.darkmagic.TheSeeker;
+import de.maanex.magic.spells.earthbender.EarthBenderBridge;
 import de.maanex.magic.spells.earthbender.EarthBenderCannon;
+import de.maanex.magic.spells.lightmagic.TrueSight;
+import de.maanex.magic.spells.waterbender.WaterBenderSplash;
 import de.maanex.magic.wandsuse.UseWand;
 import de.maanex.news.News;
 import de.maanex.survival.AntiExplode;
@@ -44,6 +70,8 @@ public class Main extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
+		registerSpells();
+
 		Wands.registerRecipe();
 		Spellbook.registerRecipe();
 		HelpBook.registerRecipe();
@@ -121,6 +149,38 @@ public class Main extends JavaPlugin {
 			ManaRegeneration.doTick();
 		}, 20, 20);
 	}
+
+	private void registerSpells() {
+		MagicManager.registerSpell(new Strike());
+		MagicManager.registerSpell(new Comet());
+		MagicManager.registerSpell(new ProtectionWall());
+		MagicManager.registerSpell(new Knock());
+		MagicManager.registerSpell(new AirBlast());
+		MagicManager.registerSpell(new Nitro());
+		MagicManager.registerSpell(new ArrowStorm());
+		MagicManager.registerSpell(new Warp());
+		MagicManager.registerSpell(new HolyShield());
+		MagicManager.registerSpell(new Fireball());
+		MagicManager.registerSpell(new TheSeeker());
+		MagicManager.registerSpell(new TrueSight());
+		MagicManager.registerSpell(new Frostwave());
+		MagicManager.registerSpell(new PainfullSting());
+		MagicManager.registerSpell(new MagmaWorm());
+		MagicManager.registerSpell(new EarthBenderBridge());
+		MagicManager.registerSpell(new EarthBenderCannon());
+		MagicManager.registerSpell(new DarkSeal());
+		MagicManager.registerSpell(new Levitate());
+		MagicManager.registerSpell(new Stun());
+		MagicManager.registerSpell(new Firepunch());
+		MagicManager.registerSpell(new WaterBenderSplash());
+		MagicManager.registerSpell(new Elementum());
+		MagicManager.registerSpell(new FireSpirit());
+		MagicManager.registerSpell(new EarthSpirit());
+		MagicManager.registerSpell(new WaterSpirit());
+		MagicManager.registerSpell(new AirSpirit());
+	}
+
+	//
 
 	@Override
 	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id) {

@@ -17,7 +17,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import de.maanex.magic.ClsManager;
+import de.maanex.magic.MagicManager;
 import de.maanex.magic.MagicSpell;
 import de.maanex.magic.items.DefaultItems;
 
@@ -87,7 +87,7 @@ public class Spellbook implements Listener {
 					if (!l.startsWith("§0")) continue;
 					try {
 						int i = Integer.parseInt(l.replace("§0", ""));
-						for (MagicSpell p : ClsManager.spells)
+						for (MagicSpell p : MagicManager.getAllSpells())
 							if (p.getID() == i) spells.add(p);
 					} catch (Exception ex) {
 						continue;
@@ -107,7 +107,7 @@ public class Spellbook implements Listener {
 			s = s.replace("§0", "");
 			if (s.equalsIgnoreCase("")) continue;
 			int i = Integer.parseInt(s);
-			for (MagicSpell p : ClsManager.spells)
+			for (MagicSpell p : MagicManager.getAllSpells())
 				if (p.getID() == i) out.add(p);
 		}
 		return out;
