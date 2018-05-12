@@ -22,6 +22,7 @@ import de.maanex.magic.spells.AirBlast;
 import de.maanex.magic.spells.ArrowStorm;
 import de.maanex.magic.spells.Comet;
 import de.maanex.magic.spells.Fireball;
+import de.maanex.magic.spells.Firemine;
 import de.maanex.magic.spells.Firepunch;
 import de.maanex.magic.spells.Frostwave;
 import de.maanex.magic.spells.HolyShield;
@@ -178,6 +179,7 @@ public class Main extends JavaPlugin {
 		MagicManager.registerSpell(new EarthSpirit());
 		MagicManager.registerSpell(new WaterSpirit());
 		MagicManager.registerSpell(new AirSpirit());
+		MagicManager.registerSpell(new Firemine());
 	}
 
 	//
