@@ -2,6 +2,7 @@ package de.maanex.magic.listener;
 
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
@@ -22,6 +23,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import de.maanex.magic.MagicManager;
 import de.maanex.magic.MagicPlayer;
+import de.maanex.magic.MagicSpell;
 import de.maanex.magic.spells.basic.Elementum;
 import de.maanex.magic.structures.RunicTableSpotter;
 import de.maanex.utils.Particle;
@@ -92,6 +94,8 @@ public class RunicTableUse implements Listener {
 				e.setCancelled(true);
 				return;
 			} else {
+				// REMOVE 1 BEL
+				e.setCancelled(true);
 				if (e.getClick().equals(ClickType.LEFT)) {
 
 				} else if (e.getClick().equals(ClickType.RIGHT)) {
@@ -101,12 +105,26 @@ public class RunicTableUse implements Listener {
 		}
 	}
 
+	private static HashMap<MagicSpell, Integer> getResults(ItemStack i, ItemStack u) {
+		if (i == null || u == null) return null;
+		MagicSpell j = MagicSpell.parse(i);
+		MagicSpell k = MagicSpell.parse(u);
+		if (j == null || k == null) return null;
+
+		// for(SpellRecipe r : )
+		return null;
+	}
+
 	@EventHandler
 	public void onClose(InventoryCloseEvent e) {
 		if (e.getInventory().getName().equalsIgnoreCase(TABLE_NAME)) {
 			Location l = e.getPlayer().getTargetBlock(null, 10).getLocation();
 			if (l == null) l = e.getPlayer().getLocation();
 
+			for (int i : Arrays.asList(0, 1, 4))
+				if (e.getInventory().getItem(i) != null) {
+					if (e.getInventory().getItem(i).getType().equals(Material.IRON_HOE)) l.getWorld().dropItem(l, e.getInventory().getItem(i));
+				}
 		}
 	}
 

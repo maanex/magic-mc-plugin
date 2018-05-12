@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="WINDOWS-1252" standalone="no"?>
 <jardesc>
-    <jar path="C:/Users/andre/Desktop/Projekte/Minnekraft/Server/1.12.2 Wands Test/plugins/Magic.jar"/>
+    <jar path="C:/Users/andre/Desktop/Projekte/_Minnekraft/Server/1.12.2 Wands Test/plugins/Magic.jar"/>
     <options buildIfNeeded="true" compress="true" descriptionLocation="/Plugin 1.12.2 - Magic/Export.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>

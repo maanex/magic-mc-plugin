@@ -10,13 +10,13 @@ public class MagicManager {
 	private MagicManager() {
 	}
 
-	private static List<MagicSpell> spells = new ArrayList<>();
-
 	//
 
 	static {}
 
 	//
+
+	private static List<MagicSpell> spells = new ArrayList<>();
 
 	public static void registerSpell(MagicSpell s) {
 		spells.add(s);
@@ -41,4 +41,21 @@ public class MagicManager {
 			if (cls.isInstance(s)) return (T) s;
 		return null;
 	}
+
+	//
+
+	private static List<SpellRecipe> recipes = new ArrayList<>();
+
+	public static void registerSpellRecipe(SpellRecipe r) {
+		recipes.add(r);
+	}
+
+	public static void unregisterSpellRecipe(SpellRecipe r) {
+		recipes.remove(r);
+	}
+
+	public static List<SpellRecipe> getAllSpellRecipes() {
+		return recipes;
+	}
+
 }

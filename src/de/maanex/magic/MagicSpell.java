@@ -131,4 +131,22 @@ public abstract class MagicSpell {
 		stack.setItemMeta(m);
 	}
 
+	//
+
+	public static MagicSpell parse(ItemStack s) {
+		if (s == null) return null;
+		if (!s.getType().equals(Material.IRON_HOE) || !s.hasItemMeta()) return null;
+
+		ItemMeta me = s.getItemMeta();
+		if (!me.hasLore()) return null;
+		String l = me.getLore().get(0);
+		if (!l.startsWith("§0")) return null;
+		try {
+			int i = Integer.parseInt(l.replace("§0", ""));
+			for (MagicSpell p : MagicManager.getAllSpells())
+				if (p.getID() == i) return p;
+		} catch (Exception ex) {}
+		return null;
+	}
+
 }

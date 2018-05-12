@@ -48,7 +48,7 @@ public class Spellbook implements Listener {
 		if (e.getItem().getType().equals(Material.IRON_HOE) && e.getItem().getItemMeta().isUnbreakable()) e.setCancelled(true);
 
 		if (!e.getPlayer().getItemInHand().getType().equals(Material.BOOK) || e.getPlayer().getInventory().getItemInOffHand().getType().equals(Material.BOOK)) return;
-		if (e.getItem() != null && e.getItem().hasItemMeta() && e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(DefaultItems.SPELLBOOK_NAME)) {
+		if (e.getItem() != null && e.getItem().hasItemMeta() && e.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(DefaultItems.SPELLBOOK_NAME) && e.getItem().getAmount() == 1) {
 			List<MagicSpell> spells = parseSpells(e.getItem().getItemMeta());
 			Inventory inv = Bukkit.createInventory(e.getPlayer(), InventoryType.HOPPER, DefaultItems.SPELLBOOK_NAME);
 			int c = 0;

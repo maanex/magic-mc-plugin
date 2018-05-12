@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.World.Environment;
 import org.bukkit.inventory.ShapedRecipe;
 
+import de.maanex.magic.WandModifiers;
 import de.maanex.magic.items.WandBuilder;
 
 
@@ -16,7 +17,7 @@ public class Wands {
 
 	@SuppressWarnings("deprecation")
 	public static void registerRecipe() {
-		ShapedRecipe res = new ShapedRecipe(WandBuilder.get(Environment.NORMAL).build());
+		ShapedRecipe res = new ShapedRecipe(WandBuilder.get(Environment.NORMAL).withMods(new WandModifiers(-1, -1, -1)).build());
 
 		res.shape("AAI", "ASA", "IAA");
 
