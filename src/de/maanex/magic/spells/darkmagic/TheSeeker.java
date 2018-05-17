@@ -13,6 +13,9 @@ import org.bukkit.entity.Player;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
 import de.maanex.magic.WandModifiers;
+import de.maanex.magic.enumeri.SpellCategory;
+import de.maanex.magic.enumeri.SpellRarity;
+import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 import de.maanex.main.Main;
 import de.maanex.utils.Particle;
@@ -23,7 +26,7 @@ import net.minecraft.server.v1_12_R1.EnumParticle;
 public class TheSeeker extends MagicSpell {
 
 	public TheSeeker() {
-		super(11, "Der Sucher", "Er sucht und schnappt zu!", 20, WandType.DARK);
+		super(11, "Der Sucher", "Er sucht und schnappt zu!", 15, 60, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.FORBIDDEN, WandType.DARK);
 	}
 
 	@Override

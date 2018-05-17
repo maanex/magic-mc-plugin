@@ -11,6 +11,9 @@ import org.bukkit.block.Block;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
 import de.maanex.magic.WandModifiers;
+import de.maanex.magic.enumeri.SpellCategory;
+import de.maanex.magic.enumeri.SpellRarity;
+import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 import de.maanex.main.Main;
 
@@ -18,7 +21,7 @@ import de.maanex.main.Main;
 public class TrueSight extends MagicSpell {
 
 	public TrueSight() {
-		super(12, "Wahre Einsicht", "Sieh an, sieh an!", 6, WandType.LIGHT);
+		super(12, "Wahre Einsicht", "Sieh an, sieh an!", 1, 5, SpellType.ACTIVE, SpellCategory.UTILITY, SpellRarity.GODLIKE, WandType.LIGHT);
 	}
 
 	@SuppressWarnings("deprecation")

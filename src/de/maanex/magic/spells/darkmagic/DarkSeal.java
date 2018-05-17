@@ -14,6 +14,9 @@ import org.bukkit.potion.PotionEffectType;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
 import de.maanex.magic.WandModifiers;
+import de.maanex.magic.enumeri.SpellCategory;
+import de.maanex.magic.enumeri.SpellRarity;
+import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 import de.maanex.main.Main;
 import de.maanex.utils.Particle;
@@ -24,7 +27,7 @@ import net.minecraft.server.v1_12_R1.EnumParticle;
 public class DarkSeal extends MagicSpell {
 
 	public DarkSeal() {
-		super(18, "Dunkles Siegel", "Markiere einen Gegner mit dem Dunklen Siegel!", 7, WandType.DARK);
+		super(18, "Dunkles Siegel", "Markiere einen Gegner mit dem Dunklen Siegel!", 7, 60, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.FORBIDDEN, WandType.DARK);
 	}
 
 	@Override

@@ -6,6 +6,9 @@ import org.bukkit.Material;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
 import de.maanex.magic.WandModifiers;
+import de.maanex.magic.enumeri.SpellCategory;
+import de.maanex.magic.enumeri.SpellRarity;
+import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 import de.maanex.utils.Particle;
 import net.minecraft.server.v1_12_R1.EnumParticle;
@@ -14,7 +17,7 @@ import net.minecraft.server.v1_12_R1.EnumParticle;
 public class EarthSpirit extends MagicSpell {
 
 	public EarthSpirit() {
-		super(25, "Erdgeist", "Spiritus terrae", 0);
+		super(25, "Erdgeist", "Spiritus terrae", 0, 0, SpellType.NOT_USEABLE, SpellCategory.UTILITY, SpellRarity.COMMON);
 	}
 
 	@SuppressWarnings("deprecation")

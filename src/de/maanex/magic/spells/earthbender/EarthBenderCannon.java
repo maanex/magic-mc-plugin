@@ -21,6 +21,9 @@ import org.bukkit.util.Vector;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
 import de.maanex.magic.WandModifiers;
+import de.maanex.magic.enumeri.SpellCategory;
+import de.maanex.magic.enumeri.SpellRarity;
+import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 import de.maanex.main.Main;
 import de.maanex.utils.Particle;
@@ -30,7 +33,7 @@ import net.minecraft.server.v1_12_R1.EnumParticle;
 public class EarthBenderCannon extends MagicSpell implements Listener {
 
 	public EarthBenderCannon() {
-		super(17, "Erdbendigung - Schleuder", "Hepp... UUUuunnd SCHUSS!", 5);
+		super(17, "Erdbendigung - Schleuder", "Hepp... UUUuunnd SCHUSS!", 3, 2, SpellType.ACTIVE, SpellCategory.BENDER, SpellRarity.RARE);
 	}
 
 	static HashMap<MagicPlayer, FallingBlock>	blocks	= new HashMap<>();

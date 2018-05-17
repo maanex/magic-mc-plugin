@@ -10,6 +10,9 @@ import org.bukkit.block.Block;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
 import de.maanex.magic.WandModifiers;
+import de.maanex.magic.enumeri.SpellCategory;
+import de.maanex.magic.enumeri.SpellRarity;
+import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 import de.maanex.magic.missile.BridgeDrawMissile;
 
@@ -17,7 +20,7 @@ import de.maanex.magic.missile.BridgeDrawMissile;
 public class EarthBenderBridge extends MagicSpell {
 
 	public EarthBenderBridge() {
-		super(16, "Erdbendigung - Brücke", "Schmiede eine mächtige Brücke!", 18);
+		super(16, "Erdbendigung - Brücke", "Schmiede eine mächtige Brücke!", 18, 0, SpellType.ACTIVE, SpellCategory.BENDER, SpellRarity.VERY_RARE);
 	}
 
 	@SuppressWarnings("deprecation")

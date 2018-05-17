@@ -9,6 +9,9 @@ import org.bukkit.entity.Player;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
 import de.maanex.magic.WandModifiers;
+import de.maanex.magic.enumeri.SpellCategory;
+import de.maanex.magic.enumeri.SpellRarity;
+import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 import de.maanex.magic.missile.PainfullStingMissile;
 import de.maanex.utils.Particle;
@@ -19,7 +22,7 @@ import net.minecraft.server.v1_12_R1.EnumParticle;
 public class PainfullSting extends MagicSpell {
 
 	public PainfullSting() {
-		super(14, "Schmerzhafter Stich", "Autsch!", 5);
+		super(14, "Schmerzhafter Stich", "Autsch!", 5, 1, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.RARE);
 	}
 
 	@Override

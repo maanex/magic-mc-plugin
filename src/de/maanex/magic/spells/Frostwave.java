@@ -18,6 +18,9 @@ import org.bukkit.potion.PotionEffectType;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
 import de.maanex.magic.WandModifiers;
+import de.maanex.magic.enumeri.SpellCategory;
+import de.maanex.magic.enumeri.SpellRarity;
+import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 import de.maanex.main.Main;
 import de.maanex.utils.Particle;
@@ -27,7 +30,7 @@ import net.minecraft.server.v1_12_R1.EnumParticle;
 public class Frostwave extends MagicSpell {
 
 	public Frostwave() {
-		super(13, "Frostwelle", "Brrrr!", 7);
+		super(13, "Frostwelle", "Brrrr!", 2, 4, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.VERY_RARE);
 	}
 
 	@SuppressWarnings("deprecation")

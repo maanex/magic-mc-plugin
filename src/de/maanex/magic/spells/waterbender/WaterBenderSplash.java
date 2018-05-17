@@ -7,6 +7,9 @@ import org.bukkit.util.Vector;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
 import de.maanex.magic.WandModifiers;
+import de.maanex.magic.enumeri.SpellCategory;
+import de.maanex.magic.enumeri.SpellRarity;
+import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 import de.maanex.magic.missile.WaterSplashMissile;
 
@@ -14,7 +17,7 @@ import de.maanex.magic.missile.WaterSplashMissile;
 public class WaterBenderSplash extends MagicSpell {
 
 	public WaterBenderSplash() {
-		super(22, "Wasserbendigung - Platscher", "Eine GIGANTISCHE Welle...", 5);
+		super(22, "Wasserbendigung - Platscher", "Eine GIGANTISCHE Welle...", 5, 5, SpellType.ACTIVE, SpellCategory.BENDER, SpellRarity.RARE);
 	}
 
 	@Override

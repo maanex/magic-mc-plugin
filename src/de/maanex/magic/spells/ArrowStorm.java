@@ -10,13 +10,16 @@ import org.bukkit.util.Vector;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
 import de.maanex.magic.WandModifiers;
+import de.maanex.magic.enumeri.SpellCategory;
+import de.maanex.magic.enumeri.SpellRarity;
+import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 
 
 public class ArrowStorm extends MagicSpell {
 
 	public ArrowStorm() {
-		super(7, "Pfeilsturm", "Au, au, aua, AUTSCH! STOP!", 4);
+		super(7, "Pfeilsturm", "Au, au, aua, AUTSCH! STOP!", 4, 20, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.RARE);
 	}
 
 	@Override
@@ -27,6 +30,8 @@ public class ArrowStorm extends MagicSpell {
 			Arrow a = caster.getMCPlayer().launchProjectile(Arrow.class, caster.getMCPlayer().getLocation().getDirection().add(v(r)).normalize());
 			a.setPickupStatus(PickupStatus.CREATIVE_ONLY);
 			a.setTicksLived(20 * 60 * 5 - 40);
+			a.setCritical(true);
+			a.setKnockbackStrength(2);
 		}
 
 		takeMana(caster, mods);

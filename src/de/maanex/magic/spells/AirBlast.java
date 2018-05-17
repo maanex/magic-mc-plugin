@@ -8,6 +8,9 @@ import org.bukkit.entity.LivingEntity;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
 import de.maanex.magic.WandModifiers;
+import de.maanex.magic.enumeri.SpellCategory;
+import de.maanex.magic.enumeri.SpellRarity;
+import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 import de.maanex.utils.Particle;
 import net.minecraft.server.v1_12_R1.EnumParticle;
@@ -16,7 +19,7 @@ import net.minecraft.server.v1_12_R1.EnumParticle;
 public class AirBlast extends MagicSpell {
 
 	public AirBlast() {
-		super(5, "Air Blast", "Wusch! Weg von mir!", 15);
+		super(5, "Air Blast", "Wusch! Weg von mir!", 5, 18, SpellType.ACTIVE, SpellCategory.UTILITY, SpellRarity.EPIC);
 	}
 
 	@Override

@@ -3,7 +3,7 @@ package de.maanex.magic.enumeri;
 
 public enum SpellType {
 
-	ACTIVE("Aktiv"), PASSIVE("Passiv")
+	ACTIVE("Aktiv"), PASSIVE("Passiv"), NOT_USEABLE("Nicht Benutzbar")
 
 	;
 

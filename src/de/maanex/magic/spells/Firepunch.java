@@ -4,6 +4,9 @@ package de.maanex.magic.spells;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
 import de.maanex.magic.WandModifiers;
+import de.maanex.magic.enumeri.SpellCategory;
+import de.maanex.magic.enumeri.SpellRarity;
+import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 import de.maanex.magic.missile.FirePunchMissile;
 
@@ -11,7 +14,7 @@ import de.maanex.magic.missile.FirePunchMissile;
 public class Firepunch extends MagicSpell {
 
 	public Firepunch() {
-		super(21, "Feuerschlag", "Knock, nur 1000x besser!", 4);
+		super(21, "Feuerschlag", "Knock, nur 1000x besser!", 4, 1, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.VERY_RARE);
 	}
 
 	@Override

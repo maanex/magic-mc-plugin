@@ -12,6 +12,9 @@ import org.bukkit.util.Vector;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
 import de.maanex.magic.WandModifiers;
+import de.maanex.magic.enumeri.SpellCategory;
+import de.maanex.magic.enumeri.SpellRarity;
+import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 import de.maanex.utils.Particle;
 import net.minecraft.server.v1_12_R1.EnumParticle;
@@ -20,7 +23,7 @@ import net.minecraft.server.v1_12_R1.EnumParticle;
 public class Levitate extends MagicSpell {
 
 	public Levitate() {
-		super(19, "Übersicht", "Gut Aussicht von hier oben!", 2);
+		super(19, "Übersicht", "Gut Aussicht von hier oben!", 2, 15, SpellType.ACTIVE, SpellCategory.UTILITY, SpellRarity.RARE);
 	}
 
 	public static List<Player> inAir = new ArrayList<>();

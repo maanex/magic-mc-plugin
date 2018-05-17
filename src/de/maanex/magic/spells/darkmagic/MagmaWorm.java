@@ -10,6 +10,9 @@ import org.bukkit.entity.Entity;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
 import de.maanex.magic.WandModifiers;
+import de.maanex.magic.enumeri.SpellCategory;
+import de.maanex.magic.enumeri.SpellRarity;
+import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 import de.maanex.magic.missile.MagmaMissile;
 import de.maanex.utils.Particle;
@@ -20,7 +23,7 @@ import net.minecraft.server.v1_12_R1.EnumParticle;
 public class MagmaWorm extends MagicSpell {
 
 	public MagmaWorm() {
-		super(15, "Magma Wurm", "Igitt!", 16, WandType.DARK);
+		super(15, "Magma Wurm", "Igitt!", 16, 60, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.FORBIDDEN, WandType.DARK);
 	}
 
 	@Override

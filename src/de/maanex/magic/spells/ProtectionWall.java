@@ -9,6 +9,9 @@ import org.bukkit.entity.Player;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
 import de.maanex.magic.WandModifiers;
+import de.maanex.magic.enumeri.SpellCategory;
+import de.maanex.magic.enumeri.SpellRarity;
+import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 import de.maanex.main.Main;
 
@@ -16,7 +19,7 @@ import de.maanex.main.Main;
 public class ProtectionWall extends MagicSpell {
 
 	public ProtectionWall() {
-		super(3, "Schutzwand", "Schützt dich! (TÜV-Geprüft)", 3);
+		super(3, "Schutzwand", "Schützt dich! (TÜV-Geprüft)", 3, 4, SpellType.ACTIVE, SpellCategory.PROTECTION, SpellRarity.RARE);
 	}
 
 	@Override

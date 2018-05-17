@@ -7,13 +7,16 @@ import org.bukkit.block.Block;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
 import de.maanex.magic.WandModifiers;
+import de.maanex.magic.enumeri.SpellCategory;
+import de.maanex.magic.enumeri.SpellRarity;
+import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 
 
 public class Strike extends MagicSpell {
 
 	public Strike() {
-		super(1, "Strike", "Ein Blitz!", 10);
+		super(1, "Strike", "Ein Blitz!", 3, 3, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.COMMON);
 	}
 
 	@Override
