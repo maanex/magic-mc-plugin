@@ -1,4 +1,4 @@
-package de.maanex.magic.wandsuse;
+package de.maanex.magic;
 
 
 import java.util.List;
@@ -15,10 +15,8 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-import de.maanex.magic.MagicPlayer;
-import de.maanex.magic.MagicSpell;
-import de.maanex.magic.WandModifiers;
 import de.maanex.magic.crafting.Spellbook;
+import de.maanex.magic.enumeri.WandType;
 import de.maanex.magic.generators.WandModsGen;
 import de.maanex.magic.items.DefaultItems;
 import de.maanex.magic.items.WandBuilder;

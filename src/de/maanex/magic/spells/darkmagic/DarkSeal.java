@@ -14,7 +14,7 @@ import org.bukkit.potion.PotionEffectType;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
 import de.maanex.magic.WandModifiers;
-import de.maanex.magic.wandsuse.WandType;
+import de.maanex.magic.enumeri.WandType;
 import de.maanex.main.Main;
 import de.maanex.utils.Particle;
 import de.maanex.utils.TargetEntityFinder;

@@ -88,7 +88,7 @@ public class RunicTableUse implements Listener {
 
 	@EventHandler
 	public void onInvClick(InventoryClickEvent e) {
-		if (e.getClickedInventory().getName().equalsIgnoreCase(TABLE_NAME)) {
+		if (e.getClickedInventory() != null && e.getClickedInventory().getName().equalsIgnoreCase(TABLE_NAME)) {
 			if (e.getSlot() <= 1) return;
 			if (e.getSlot() <= 3) {
 				e.setCancelled(true);

@@ -7,8 +7,8 @@ import org.bukkit.util.Vector;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
 import de.maanex.magic.WandModifiers;
+import de.maanex.magic.enumeri.WandType;
 import de.maanex.magic.missile.WaterSplashMissile;
-import de.maanex.magic.wandsuse.WandType;
 
 
 public class WaterBenderSplash extends MagicSpell {

@@ -7,7 +7,7 @@ import org.bukkit.entity.LivingEntity;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
 import de.maanex.magic.WandModifiers;
-import de.maanex.magic.wandsuse.WandType;
+import de.maanex.magic.enumeri.WandType;
 import de.maanex.utils.Particle;
 import net.minecraft.server.v1_12_R1.EnumParticle;
 

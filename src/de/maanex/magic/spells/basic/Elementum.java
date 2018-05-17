@@ -4,7 +4,7 @@ package de.maanex.magic.spells.basic;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
 import de.maanex.magic.WandModifiers;
-import de.maanex.magic.wandsuse.WandType;
+import de.maanex.magic.enumeri.WandType;
 
 
 public class Elementum extends MagicSpell {

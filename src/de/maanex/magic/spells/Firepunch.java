@@ -4,8 +4,8 @@ package de.maanex.magic.spells;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
 import de.maanex.magic.WandModifiers;
+import de.maanex.magic.enumeri.WandType;
 import de.maanex.magic.missile.FirePunchMissile;
-import de.maanex.magic.wandsuse.WandType;
 
 
 public class Firepunch extends MagicSpell {

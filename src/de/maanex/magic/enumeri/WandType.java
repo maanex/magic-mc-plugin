@@ -1,4 +1,4 @@
-package de.maanex.magic.wandsuse;
+package de.maanex.magic.enumeri;
 
 
 import org.bukkit.inventory.ItemStack;

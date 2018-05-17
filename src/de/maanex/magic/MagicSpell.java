@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import de.maanex.magic.wandsuse.WandType;
+import de.maanex.magic.enumeri.WandType;
 
 
 public abstract class MagicSpell {
