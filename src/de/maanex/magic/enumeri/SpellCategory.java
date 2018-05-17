@@ -1,15 +1,15 @@
 package de.maanex.magic.enumeri;
 
 
-public enum SpellType {
+public enum SpellCategory {
 
-	ACTIVE("Aktiv"), PASSIVE("Passiv")
+	COMBAT("Kampf"), PROTECTION("Schutz"), UTILITY("Werkzeug"), BENDER("Bendigung"), HALLUCINATION("Halluzination")
 
 	;
 
 	private String displayname;
 
-	SpellType(String displayname) {
+	SpellCategory(String displayname) {
 		this.displayname = displayname;
 	}
 

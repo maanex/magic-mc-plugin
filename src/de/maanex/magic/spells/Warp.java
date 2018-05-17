@@ -13,6 +13,9 @@ import org.bukkit.potion.PotionEffectType;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
 import de.maanex.magic.WandModifiers;
+import de.maanex.magic.enumeri.SpellCategory;
+import de.maanex.magic.enumeri.SpellRarity;
+import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 import de.maanex.main.Main;
 import de.maanex.utils.Particle;
@@ -22,7 +25,7 @@ import net.minecraft.server.v1_12_R1.EnumParticle;
 public class Warp extends MagicSpell {
 
 	public Warp() {
-		super(8, "Warp", "Zack, Zack - Hier, Dort", 2);
+		super(8, "Warp", "Zack, Zack - Hier, Dort", 2, 0, SpellType.ACTIVE, SpellCategory.UTILITY, SpellRarity.RARE);
 	}
 
 	private static HashMap<Player, Integer> dark_wand_show_tasks = new HashMap<>();

@@ -9,27 +9,41 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import de.maanex.magic.enumeri.SpellCategory;
+import de.maanex.magic.enumeri.SpellRarity;
+import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 
 
 public abstract class MagicSpell {
 
-	private String		name, desc;
-	private int			id, manacost;
-	private WandType	reqWandType	= null;
+	private String			name, desc;
+	private int				id, manacost, cooldown;
+	private WandType		reqWandType	= null;
+	private SpellType		type;
+	private SpellCategory	category;
+	private SpellRarity		rarity;
 
-	public MagicSpell(int id, String name, String desc, int manacost) {
+	public MagicSpell(int id, String name, String desc, int manacost, int cooldown, SpellType type, SpellCategory category, SpellRarity rarity) {
 		this.id = id;
 		this.name = name;
 		this.desc = desc;
 		this.manacost = manacost;
+		this.cooldown = cooldown;
+		this.type = type;
+		this.category = category;
+		this.rarity = rarity;
 	}
 
-	public MagicSpell(int id, String name, String desc, int manacost, WandType reqWandType) {
+	public MagicSpell(int id, String name, String desc, int manacost, int cooldown, SpellType type, SpellCategory category, SpellRarity rarity, WandType reqWandType) {
 		this.id = id;
 		this.name = name;
 		this.desc = desc;
 		this.manacost = manacost;
+		this.cooldown = cooldown;
+		this.type = type;
+		this.category = category;
+		this.rarity = rarity;
 		this.reqWandType = reqWandType;
 	}
 
@@ -47,10 +61,12 @@ public abstract class MagicSpell {
 		if (canAffortSpell(player, mod)) {
 			if (reqWandType != null) {
 				if (type.equals(reqWandType)) onCastPerform(player, type, mod);
-				else player.getMCPlayer().sendMessage("�7Du ben�tigst f�r diesen Zauber einen geeigneten Zauberstab!");
+				else player.getMCPlayer().sendMessage("§7Du benötigst für diesen Zauber einen geeigneten Zauberstab!");
 			} else onCastPerform(player, type, mod);
-		} else player.getMCPlayer().sendMessage("�7Du hast nicht genug Mana!");
+		} else player.getMCPlayer().sendMessage("§7Du hast nicht genug Mana!");
 	}
+
+	//
 
 	public String getName() {
 		return this.name;
@@ -66,6 +82,22 @@ public abstract class MagicSpell {
 
 	public int getManacost() {
 		return this.manacost;
+	}
+
+	public int getCooldown() {
+		return cooldown;
+	}
+
+	public SpellType getType() {
+		return type;
+	}
+
+	public SpellCategory getCategory() {
+		return category;
+	}
+
+	public SpellRarity getRarity() {
+		return rarity;
 	}
 
 	public WandType getRequiredWandType() {
@@ -92,16 +124,21 @@ public abstract class MagicSpell {
 
 		ItemMeta m = out.getItemMeta();
 
-		String namecc = "�3";
+		String namecc = "§3";
 		if (getRequiredWandType() != null) namecc = getRequiredWandType().getDisplayname().substring(0, 2);
 		m.setDisplayName(namecc + getName());
 
 		List<String> lore = new ArrayList<>();
 
-		lore.add("�0" + getID());
-		lore.add("�d" + getDesc());
-		lore.add("�0");
-		lore.add("�6" + getManacost() + " Mana");
+		lore.add("§0" + getID());
+		lore.add("§7" + getDesc());
+		lore.add("§0");
+		lore.add("§3✤ Mana: §b" + getManacost());
+		lore.add("§2♼ Cooldown: §a" + getCooldown());
+		lore.add("§0");
+		lore.add("§9✷ §8Typ: §7" + getType().getDisplayName());
+		lore.add("§c✵ §8Kategorie: §7" + getCategory().getDisplayName());
+		lore.add("§d❊ §8Seltenheit: §7" + getRarity().getDisplayName());
 
 		m.setLore(lore);
 
@@ -115,16 +152,16 @@ public abstract class MagicSpell {
 
 		ItemMeta m = stack.getItemMeta();
 
-		String namecc = "�3";
+		String namecc = "§3";
 		if (getRequiredWandType() != null) namecc = getRequiredWandType().getDisplayname().substring(0, 2);
 		m.setDisplayName(namecc + getName());
 
 		List<String> lore = new ArrayList<>();
 
-		lore.add("�0" + getID());
-		lore.add("�d" + getDesc());
-		lore.add("�0");
-		lore.add("�6" + getManacost() + " Mana");
+		lore.add("§0" + getID());
+		lore.add("§d" + getDesc());
+		lore.add("§0");
+		lore.add("§6" + getManacost() + " Mana");
 
 		m.setLore(lore);
 
@@ -140,9 +177,9 @@ public abstract class MagicSpell {
 		ItemMeta me = s.getItemMeta();
 		if (!me.hasLore()) return null;
 		String l = me.getLore().get(0);
-		if (!l.startsWith("�0")) return null;
+		if (!l.startsWith("§0")) return null;
 		try {
-			int i = Integer.parseInt(l.replace("�0", ""));
+			int i = Integer.parseInt(l.replace("§0", ""));
 			for (MagicSpell p : MagicManager.getAllSpells())
 				if (p.getID() == i) return p;
 		} catch (Exception ex) {}
