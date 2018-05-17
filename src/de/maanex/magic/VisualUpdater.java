@@ -1,6 +1,7 @@
 package de.maanex.magic;
 
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -20,11 +21,39 @@ public class VisualUpdater {
 	private VisualUpdater() {
 	}
 
-	public static void updateAll() {
-		Bukkit.getOnlinePlayers().forEach(p -> update(MagicPlayer.get(p)));
+	public static void updateAllFull() {
+		Bukkit.getOnlinePlayers().forEach(p -> updateFull(MagicPlayer.get(p)));
 	}
 
-	public static void update(MagicPlayer player) {
+	public static void updateAllCooldown() {
+		Bukkit.getOnlinePlayers().forEach(p -> updateCooldown(MagicPlayer.get(p), true));
+	}
+
+	private static HashMap<Player, MagicSpell> last = new HashMap<>();
+
+	public static void updateCooldown(MagicPlayer player, boolean forceNCdDp) {
+		Player m = player.getMCPlayer();
+		if (m.getInventory().getItemInMainHand() != null && m.getInventory().getItemInMainHand().getType().equals(Material.WOOD_HOE) && m.getInventory().getItemInOffHand() != null
+				&& m.getInventory().getItemInOffHand().hasItemMeta()) {
+			List<MagicSpell> spells = Spellbook.parseSpells(m.getInventory().getItemInOffHand().getItemMeta());
+			MagicSpell s = spells.get(player.selected_spell);
+			if (s == null) return;
+			if (player.cooldown.containsKey(s)) {
+				String disp = player.cooldown.get(s) + "s";
+				m.sendTitle("", "§7" + s.getName() + " §8-§7 " + disp, 0, 30, 10);
+
+				last.put(m, s);
+			} else if (forceNCdDp || (last.containsKey(m) && last.get(m).equals(s))) {
+				String namecc = "§3";
+				if (s.getRequiredWandType() != null) namecc = s.getRequiredWandType().getDisplayname().substring(0, 2);
+				m.sendTitle("", namecc + s.getName(), 2, 40, 20);
+
+				if (last.containsKey(m)) last.remove(m);
+			}
+		}
+	}
+
+	public static void updateFull(MagicPlayer player) {
 		Player m = player.getMCPlayer();
 		int manareq = -1;
 		/* playerHasWand(player) */;

@@ -143,7 +143,7 @@ public class Main extends JavaPlugin {
 		}, 20, 20);
 
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
-			VisualUpdater.updateAll();
+			VisualUpdater.updateAllFull();
 		}, 40, 40);
 
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {

@@ -94,9 +94,7 @@ public class UseWand implements Listener {
 				e.setCancelled(true);
 
 				spell = spells.get(p.selected_spell);
-				String namecc = "§3";
-				if (spell.getRequiredWandType() != null) namecc = spell.getRequiredWandType().getDisplayname().substring(0, 2);
-				p.getMCPlayer().sendTitle("", namecc + spells.get(p.selected_spell).getName(), 2, 40, 20);
+				VisualUpdater.updateCooldown(p, true);
 				e.getPlayer().setCooldown(Material.BOOK, 10);
 			} else if (e.getAction().equals(Action.LEFT_CLICK_AIR) || e.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
 				if (new Random().nextInt(100) >= m.getSavety()) {

@@ -20,9 +20,10 @@ public class MagicPlayer {
 	private int		mana, manaCap, maxMana;
 
 	// temp
-	public int					selected_spell	= 0;
-	public int					nat_mana_reg_c	= 0;
-	public List<MagicEffect>	applied_effects	= new ArrayList<>();
+	public int							selected_spell	= 0;
+	public int							nat_mana_reg_c	= 0;
+	public List<MagicEffect>			applied_effects	= new ArrayList<>();
+	public HashMap<MagicSpell, Integer>	cooldown		= new HashMap<>();
 
 	private MagicPlayer(Player player) {
 		this.player = player;
@@ -81,7 +82,7 @@ public class MagicPlayer {
 		} else this.mana += mana;
 		this.mana = Math.max(0, this.mana);
 		this.mana = Math.min(this.mana, this.maxMana);
-		VisualUpdater.update(this);
+		VisualUpdater.updateFull(this);
 	}
 
 	public boolean canAffordMana(int mana) {
@@ -130,22 +131,37 @@ public class MagicPlayer {
 			if (e.duration <= 0) applied_effects.remove(e);
 			e.tick(this);
 		}
+
+		List<MagicSpell> rem = new ArrayList<>();
+		for (MagicSpell s : cooldown.keySet()) {
+			int ticks = cooldown.get(s);
+
+			ticks--;
+			if (ticks > 0) cooldown.put(s, ticks);
+			else rem.add(s);
+		}
+		rem.forEach(cooldown::remove);
+
+		VisualUpdater.updateCooldown(this, false);
 	}
 
 	/*
 	 * 
 	 */
 
-	private static HashMap<Player, MagicPlayer> players = new HashMap<>();
+	private static HashMap<String, MagicPlayer> players = new HashMap<>();
 
 	public static MagicPlayer get(Player player) {
-		if (players.containsKey(player)) return players.get(player);
+		if (players.containsKey(player.getUniqueId().toString())) {
+			if (players.get(player.getUniqueId().toString()).getMCPlayer() != player) players.get(player.getUniqueId().toString()).player = player;
+			return players.get(player.getUniqueId().toString());
+		}
 
 		MagicPlayer p = new MagicPlayer(player);
 		if (Database.getConfig().getStringList("players").contains(player.getUniqueId().toString())) {
 			ManaDbInterface.parseValues(p);
 		}
-		players.put(player, p);
+		players.put(player.getUniqueId().toString(), p);
 		return p;
 	}
 
@@ -153,7 +169,7 @@ public class MagicPlayer {
 		List<String> uuids = new ArrayList<>();
 		players.forEach((k, v) -> {
 			ManaDbInterface.saveValues(v);
-			uuids.add(k.getUniqueId().toString());
+			uuids.add(k);
 		});
 
 		Database.getConfig().set("players", uuids);

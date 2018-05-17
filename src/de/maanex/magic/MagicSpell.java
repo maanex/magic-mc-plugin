@@ -55,10 +55,17 @@ public abstract class MagicSpell {
 
 	protected void takeMana(MagicPlayer caster, WandModifiers mods) {
 		caster.addMana((int) (-manacost * ((double) mods.getManause() / 100)));
+
+		if (cooldown > 0) caster.cooldown.put(this, cooldown);
+		VisualUpdater.updateCooldown(caster, true);
 	}
 
 	public void interaction(MagicPlayer player, WandType type, WandModifiers mod) {
 		if (canAffortSpell(player, mod)) {
+			if (player.cooldown.containsKey(this)) {
+				player.getMCPlayer().sendMessage("§7Spell is on Cooldown!");
+				return;
+			}
 			if (reqWandType != null) {
 				if (type.equals(reqWandType)) onCastPerform(player, type, mod);
 				else player.getMCPlayer().sendMessage("§7Du benötigst für diesen Zauber einen geeigneten Zauberstab!");
@@ -134,7 +141,7 @@ public abstract class MagicSpell {
 		lore.add("§7" + getDesc());
 		lore.add("§0");
 		lore.add("§3✤ Mana: §b" + getManacost());
-		lore.add("§2♼ Cooldown: §a" + getCooldown());
+		lore.add("§2♼ Cooldown: §a" + getCooldown() + "s");
 		lore.add("§0");
 		lore.add("§9✷ §8Typ: §7" + getType().getDisplayName());
 		lore.add("§c✵ §8Kategorie: §7" + getCategory().getDisplayName());
