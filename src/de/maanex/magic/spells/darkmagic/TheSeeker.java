@@ -26,7 +26,7 @@ import net.minecraft.server.v1_12_R1.EnumParticle;
 public class TheSeeker extends MagicSpell {
 
 	public TheSeeker() {
-		super(11, "Der Sucher", "Er sucht und schnappt zu!", 15, 60, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.FORBIDDEN, WandType.DARK);
+		super(11, "Der Sucher", "Er sucht und schnappt zu!", 15, 360, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.FORBIDDEN, WandType.DARK);
 	}
 
 	@Override

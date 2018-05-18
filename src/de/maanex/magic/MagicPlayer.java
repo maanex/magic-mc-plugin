@@ -16,8 +16,9 @@ import de.maanex.magic.database.ManaDbInterface;
 
 public class MagicPlayer {
 
-	private Player	player;
-	private int		mana, manaCap, maxMana;
+	private Player				player;
+	private int					mana, manaCap, maxMana;
+	private List<SpellRecipe>	researchedRecipes;
 
 	// temp
 	public int							selected_spell	= 0;
@@ -30,38 +31,23 @@ public class MagicPlayer {
 		this.mana = DefaultValues.MANA;
 		this.manaCap = DefaultValues.MANA_REGEN_CAP;
 		this.maxMana = DefaultValues.MAX_MANA;
+		this.researchedRecipes = new ArrayList<>();
 	}
+
+	//
 
 	public Player getMCPlayer() {
 		return this.player;
 	}
 
+	//
+
 	public int getMana() {
 		return this.mana;
 	}
 
-	public int getManaCap() {
-		return this.manaCap;
-	}
-
-	public int getMaxMana() {
-		return this.maxMana;
-	}
-
 	public void setMana(int mana) {
 		this.mana = mana;
-	}
-
-	public void setManaCap(int manaCap) {
-		this.manaCap = manaCap;
-	}
-
-	public void setMaxMana(int maxMana) {
-		this.maxMana = maxMana;
-	}
-
-	public void addMana(int mana) {
-		addMana(mana, true);
 	}
 
 	public void addMana(int mana, boolean useCap) {
@@ -85,17 +71,65 @@ public class MagicPlayer {
 		VisualUpdater.updateFull(this);
 	}
 
+	public void addMana(int mana) {
+		addMana(mana, true);
+	}
+
 	public boolean canAffordMana(int mana) {
 		return this.mana >= mana;
+	}
+
+	//
+
+	public int getManaCap() {
+		return this.manaCap;
+	}
+
+	public void setManaCap(int manaCap) {
+		this.manaCap = manaCap;
 	}
 
 	public void addManaCap(int manaCap) {
 		this.manaCap += manaCap;
 	}
 
+	//
+
+	public int getMaxMana() {
+		return this.maxMana;
+	}
+
+	public void setMaxMana(int maxMana) {
+		this.maxMana = maxMana;
+	}
+
 	public void addMaxMana(int maxMana) {
 		this.maxMana += maxMana;
 	}
+
+	//
+
+	public List<SpellRecipe> getResearchedRecipes() {
+		return this.researchedRecipes;
+	}
+
+	public void setResearchedRecipes(List<SpellRecipe> newList) {
+		this.researchedRecipes = newList;
+	}
+
+	public void addRecipe(SpellRecipe res) {
+		researchedRecipes.add(res);
+	}
+
+	public void removeRecipe(SpellRecipe res) {
+		researchedRecipes.remove(res);
+	}
+
+	public boolean hasResearchedRecipe(SpellRecipe res) {
+		return researchedRecipes.contains(res);
+	}
+
+	//
 
 	public void clearEffects() {
 		applied_effects.clear();

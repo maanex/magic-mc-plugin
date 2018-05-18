@@ -9,6 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import de.maanex.magic.MagicManager;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.ManaRegeneration;
+import de.maanex.magic.SpellRecipe;
 import de.maanex.magic.UseWand;
 import de.maanex.magic.VisualUpdater;
 import de.maanex.magic.crafting.HelpBook;
@@ -72,6 +73,7 @@ public class Main extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		registerSpells();
+		registerSpellRecipes();
 
 		Wands.registerRecipe();
 		Spellbook.registerRecipe();
@@ -180,6 +182,13 @@ public class Main extends JavaPlugin {
 		MagicManager.registerSpell(new WaterSpirit());
 		MagicManager.registerSpell(new AirSpirit());
 		MagicManager.registerSpell(new Firemine());
+	}
+
+	private void registerSpellRecipes() {
+		MagicManager.registerSpellRecipe(new SpellRecipe(Elementum.class, Elementum.class, FireSpirit.class, 25));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Elementum.class, Elementum.class, WaterSpirit.class, 25));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Elementum.class, Elementum.class, EarthSpirit.class, 25));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Elementum.class, Elementum.class, AirSpirit.class, 25));
 	}
 
 	//

@@ -4,6 +4,7 @@ package de.maanex.magic;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -56,7 +57,7 @@ public abstract class MagicSpell {
 	protected void takeMana(MagicPlayer caster, WandModifiers mods) {
 		caster.addMana((int) (-manacost * ((double) mods.getManause() / 100)));
 
-		if (cooldown > 0) caster.cooldown.put(this, cooldown);
+		if (cooldown > 0 && !caster.getMCPlayer().getGameMode().equals(GameMode.CREATIVE)) caster.cooldown.put(this, cooldown);
 		VisualUpdater.updateCooldown(caster, true);
 	}
 

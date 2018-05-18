@@ -3,11 +3,18 @@ package de.maanex.magic;
 
 public class SpellRecipe {
 
-	private Class<? extends MagicSpell>	spell1, spell2;
-	private MagicSpell					result;
-	private int							probability;
+	private MagicSpell	spell1, spell2, result;
+	private int			probability;
 
-	public SpellRecipe(Class<? extends MagicSpell> spell1, Class<? extends MagicSpell> spell2, MagicSpell result, int probability) {
+	public SpellRecipe(Class<? extends MagicSpell> spell1, Class<? extends MagicSpell> spell2, Class<? extends MagicSpell> result, int probability) {
+		super();
+		this.spell1 = MagicManager.getSpell(spell1);
+		this.spell2 = MagicManager.getSpell(spell2);
+		this.result = MagicManager.getSpell(result);
+		this.probability = probability;
+	}
+
+	public SpellRecipe(MagicSpell spell1, MagicSpell spell2, MagicSpell result, int probability) {
 		super();
 		this.spell1 = spell1;
 		this.spell2 = spell2;
@@ -15,19 +22,19 @@ public class SpellRecipe {
 		this.probability = probability;
 	}
 
-	public Class<? extends MagicSpell> getSpell1() {
+	public MagicSpell getSpell1() {
 		return spell1;
 	}
 
-	public void setSpell1(Class<? extends MagicSpell> spell1) {
+	public void setSpell1(MagicSpell spell1) {
 		this.spell1 = spell1;
 	}
 
-	public Class<? extends MagicSpell> getSpell2() {
+	public MagicSpell getSpell2() {
 		return spell2;
 	}
 
-	public void setSpell2(Class<? extends MagicSpell> spell2) {
+	public void setSpell2(MagicSpell spell2) {
 		this.spell2 = spell2;
 	}
 
