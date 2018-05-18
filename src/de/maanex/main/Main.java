@@ -39,6 +39,9 @@ import de.maanex.magic.spells.Warp;
 import de.maanex.magic.spells.basic.AirSpirit;
 import de.maanex.magic.spells.basic.EarthSpirit;
 import de.maanex.magic.spells.basic.Elementum;
+import de.maanex.magic.spells.basic.EssenceBender;
+import de.maanex.magic.spells.basic.EssenceBrightness;
+import de.maanex.magic.spells.basic.EssenceDarkness;
 import de.maanex.magic.spells.basic.FireSpirit;
 import de.maanex.magic.spells.basic.WaterSpirit;
 import de.maanex.magic.spells.darkmagic.DarkSeal;
@@ -182,14 +185,22 @@ public class Main extends JavaPlugin {
 		MagicManager.registerSpell(new WaterSpirit());
 		MagicManager.registerSpell(new AirSpirit());
 		MagicManager.registerSpell(new Firemine());
+		MagicManager.registerSpell(new EssenceDarkness());
+		MagicManager.registerSpell(new EssenceBrightness());
+		MagicManager.registerSpell(new EssenceBender());
 	}
 
 	private void registerSpellRecipes() {
-		MagicManager.registerSpellRecipe(new SpellRecipe(Elementum.class, Elementum.class, FireSpirit.class, 25));
-		MagicManager.registerSpellRecipe(new SpellRecipe(Elementum.class, Elementum.class, WaterSpirit.class, 25));
-		MagicManager.registerSpellRecipe(new SpellRecipe(Elementum.class, Elementum.class, EarthSpirit.class, 25));
-		MagicManager.registerSpellRecipe(new SpellRecipe(Elementum.class, Elementum.class, AirSpirit.class, 25));
+		// Base
+		MagicManager.registerSpellRecipe(new SpellRecipe(Elementum.class, Elementum.class, FireSpirit.class, 48));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Elementum.class, Elementum.class, WaterSpirit.class, 48));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Elementum.class, Elementum.class, EarthSpirit.class, 48));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Elementum.class, Elementum.class, AirSpirit.class, 48));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Elementum.class, Elementum.class, EssenceDarkness.class, 1));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Elementum.class, Elementum.class, EssenceBrightness.class, 2));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Elementum.class, Elementum.class, EssenceBender.class, 5));
 
+		// Fire Stuff
 		MagicManager.registerSpellRecipe(new SpellRecipe(FireSpirit.class, FireSpirit.class, Fireball.class, 999));
 		MagicManager.registerSpellRecipe(new SpellRecipe(FireSpirit.class, FireSpirit.class, Firepunch.class, 1));
 
@@ -203,6 +214,15 @@ public class Main extends JavaPlugin {
 		MagicManager.registerSpellRecipe(new SpellRecipe(Knock.class, FireSpirit.class, Firepunch.class, 10));
 		MagicManager.registerSpellRecipe(new SpellRecipe(Knock.class, FireSpirit.class, FireSpirit.class, 45));
 		MagicManager.registerSpellRecipe(new SpellRecipe(Knock.class, FireSpirit.class, Knock.class, 45));
+
+		// Bender Stuff
+		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceBender.class, EarthSpirit.class, EarthBenderCannon.class, 20));
+		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceBender.class, EarthSpirit.class, EarthBenderBridge.class, 20));
+
+		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceBender.class, WaterSpirit.class, WaterBenderSplash.class, 20));
+
+		// Mixing Elements
+		MagicManager.registerSpellRecipe(new SpellRecipe(AirSpirit.class, WaterSpirit.class, Strike.class, 100));
 	}
 
 	//
