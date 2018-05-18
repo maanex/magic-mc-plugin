@@ -117,8 +117,8 @@ public class MagicPlayer {
 		this.researchedRecipes = newList;
 	}
 
-	public void addRecipe(SpellRecipe res) {
-		researchedRecipes.add(res);
+	public void researchRecipe(SpellRecipe res) {
+		if (!researchedRecipes.contains(res)) researchedRecipes.add(res);
 	}
 
 	public void removeRecipe(SpellRecipe res) {

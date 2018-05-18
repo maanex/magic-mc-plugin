@@ -155,7 +155,7 @@ public abstract class MagicSpell {
 	}
 
 	public void updateExistingItemStack(ItemStack stack) {
-
+		stack.setType(Material.IRON_HOE);
 		setSkin(stack, (short) id);
 
 		ItemMeta m = stack.getItemMeta();

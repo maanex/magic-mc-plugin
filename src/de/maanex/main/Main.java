@@ -189,6 +189,20 @@ public class Main extends JavaPlugin {
 		MagicManager.registerSpellRecipe(new SpellRecipe(Elementum.class, Elementum.class, WaterSpirit.class, 25));
 		MagicManager.registerSpellRecipe(new SpellRecipe(Elementum.class, Elementum.class, EarthSpirit.class, 25));
 		MagicManager.registerSpellRecipe(new SpellRecipe(Elementum.class, Elementum.class, AirSpirit.class, 25));
+
+		MagicManager.registerSpellRecipe(new SpellRecipe(FireSpirit.class, FireSpirit.class, Fireball.class, 999));
+		MagicManager.registerSpellRecipe(new SpellRecipe(FireSpirit.class, FireSpirit.class, Firepunch.class, 1));
+
+		MagicManager.registerSpellRecipe(new SpellRecipe(Fireball.class, FireSpirit.class, Fireball.class, 80));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Fireball.class, FireSpirit.class, Comet.class, 19));
+
+		MagicManager.registerSpellRecipe(new SpellRecipe(Fireball.class, Fireball.class, Fireball.class, 19));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Fireball.class, Fireball.class, Comet.class, 80));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Fireball.class, Fireball.class, Firepunch.class, 1));
+
+		MagicManager.registerSpellRecipe(new SpellRecipe(Knock.class, FireSpirit.class, Firepunch.class, 10));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Knock.class, FireSpirit.class, FireSpirit.class, 45));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Knock.class, FireSpirit.class, Knock.class, 45));
 	}
 
 	//

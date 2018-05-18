@@ -1,14 +1,17 @@
 package de.maanex.magic.listener;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
@@ -24,8 +27,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 import de.maanex.magic.MagicManager;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
+import de.maanex.magic.SpellRecipe;
 import de.maanex.magic.spells.basic.Elementum;
 import de.maanex.magic.structures.RunicTableSpotter;
+import de.maanex.main.Main;
 import de.maanex.utils.Particle;
 import net.minecraft.server.v1_12_R1.EnumParticle;
 
@@ -76,8 +81,8 @@ public class RunicTableUse implements Listener {
 		ItemStack res = new ItemStack(Material.STONE_HOE);
 		setSkin(res, (short) 2);
 		m = res.getItemMeta();
-		m.setDisplayName("§6Linksklicken zum Kombinieren!");
-		m.setLore(Arrays.asList("§5Rechtsklicken um Wahrscheinlichkeiten", "   §5anzuzeigen! (1 Mana)"));
+		m.setDisplayName("§eLinksklicken zum Kombinieren!");
+		m.setLore(Arrays.asList("§dRechtsklicken um Wahrscheinlichkeiten", "§danzuzeigen! §5(1 Mana)"));
 		res.setItemMeta(m);
 
 		inv.setItem(2, empty);
@@ -94,25 +99,85 @@ public class RunicTableUse implements Listener {
 				e.setCancelled(true);
 				return;
 			} else {
-				// REMOVE 1 BEL
-				e.setCancelled(true);
-				if (e.getClick().equals(ClickType.LEFT)) {
+				if (e.getCurrentItem() == null) return;
+				if (!e.getCurrentItem().getType().equals(Material.STONE_HOE)) {
 
-				} else if (e.getClick().equals(ClickType.RIGHT)) {
+				} else {
+					if (e.getClick().equals(ClickType.LEFT) && (e.getCursor() == null || e.getCursor().getType().equals(Material.AIR))) {
+						HashMap<SpellRecipe, Integer> er = getResults(e.getInventory().getItem(0), e.getInventory().getItem(1));
 
+						if (er == null || er.isEmpty()) {
+							e.setCancelled(true);
+							return;
+						}
+
+						SpellRecipe s = getSpell(er);
+						s.getResult().updateExistingItemStack(e.getCurrentItem());
+
+						Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> {
+							ItemStack res = new ItemStack(Material.STONE_HOE);
+							setSkin(res, (short) 2);
+							ItemMeta m = res.getItemMeta();
+							m.setDisplayName("§eLinksklicken zum Kombinieren!");
+							m.setLore(Arrays.asList("§dRechtsklicken um Wahrscheinlichkeiten", "§danzuzeigen! §5(1 Mana)"));
+							res.setItemMeta(m);
+							e.getInventory().setItem(4, res);
+						}, 1);
+
+						e.getInventory().setItem(0, null);
+						e.getInventory().setItem(1, null);
+
+						if (e.getWhoClicked() instanceof Player) MagicPlayer.get((Player) e.getWhoClicked()).researchRecipe(s);
+					} else if (e.getClick().equals(ClickType.RIGHT)) {
+						e.setCancelled(true);
+						HashMap<SpellRecipe, Integer> er = getResults(e.getInventory().getItem(0), e.getInventory().getItem(1));
+						if (er == null || er.isEmpty()) return;
+
+						ItemMeta m = e.getCurrentItem().getItemMeta();
+						List<String> lore = new ArrayList<>(Arrays.asList("§dRechtsklicken um Wahrscheinlichkeiten", "§danzuzeigen! §5(1 Mana)", "§0"));
+
+						int t = 0;
+						for (int i : er.values())
+							t += i;
+						for (SpellRecipe r : er.keySet()) {
+							double per = Math.round(((double) r.getProbability() / t) * 10000.0) / 100.0;
+							String p = r.getResult().getName();
+							if (e.getWhoClicked() instanceof Player && !MagicPlayer.get((Player) e.getWhoClicked()).hasResearchedRecipe(r)) p = "???";
+							lore.add("§a" + p + " §2" + per + "%");
+						}
+
+						m.setLore(lore);
+						e.getCurrentItem().setItemMeta(m);
+					} else e.setCancelled(true);
 				}
 			}
 		}
 	}
 
-	private static HashMap<MagicSpell, Integer> getResults(ItemStack i, ItemStack u) {
+	private static SpellRecipe getSpell(HashMap<SpellRecipe, Integer> av) {
+		int t = 0;
+		for (int i : av.values())
+			t += i;
+		int r = new Random().nextInt(t);
+		for (SpellRecipe s : av.keySet()) {
+			r -= av.get(s);
+			if (r <= 0) return s;
+		}
+		return av.keySet().stream().findFirst().get();
+	}
+
+	private static HashMap<SpellRecipe, Integer> getResults(ItemStack i, ItemStack u) {
 		if (i == null || u == null) return null;
 		MagicSpell j = MagicSpell.parse(i);
 		MagicSpell k = MagicSpell.parse(u);
 		if (j == null || k == null) return null;
 
-		// for(SpellRecipe r : )
-		return null;
+		HashMap<SpellRecipe, Integer> out = new HashMap<>();
+
+		for (SpellRecipe r : MagicManager.getAllSpellRecipes()) {
+			if ((r.getSpell1().equals(j) && r.getSpell2().equals(k)) || r.getSpell1().equals(k) && r.getSpell2().equals(j)) out.put(r, r.getProbability());
+		}
+		return out;
 	}
 
 	@EventHandler
