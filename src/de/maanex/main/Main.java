@@ -215,6 +215,21 @@ public class Main extends JavaPlugin {
 		MagicManager.registerSpellRecipe(new SpellRecipe(Knock.class, FireSpirit.class, FireSpirit.class, 45));
 		MagicManager.registerSpellRecipe(new SpellRecipe(Knock.class, FireSpirit.class, Knock.class, 45));
 
+		// Air Stuff
+		MagicManager.registerSpellRecipe(new SpellRecipe(AirSpirit.class, AirSpirit.class, AirBlast.class, 1));
+		MagicManager.registerSpellRecipe(new SpellRecipe(AirSpirit.class, AirSpirit.class, Levitate.class, 99));
+
+		// Earth Stuff
+		// MagicManager.registerSpellRecipe(new SpellRecipe(EarthSpirit.class,
+		// EarthSpirit.class, HolyShield.class, 1));
+		MagicManager.registerSpellRecipe(new SpellRecipe(EarthSpirit.class, EarthSpirit.class, ProtectionWall.class, 99));
+
+		// Water Stuff
+		// MagicManager.registerSpellRecipe(new SpellRecipe(WaterSpirit.class,
+		// WaterSpirit.class, AirBlast.class, 1));
+		// MagicManager.registerSpellRecipe(new SpellRecipe(WaterSpirit.class,
+		// WaterSpirit.class, Levitate.class, 99));
+
 		// Bender Stuff
 		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceBender.class, EarthSpirit.class, EarthBenderCannon.class, 20));
 		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceBender.class, EarthSpirit.class, EarthBenderBridge.class, 20));
@@ -222,7 +237,27 @@ public class Main extends JavaPlugin {
 		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceBender.class, WaterSpirit.class, WaterBenderSplash.class, 20));
 
 		// Mixing Elements
-		MagicManager.registerSpellRecipe(new SpellRecipe(AirSpirit.class, WaterSpirit.class, Strike.class, 100));
+		MagicManager.registerSpellRecipe(new SpellRecipe(AirSpirit.class, WaterSpirit.class, Knock.class, 60));
+		MagicManager.registerSpellRecipe(new SpellRecipe(AirSpirit.class, WaterSpirit.class, Strike.class, 20));
+
+		MagicManager.registerSpellRecipe(new SpellRecipe(EarthSpirit.class, WaterSpirit.class, Knock.class, 60));
+		MagicManager.registerSpellRecipe(new SpellRecipe(EarthSpirit.class, WaterSpirit.class, Frostwave.class, 20));
+
+		MagicManager.registerSpellRecipe(new SpellRecipe(EarthSpirit.class, FireSpirit.class, Knock.class, 60));
+		MagicManager.registerSpellRecipe(new SpellRecipe(EarthSpirit.class, FireSpirit.class, Firemine.class, 20));
+
+		MagicManager.registerSpellRecipe(new SpellRecipe(AirSpirit.class, FireSpirit.class, Knock.class, 60));
+		MagicManager.registerSpellRecipe(new SpellRecipe(AirSpirit.class, FireSpirit.class, Comet.class, 10));
+
+		// Crossing Elements
+		MagicManager.registerSpellRecipe(new SpellRecipe(AirSpirit.class, EarthSpirit.class, Knock.class, 60));
+		MagicManager.registerSpellRecipe(new SpellRecipe(AirSpirit.class, EarthSpirit.class, ArrowStorm.class, 20));
+		MagicManager.registerSpellRecipe(new SpellRecipe(AirSpirit.class, EarthSpirit.class, Warp.class, 10));
+		MagicManager.registerSpellRecipe(new SpellRecipe(AirSpirit.class, EarthSpirit.class, Nitro.class, 10));
+
+		MagicManager.registerSpellRecipe(new SpellRecipe(WaterSpirit.class, FireSpirit.class, Knock.class, 60));
+		MagicManager.registerSpellRecipe(new SpellRecipe(WaterSpirit.class, FireSpirit.class, PainfullSting.class, 20));
+		MagicManager.registerSpellRecipe(new SpellRecipe(WaterSpirit.class, FireSpirit.class, Stun.class, 20));
 	}
 
 	//

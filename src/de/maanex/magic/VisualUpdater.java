@@ -36,6 +36,7 @@ public class VisualUpdater {
 		if (m.getInventory().getItemInMainHand() != null && m.getInventory().getItemInMainHand().getType().equals(Material.WOOD_HOE) && m.getInventory().getItemInOffHand() != null
 				&& m.getInventory().getItemInOffHand().hasItemMeta()) {
 			List<MagicSpell> spells = Spellbook.parseSpells(m.getInventory().getItemInOffHand().getItemMeta());
+			if (spells.size() <= player.selected_spell) return;
 			MagicSpell s = spells.get(player.selected_spell);
 			if (s == null) return;
 			if (player.cooldown.containsKey(s)) {

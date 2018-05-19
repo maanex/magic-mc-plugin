@@ -167,9 +167,14 @@ public abstract class MagicSpell {
 		List<String> lore = new ArrayList<>();
 
 		lore.add("§0" + getID());
-		lore.add("§d" + getDesc());
+		lore.add("§7" + getDesc());
 		lore.add("§0");
-		lore.add("§6" + getManacost() + " Mana");
+		lore.add("§3✤ Mana: §b" + getManacost());
+		lore.add("§2♼ Cooldown: §a" + getCooldown() + "s");
+		lore.add("§0");
+		lore.add("§9✷ §8Typ: §7" + getType().getDisplayName());
+		lore.add("§c✵ §8Kategorie: §7" + getCategory().getDisplayName());
+		lore.add("§d❊ §8Seltenheit: §7" + getRarity().getDisplayName());
 
 		m.setLore(lore);
 
