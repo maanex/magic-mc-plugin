@@ -25,7 +25,7 @@ import net.minecraft.server.v1_12_R1.EnumParticle;
 public class Taser extends MagicSpell {
 
 	public Taser() {
-		super(35, "Stromschlag", "Bei USA Polizisten als Taser bekannt!", 3, 2, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.VERY_RARE);
+		super(35, "Stromschlag", "Bei USA Polizisten als Taser bekannt!", 3, 3, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.VERY_RARE);
 	}
 
 	@Override
@@ -38,16 +38,17 @@ public class Taser extends MagicSpell {
 	}
 
 	private void drawRay(Random r, Player src, Location l, int dis) {
+		src.setVelocity(new Vector(0, 0, 0));
 		while (dis-- > 0) {
-			l.add(l.getDirection().multiply(.3));
-			new Particle(EnumParticle.CRIT_MAGIC, l, true, (float) ((double) r.nextInt(10) / 10), (float) ((double) r.nextInt(10) / 10), (float) ((double) r.nextInt(10) / 10), 0, 2).sendAll();
+			l.add(l.getDirection().multiply(.5));
+			new Particle(EnumParticle.CRIT_MAGIC, l, true, (float) ((double) r.nextInt(10) / 20), (float) ((double) r.nextInt(10) / 20), (float) ((double) r.nextInt(10) / 20), 0, 1).sendAll();
 
-			for (Entity e : l.getWorld().getNearbyEntities(l, .3, .3, .3)) {
+			for (Entity e : l.getWorld().getNearbyEntities(l, .6, .6, .6)) {
 				if (e.equals(src)) continue;
 				if (!(e instanceof LivingEntity)) continue;
 
 				((LivingEntity) e).damage(1, e);
-				((LivingEntity) e).setVelocity(Vector.getRandom().multiply(.1));
+				((LivingEntity) e).setVelocity(Vector.getRandom().subtract(Vector.getRandom()));
 			}
 		}
 	}

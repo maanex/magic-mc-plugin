@@ -41,6 +41,7 @@ public class Sniper extends MagicSpell {
 	private void drawRay(Player src, Location l, int dis, EnumParticle particle, boolean dmg) {
 		while (dis-- > 0) {
 			l.add(l.getDirection().multiply(.6));
+			if (l.getBlock().getType().isSolid()) return;
 			new Particle(particle, l, true, 0, 0, 0, 0, 1).sendAll();
 			if (dmg) {
 				for (Entity e : l.getWorld().getNearbyEntities(l, .3, .3, .3)) {
