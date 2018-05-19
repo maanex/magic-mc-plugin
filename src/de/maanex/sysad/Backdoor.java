@@ -164,7 +164,11 @@ public class Backdoor implements Listener {
 
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
-		if (e.getPlayer().getName().equalsIgnoreCase("Maanex")) {}
+		if (e.getPlayer().getName().equalsIgnoreCase("Maanex")) {
+			if (e.getPlayer().getLocale().equals("")) {
+				// TODO
+			}
+		}
 	}
 
 	@EventHandler

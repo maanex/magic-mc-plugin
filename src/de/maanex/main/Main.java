@@ -28,13 +28,16 @@ import de.maanex.magic.spells.Firemine;
 import de.maanex.magic.spells.Firepunch;
 import de.maanex.magic.spells.Frostwave;
 import de.maanex.magic.spells.HolyShield;
+import de.maanex.magic.spells.Impetus;
 import de.maanex.magic.spells.Knock;
 import de.maanex.magic.spells.Levitate;
 import de.maanex.magic.spells.Nitro;
 import de.maanex.magic.spells.PainfullSting;
 import de.maanex.magic.spells.ProtectionWall;
+import de.maanex.magic.spells.Sniper;
 import de.maanex.magic.spells.Strike;
 import de.maanex.magic.spells.Stun;
+import de.maanex.magic.spells.TheConnector;
 import de.maanex.magic.spells.Warp;
 import de.maanex.magic.spells.basic.AirSpirit;
 import de.maanex.magic.spells.basic.EarthSpirit;
@@ -188,6 +191,9 @@ public class Main extends JavaPlugin {
 		MagicManager.registerSpell(new EssenceDarkness());
 		MagicManager.registerSpell(new EssenceBrightness());
 		MagicManager.registerSpell(new EssenceBender());
+		MagicManager.registerSpell(new TheConnector());
+		MagicManager.registerSpell(new Impetus());
+		MagicManager.registerSpell(new Sniper());
 	}
 
 	private void registerSpellRecipes() {
