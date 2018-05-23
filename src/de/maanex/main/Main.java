@@ -23,6 +23,7 @@ import de.maanex.magic.missile.MagicMissile;
 import de.maanex.magic.spells.AirBlast;
 import de.maanex.magic.spells.ArrowStorm;
 import de.maanex.magic.spells.Comet;
+import de.maanex.magic.spells.Enderdrag;
 import de.maanex.magic.spells.Fireball;
 import de.maanex.magic.spells.Firemine;
 import de.maanex.magic.spells.Firepunch;
@@ -34,13 +35,17 @@ import de.maanex.magic.spells.Knock;
 import de.maanex.magic.spells.Levitate;
 import de.maanex.magic.spells.Nitro;
 import de.maanex.magic.spells.PainfullSting;
+import de.maanex.magic.spells.Phase;
 import de.maanex.magic.spells.ProtectionWall;
 import de.maanex.magic.spells.Sniper;
 import de.maanex.magic.spells.Strike;
 import de.maanex.magic.spells.Stun;
 import de.maanex.magic.spells.Taser;
 import de.maanex.magic.spells.TheConnector;
+import de.maanex.magic.spells.Timewarp;
 import de.maanex.magic.spells.Warp;
+import de.maanex.magic.spells.Waterball;
+import de.maanex.magic.spells.Waterpunch;
 import de.maanex.magic.spells.basic.AirSpirit;
 import de.maanex.magic.spells.basic.EarthSpirit;
 import de.maanex.magic.spells.basic.Elementum;
@@ -66,6 +71,7 @@ import de.maanex.survival.Schlafenszeit;
 import de.maanex.sysad.Backdoor;
 import de.maanex.sysad.CpuTerminal;
 import de.maanex.test.ItemsWithTextures;
+import de.maanex.test.MathEqu;
 import de.maanex.whitehell.WorldsAmbient;
 import de.maanex.whitehell.generator.WhiteHellGenerator;
 
@@ -92,6 +98,7 @@ public class Main extends JavaPlugin {
 		getCommand("news").setExecutor(new News());
 		getCommand("cpu").setExecutor(new CpuTerminal());
 		getCommand("test").setExecutor(new ItemsWithTextures());
+		getCommand("equ").setExecutor(new MathEqu());
 
 		registerListeners();
 		startTimers();
@@ -116,6 +123,8 @@ public class Main extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new ManapotDrink(), this);
 		Bukkit.getPluginManager().registerEvents(new EarthBenderCannon(), this);
 
+		Bukkit.getPluginManager().registerEvents(MagicManager.getSpell(Phase.class), this);
+
 		// Survival
 		// Bukkit.getPluginManager().registerEvents(new ServerlistPing(), this);
 		Bukkit.getPluginManager().registerEvents(new AntiExplode(), this);
@@ -138,9 +147,13 @@ public class Main extends JavaPlugin {
 	private void startTimers() {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
 			MagicMissile.doTick();
+
 			Jetpack.tick();
-			Levitate.tick();
 			WorldsAmbient.tick();
+
+			Levitate.tick();
+			Enderdrag.tick();
+			Phase.tick();
 		}, 1, 1);
 
 		// Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
@@ -198,6 +211,11 @@ public class Main extends JavaPlugin {
 		MagicManager.registerSpell(new Sniper());
 		MagicManager.registerSpell(new Taser());
 		MagicManager.registerSpell(new Firering());
+		MagicManager.registerSpell(new Timewarp());
+		MagicManager.registerSpell(new Enderdrag());
+		MagicManager.registerSpell(new Waterpunch());
+		MagicManager.registerSpell(new Waterball());
+		MagicManager.registerSpell(new Phase());
 	}
 
 	private void registerSpellRecipes() {
@@ -230,8 +248,7 @@ public class Main extends JavaPlugin {
 		MagicManager.registerSpellRecipe(new SpellRecipe(AirSpirit.class, AirSpirit.class, Levitate.class, 99));
 
 		// Earth Stuff
-		// MagicManager.registerSpellRecipe(new SpellRecipe(EarthSpirit.class,
-		// EarthSpirit.class, HolyShield.class, 1));
+		MagicManager.registerSpellRecipe(new SpellRecipe(EarthSpirit.class, EarthSpirit.class, HolyShield.class, 1));
 		MagicManager.registerSpellRecipe(new SpellRecipe(EarthSpirit.class, EarthSpirit.class, ProtectionWall.class, 99));
 
 		// Water Stuff
@@ -239,6 +256,10 @@ public class Main extends JavaPlugin {
 		// WaterSpirit.class, AirBlast.class, 1));
 		// MagicManager.registerSpellRecipe(new SpellRecipe(WaterSpirit.class,
 		// WaterSpirit.class, Levitate.class, 99));
+
+		MagicManager.registerSpellRecipe(new SpellRecipe(Knock.class, WaterSpirit.class, Waterpunch.class, 10));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Knock.class, WaterSpirit.class, WaterSpirit.class, 45));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Knock.class, WaterSpirit.class, Knock.class, 45));
 
 		// Bender Stuff
 		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceBender.class, EarthSpirit.class, EarthBenderCannon.class, 20));

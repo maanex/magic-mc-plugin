@@ -14,3 +14,5 @@ commands:
     description: CPU-Auslastung des Servers! (Und andere nützliche fakten!)
   test:
     description: Nicht für dich!
+  equ:
+    description: Nicht für dich!
