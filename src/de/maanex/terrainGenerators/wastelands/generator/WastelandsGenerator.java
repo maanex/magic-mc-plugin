@@ -73,7 +73,7 @@ public class WastelandsGenerator extends ChunkGenerator {
 
 	@Override
 	public List<BlockPopulator> getDefaultPopulators(World world) {
-		return Arrays.asList(new OrePopulator());
+		return Arrays.asList(new BlockVariantsAndOresPopulator());
 	}
 
 	//

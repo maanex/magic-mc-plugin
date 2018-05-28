@@ -13,7 +13,7 @@ import org.bukkit.material.MaterialData;
 
 
 @SuppressWarnings("deprecation")
-public class OrePopulator extends BlockPopulator {
+public class BlockVariantsAndOresPopulator extends BlockPopulator {
 
 	private static List<MaterialData>	rock_stone	= new ArrayList<>();
 	private static List<Material>		rock_types	= new ArrayList<>();
@@ -39,7 +39,7 @@ public class OrePopulator extends BlockPopulator {
 		rock_types.add(Material.MAGMA);
 	}
 
-	public OrePopulator() {
+	public BlockVariantsAndOresPopulator() {
 	}
 
 	@Override
