@@ -1,4 +1,4 @@
-package de.maanex.whitehell.generator;
+package de.maanex.terrainGenerators.whitehell.generator;
 
 
 import java.util.ArrayList;

@@ -22,10 +22,10 @@ import de.maanex.utils.TargetEntityFinder;
 import net.minecraft.server.v1_12_R1.EnumParticle;
 
 
-public class Enderdrag extends MagicSpell {
+public class Enderarm extends MagicSpell {
 
-	public Enderdrag() {
-		super(38, "Enderzug", "Kein Zug der auf Schienen fährt!", 1, 0, SpellType.ACTIVE, SpellCategory.UTILITY, SpellRarity.EPIC);
+	public Enderarm() {
+		super(38, "Enderarm", "Muhahahaha!", 1, 0, SpellType.ACTIVE, SpellCategory.UTILITY, SpellRarity.EPIC);
 	}
 
 	private static HashMap<MagicPlayer, LivingEntity>	drag	= new HashMap<>();

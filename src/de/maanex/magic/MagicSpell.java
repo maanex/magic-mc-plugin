@@ -139,7 +139,9 @@ public abstract class MagicSpell {
 		List<String> lore = new ArrayList<>();
 
 		lore.add("§0" + getID());
-		lore.add("§7" + getDesc());
+		if (getDesc().contains("\n")) for (String s : getDesc().split("\n"))
+			lore.add("§7" + s);
+		else lore.add("§7" + getDesc());
 		lore.add("§0");
 		lore.add("§3✤ Mana: §b" + getManacost());
 		lore.add("§2♼ Cooldown: §a" + getCooldown() + "s");
@@ -167,7 +169,9 @@ public abstract class MagicSpell {
 		List<String> lore = new ArrayList<>();
 
 		lore.add("§0" + getID());
-		lore.add("§7" + getDesc());
+		if (getDesc().contains("\n")) for (String s : getDesc().split("\n"))
+			lore.add("§7" + s);
+		else lore.add("§7" + getDesc());
 		lore.add("§0");
 		lore.add("§3✤ Mana: §b" + getManacost());
 		lore.add("§2♼ Cooldown: §a" + getCooldown() + "s");

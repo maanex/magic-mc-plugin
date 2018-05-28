@@ -1,4 +1,4 @@
-package de.maanex.whitehell;
+package de.maanex.terrainGenerators.whitehell;
 
 
 import org.bukkit.event.Listener;

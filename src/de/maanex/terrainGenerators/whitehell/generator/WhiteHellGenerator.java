@@ -1,4 +1,4 @@
-package de.maanex.whitehell.generator;
+package de.maanex.terrainGenerators.whitehell.generator;
 
 
 import java.util.Arrays;
@@ -30,7 +30,7 @@ public class WhiteHellGenerator extends ChunkGenerator {
 
 		chunk.setRegion(0, 20, 0, 16, GROUND_Y, 16, Material.CONCRETE);
 
-		for (int y = 5; y < 10; y++) {
+		for (int y = 5; y < 10; y++) { // WHY??
 			for (int x = 0; x < 16; x++) {
 				for (int z = 0; z < 16; z++) {
 					biome.setBiome(x, z, Biome.SAVANNA);

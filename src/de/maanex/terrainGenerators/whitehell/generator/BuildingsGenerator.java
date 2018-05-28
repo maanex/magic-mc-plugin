@@ -1,4 +1,4 @@
-package de.maanex.whitehell.generator;
+package de.maanex.terrainGenerators.whitehell.generator;
 
 
 import java.io.File;
@@ -19,7 +19,7 @@ import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.world.DataException;
 
-import de.maanex.whitehell.generator.LootGenerator.LootRarity;
+import de.maanex.terrainGenerators.whitehell.generator.LootGenerator.LootRarity;
 
 
 @SuppressWarnings("deprecation")

@@ -23,7 +23,7 @@ import de.maanex.magic.missile.MagicMissile;
 import de.maanex.magic.spells.AirBlast;
 import de.maanex.magic.spells.ArrowStorm;
 import de.maanex.magic.spells.Comet;
-import de.maanex.magic.spells.Enderdrag;
+import de.maanex.magic.spells.Enderarm;
 import de.maanex.magic.spells.Fireball;
 import de.maanex.magic.spells.Firemine;
 import de.maanex.magic.spells.Firepunch;
@@ -54,6 +54,9 @@ import de.maanex.magic.spells.basic.EssenceBrightness;
 import de.maanex.magic.spells.basic.EssenceDarkness;
 import de.maanex.magic.spells.basic.FireSpirit;
 import de.maanex.magic.spells.basic.WaterSpirit;
+import de.maanex.magic.spells.building.BlockSwarper;
+import de.maanex.magic.spells.building.DeGrasser;
+import de.maanex.magic.spells.building.TreeDemolisher;
 import de.maanex.magic.spells.darkmagic.DarkSeal;
 import de.maanex.magic.spells.darkmagic.MagmaWorm;
 import de.maanex.magic.spells.darkmagic.TheSeeker;
@@ -70,10 +73,11 @@ import de.maanex.survival.JoinNames;
 import de.maanex.survival.Schlafenszeit;
 import de.maanex.sysad.Backdoor;
 import de.maanex.sysad.CpuTerminal;
+import de.maanex.terrainGenerators.wastelands.generator.WastelandsGenerator;
+import de.maanex.terrainGenerators.whitehell.WorldsAmbient;
+import de.maanex.terrainGenerators.whitehell.generator.WhiteHellGenerator;
 import de.maanex.test.ItemsWithTextures;
 import de.maanex.test.MathEqu;
-import de.maanex.whitehell.WorldsAmbient;
-import de.maanex.whitehell.generator.WhiteHellGenerator;
 
 
 public class Main extends JavaPlugin {
@@ -152,7 +156,7 @@ public class Main extends JavaPlugin {
 			WorldsAmbient.tick();
 
 			Levitate.tick();
-			Enderdrag.tick();
+			Enderarm.tick();
 			Phase.tick();
 		}, 1, 1);
 
@@ -212,10 +216,13 @@ public class Main extends JavaPlugin {
 		MagicManager.registerSpell(new Taser());
 		MagicManager.registerSpell(new Firering());
 		MagicManager.registerSpell(new Timewarp());
-		MagicManager.registerSpell(new Enderdrag());
+		MagicManager.registerSpell(new Enderarm());
 		MagicManager.registerSpell(new Waterpunch());
 		MagicManager.registerSpell(new Waterball());
 		MagicManager.registerSpell(new Phase());
+		MagicManager.registerSpell(new DeGrasser());
+		MagicManager.registerSpell(new TreeDemolisher());
+		MagicManager.registerSpell(new BlockSwarper());
 	}
 
 	private void registerSpellRecipes() {
@@ -295,7 +302,16 @@ public class Main extends JavaPlugin {
 
 	@Override
 	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id) {
-		return new WhiteHellGenerator();
+		switch (id) {
+			case "0":
+			case "wastelands":
+				return new WastelandsGenerator();
+			case "1":
+			case "whitehell":
+				return new WhiteHellGenerator();
+			default:
+				return null;
+		}
 	}
 
 }
