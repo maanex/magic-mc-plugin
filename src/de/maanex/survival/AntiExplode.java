@@ -8,6 +8,7 @@ import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.FallingBlock;
@@ -21,8 +22,7 @@ import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.util.Vector;
 
 import de.maanex.main.Main;
-import de.maanex.utils.Particle;
-import net.minecraft.server.v1_12_R1.EnumParticle;
+import de.maanex.utils.ParticleUtil;
 
 
 public class AntiExplode implements Listener {
@@ -49,9 +49,8 @@ public class AntiExplode implements Listener {
 			for (final Block b : e.blockList()) {
 				for (Player p : Bukkit.getOnlinePlayers())
 					p.sendBlockChange(b.getLocation(), Material.BARRIER, (byte) 0);
-				Particle pa = new Particle(EnumParticle.BLOCK_CRACK, b.getLocation(), false, 0, 0, 0, 1, 5);
-				pa.setC(b.getTypeId() + (b.getData() * 4096));
-				pa.sendAll();
+
+				ParticleUtil.spawn(Particle.BLOCK_CRACK, b.getLocation(), 5, 1, 0, 0, 0, b.getBlockData());
 
 				Bukkit.getScheduler().runTaskLater(Main.instance, new Runnable() {
 
@@ -59,9 +58,7 @@ public class AntiExplode implements Listener {
 					public void run() {
 						for (Player p : Bukkit.getOnlinePlayers())
 							p.sendBlockChange(b.getLocation(), b.getType(), b.getData());
-						Particle pa = new Particle(EnumParticle.BLOCK_CRACK, b.getLocation(), false, 0, 0, 0, 1, 5);
-						pa.setC(b.getTypeId() + (b.getData() * 4096));
-						pa.sendAll();
+						ParticleUtil.spawn(Particle.BLOCK_CRACK, b.getLocation(), 5, 1, 0, 0, 0, b.getBlockData());
 					}
 				}, new Random().nextInt(40) + 60);
 
@@ -85,9 +82,7 @@ public class AntiExplode implements Listener {
 			FallingBlock b = (FallingBlock) e.getEntity();
 			if (pushed.contains(b)) {
 				e.setCancelled(true);
-				Particle pa = new Particle(EnumParticle.BLOCK_CRACK, b.getLocation(), false, 0, 0, 0, 1, 5);
-				pa.setC(b.getBlockId() + (b.getBlockData() * 4096));
-				pa.sendAll();
+				ParticleUtil.spawn(Particle.DRIP_LAVA, b.getLocation(), 5, 1, 0, 0, 0, b.getBlockData());
 
 				for (Entity en : b.getNearbyEntities(2, 2, 2)) {
 					try {

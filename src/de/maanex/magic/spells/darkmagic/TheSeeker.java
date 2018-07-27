@@ -4,6 +4,7 @@ package de.maanex.magic.spells.darkmagic;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -18,9 +19,8 @@ import de.maanex.magic.enumeri.SpellRarity;
 import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 import de.maanex.main.Main;
-import de.maanex.utils.Particle;
+import de.maanex.utils.ParticleUtil;
 import de.maanex.utils.TargetEntityFinder;
-import net.minecraft.server.v1_12_R1.EnumParticle;
 
 
 public class TheSeeker extends MagicSpell {
@@ -40,12 +40,10 @@ public class TheSeeker extends MagicSpell {
 		if (tar instanceof Player) {
 			Player p = (Player) tar;
 			p.playSound(p.getEyeLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1, 1);
-			Particle pa = new Particle(EnumParticle.END_ROD, p.getEyeLocation(), false, 1, 0, 1, .1f, 300);
-			pa.sendPlayer(p);
-			pa.sendPlayer(caster.getMCPlayer());
+			ParticleUtil.spawn(p, Particle.END_ROD, p.getEyeLocation(), 300, .1, 1, 0, 1);
+			ParticleUtil.spawn(caster.getMCPlayer(), Particle.END_ROD, p.getEyeLocation(), 300, .1, 1, 0, 1);
 		} else {
-			Particle pa = new Particle(EnumParticle.END_ROD, tar.getLocation(), false, 1, 0, 1, .1f, 300);
-			pa.sendPlayer(caster.getMCPlayer());
+			ParticleUtil.spawn(caster.getMCPlayer(), Particle.END_ROD, tar.getLocation(), 300, .1, 1, 0, 1);
 		}
 		takeMana(caster, mods);
 	}

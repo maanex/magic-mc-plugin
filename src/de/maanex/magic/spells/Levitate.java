@@ -4,6 +4,7 @@ package de.maanex.magic.spells;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -16,8 +17,7 @@ import de.maanex.magic.enumeri.SpellCategory;
 import de.maanex.magic.enumeri.SpellRarity;
 import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
-import de.maanex.utils.Particle;
-import net.minecraft.server.v1_12_R1.EnumParticle;
+import de.maanex.utils.ParticleUtil;
 
 
 public class Levitate extends MagicSpell {
@@ -44,8 +44,7 @@ public class Levitate extends MagicSpell {
 				return;
 			}
 
-			Particle pa = new Particle(EnumParticle.CLOUD, p.getLocation().subtract(0, .5, 0), true, .4f, 0, .4f, 0, 2);
-			pa.sendAll();
+			ParticleUtil.spawn(Particle.CLOUD, p.getLocation().subtract(0, .5, 0), 2, 0, .4, 0, .4);
 		}
 	}
 

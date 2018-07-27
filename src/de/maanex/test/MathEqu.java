@@ -10,14 +10,14 @@ import javax.script.ScriptException;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import de.maanex.main.Main;
-import de.maanex.utils.Particle;
-import net.minecraft.server.v1_12_R1.EnumParticle;
+import de.maanex.utils.ParticleUtil;
 
 
 public class MathEqu implements CommandExecutor {
@@ -40,9 +40,9 @@ public class MathEqu implements CommandExecutor {
 
 		List<Location> pos = new ArrayList<>();
 
-		final EnumParticle part;
-		if (args.length >= 5) part = EnumParticle.valueOf(args[4]);
-		else part = EnumParticle.FLAME;
+		final Particle part;
+		if (args.length >= 5) part = Particle.valueOf(args[4]);
+		else part = Particle.FLAME;
 
 		src = src.clone();
 		if (args.length >= 6) {
@@ -79,7 +79,7 @@ public class MathEqu implements CommandExecutor {
 
 		for (int i = 0; i < 200; i += 10)
 			Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> {
-				pos.forEach(l -> new Particle(part, l, true, 0, 0, 0, 0, 1).sendAll());
+				pos.forEach(l -> ParticleUtil.spawn(part, l, 1, 0, 0, 0, 0));
 			}, delay + i);
 
 		return true;

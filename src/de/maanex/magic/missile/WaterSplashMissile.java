@@ -7,6 +7,7 @@ import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -16,8 +17,7 @@ import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
 import de.maanex.main.Main;
-import de.maanex.utils.Particle;
-import net.minecraft.server.v1_12_R1.EnumParticle;
+import de.maanex.utils.ParticleUtil;
 
 
 public class WaterSplashMissile extends MagicMissile {
@@ -57,7 +57,7 @@ public class WaterSplashMissile extends MagicMissile {
 					((LivingEntity) n).setRemainingAir(0);
 				}
 
-				new Particle(EnumParticle.WATER_BUBBLE, n.getLocation(), true, 1f, 1f, 1f, 1, 200).sendAll();
+				ParticleUtil.spawn(Particle.WATER_BUBBLE, n.getLocation(), 200, 1, 1, 1, 1);
 
 				destroy();
 			}

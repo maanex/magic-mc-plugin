@@ -3,13 +3,13 @@ package de.maanex.magic.missile;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.utils.Particle;
-import net.minecraft.server.v1_12_R1.EnumParticle;
+import de.maanex.utils.ParticleUtil;
 
 
 public class PainfullStingMissile extends MagicMissile {
@@ -33,9 +33,7 @@ public class PainfullStingMissile extends MagicMissile {
 				} catch (Exception e) {}
 			}
 			destroy();
-			Particle pa = new Particle(EnumParticle.BLOCK_CRACK, position, true, 2, 2, 2, .2f, 300);
-			pa.setC(Material.DIAMOND_BLOCK.getId());
-			pa.sendAll();
+			ParticleUtil.spawn(Particle.BLOCK_CRACK, position, 300, .2, 2, 2, 2, Material.DIAMOND_BLOCK.getData());
 			return;
 		}
 
@@ -44,11 +42,8 @@ public class PainfullStingMissile extends MagicMissile {
 
 		position.add(position.getDirection().multiply(.5));
 
-		Particle pa = new Particle(EnumParticle.BLOCK_CRACK, position, true, 0, 0, 0, .2f, 10);
-		pa.setC(Material.DIAMOND_BLOCK.getId());
-		pa.sendAll();
-		Particle pb = new Particle(EnumParticle.DRIP_LAVA, position, true, 0, 0, 0, 1, 1);
-		pb.sendAll();
+		ParticleUtil.spawn(Particle.BLOCK_CRACK, position, 10, .2, 0, 0, 0, Material.DIAMOND_BLOCK.getData());
+		ParticleUtil.spawn(Particle.DRIP_LAVA, position, 1, 1, 0, 0, 0);
 	}
 
 }

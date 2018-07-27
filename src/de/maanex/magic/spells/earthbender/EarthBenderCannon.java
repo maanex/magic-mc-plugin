@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -26,8 +27,7 @@ import de.maanex.magic.enumeri.SpellRarity;
 import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 import de.maanex.main.Main;
-import de.maanex.utils.Particle;
-import net.minecraft.server.v1_12_R1.EnumParticle;
+import de.maanex.utils.ParticleUtil;
 
 
 public class EarthBenderCannon extends MagicSpell implements Listener {
@@ -87,9 +87,7 @@ public class EarthBenderCannon extends MagicSpell implements Listener {
 			FallingBlock b = (FallingBlock) e.getEntity();
 			if (blocks.values().contains(b)) {
 				e.setCancelled(true);
-				Particle pa = new Particle(EnumParticle.BLOCK_CRACK, b.getLocation(), false, 0, 0, 0, 1, 5);
-				pa.setC(b.getBlockId() + (b.getBlockData() * 4096));
-				pa.sendAll();
+				ParticleUtil.spawn(Particle.BLOCK_CRACK, b.getLocation(), 5, 1, 0, 0, 0, b.getBlockData());
 				for (MagicPlayer p : blocks.keySet())
 					if (blocks.get(p).equals(b)) {
 						blocks.remove(p);

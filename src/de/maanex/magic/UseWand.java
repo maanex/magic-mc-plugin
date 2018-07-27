@@ -6,6 +6,7 @@ import java.util.Random;
 
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.World.Environment;
 import org.bukkit.event.EventHandler;
@@ -20,8 +21,7 @@ import de.maanex.magic.enumeri.WandType;
 import de.maanex.magic.generators.WandModsGen;
 import de.maanex.magic.items.DefaultItems;
 import de.maanex.magic.items.WandBuilder;
-import de.maanex.utils.Particle;
-import net.minecraft.server.v1_12_R1.EnumParticle;
+import de.maanex.utils.ParticleUtil;
 
 
 public class UseWand implements Listener {
@@ -38,7 +38,7 @@ public class UseWand implements Listener {
 		if (e.getClickedBlock() != null && e.getClickedBlock().getType().equals(Material.GRASS)) e.setCancelled(true);
 
 		if (!m.isActivated()) {
-			if (e.getClickedBlock() != null && e.getClickedBlock().getType().equals(Material.ENCHANTMENT_TABLE)) {
+			if (e.getClickedBlock() != null && e.getClickedBlock().getType().equals(Material.ENCHANTING_TABLE)) {
 				e.setCancelled(true);
 				if (e.getPlayer().getLevel() >= 3 && e.getItem().getAmount() == 1) {
 					if (!e.getPlayer().getGameMode().equals(GameMode.CREATIVE)) e.getPlayer().setLevel(e.getPlayer().getLevel() - 3);
@@ -46,33 +46,29 @@ public class UseWand implements Listener {
 					Environment env = e.getClickedBlock().getWorld().getEnvironment();
 					if (new Random().nextInt(20) == 0) {
 						if (env.equals(Environment.NETHER)) {
-							Particle pa = new Particle(EnumParticle.LAVA, e.getClickedBlock().getLocation(), false, 3, 0, 3, 1, 100);
-							pa.sendPlayer(e.getPlayer());
+							ParticleUtil.spawn(e.getPlayer(), Particle.LAVA, e.getClickedBlock().getLocation(), 100, 1, 3, 0, 3);
 							e.getPlayer().playSound(e.getPlayer().getEyeLocation(), "entity.wither.ambient", 1, 1);
 
 							WandBuilder.get(env).withMods(WandModsGen.generate()).withType(WandType.DARK).apply(e.getItem());
 						} else {
-							Particle pa = new Particle(EnumParticle.END_ROD, e.getClickedBlock().getLocation().clone().add(0, 1.5, 0), false, 5, 0, 5, 1, 500);
-							pa.sendPlayer(e.getPlayer());
+							ParticleUtil.spawn(e.getPlayer(), Particle.END_ROD, e.getClickedBlock().getLocation(), 500, 1, 5, 0, 5);
 							e.getPlayer().playSound(e.getPlayer().getEyeLocation(), "ui.toast.challenge_complete", 1, 1);
 
 							WandBuilder.get(env).withMods(WandModsGen.generate()).withType(WandType.LIGHT).apply(e.getItem());
 						}
 					} else {
-						Particle pa = new Particle(EnumParticle.TOTEM, e.getClickedBlock().getLocation(), false, 3, 3, 3, 1, 100);
-						pa.sendPlayer(e.getPlayer());
+						ParticleUtil.spawn(e.getPlayer(), Particle.TOTEM, e.getClickedBlock().getLocation(), 100, 1, 3, 3, 3);
 						e.getPlayer().playSound(e.getPlayer().getEyeLocation(), "item.totem.use", 1, 1);
 
 						WandBuilder.get(env).withMods(WandModsGen.generate()).withType(WandType.WOODEN).apply(e.getItem());
 					}
 				} else {
-					Particle pa = new Particle(EnumParticle.SMOKE_LARGE, e.getClickedBlock().getLocation(), false, 1, 1, 1, 0f, 50);
-					pa.sendPlayer(e.getPlayer());
+					ParticleUtil.spawn(e.getPlayer(), Particle.SMOKE_LARGE, e.getClickedBlock().getLocation(), 50, 0, 1, 1, 1);
 				}
 			}
 
 			return;
-		} else if (!e.getItem().getType().equals(Material.WOOD_HOE)) {
+		} else if (!e.getItem().getType().equals(Material.WOODEN_HOE)) {
 			Environment env = e.getPlayer().getWorld().getEnvironment();
 			WandBuilder.get(env).withMods(m).withType(t).apply(e.getItem());
 		}

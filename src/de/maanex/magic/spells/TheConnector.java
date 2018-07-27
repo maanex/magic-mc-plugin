@@ -4,6 +4,7 @@ package de.maanex.magic.spells;
 import java.util.HashMap;
 
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -15,8 +16,7 @@ import de.maanex.magic.enumeri.SpellCategory;
 import de.maanex.magic.enumeri.SpellRarity;
 import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
-import de.maanex.utils.Particle;
-import net.minecraft.server.v1_12_R1.EnumParticle;
+import de.maanex.utils.ParticleUtil;
 
 
 public class TheConnector extends MagicSpell {
@@ -34,8 +34,7 @@ public class TheConnector extends MagicSpell {
 
 		if (!pos.containsKey(caster)) {
 			pos.put(caster, target.getLocation());
-			Particle pa = new Particle(EnumParticle.END_ROD, target.getLocation().clone().add(.5, .5, .5), true, .4f, .4f, .4f, 0.01f, 100);
-			pa.sendAll();
+			ParticleUtil.spawn(Particle.END_ROD, target.getLocation().clone().add(.5, .5, .5), 100, .01, .4, .4, .4);
 		} else {
 			Location l1 = pos.get(caster);
 			Location l2 = target.getLocation();
@@ -58,8 +57,7 @@ public class TheConnector extends MagicSpell {
 			double g = l1.distance(l2);
 			for (double d = 0; d < l1.distance(l2); d += .5) {
 				Location l = l1.clone().add(-x * d / g + .5, -y * d / g + .5, -z * d / g + .5);
-				Particle pa = new Particle(EnumParticle.END_ROD, l, true, .1f, .1f, .1f, 0.01f, 10);
-				pa.sendAll();
+				ParticleUtil.spawn(Particle.END_ROD, l, 10, .01, .1, .1, .1);
 				for (Entity e : l.getWorld().getNearbyEntities(l, 1, 1, 1)) {
 					if (e instanceof LivingEntity) {
 						((LivingEntity) e).damage(5, caster.getMCPlayer());

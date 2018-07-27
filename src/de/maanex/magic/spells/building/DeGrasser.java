@@ -28,10 +28,9 @@ public class DeGrasser extends MagicSpell {
 	static {
 		grass = new ArrayList<>();
 
-		grass.add(Material.LONG_GRASS);
+		grass.add(Material.TALL_GRASS);
 		grass.add(Material.CHORUS_FLOWER);
-		grass.add(Material.YELLOW_FLOWER);
-		grass.add(Material.DOUBLE_PLANT);
+		grass.add(Material.CHORUS_FLOWER);
 	}
 
 	@Override

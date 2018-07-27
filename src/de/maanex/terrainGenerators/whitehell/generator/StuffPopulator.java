@@ -11,7 +11,6 @@ import org.bukkit.Material;
 import org.bukkit.TreeType;
 import org.bukkit.World;
 import org.bukkit.generator.BlockPopulator;
-import org.bukkit.material.MaterialData;
 
 import de.maanex.utils.BlockUtil;
 
@@ -19,16 +18,16 @@ import de.maanex.utils.BlockUtil;
 @SuppressWarnings("deprecation")
 public class StuffPopulator extends BlockPopulator {
 
-	private static List<MaterialData>	rock_stone	= new ArrayList<>();
-	private static List<Material>		rock_types	= new ArrayList<>();
+	private static List<Material>	rock_stone	= new ArrayList<>();
+	private static List<Material>	rock_types	= new ArrayList<>();
 
 	static {
-		rock_stone.add(new MaterialData(Material.STONE, (byte) 0));
-		rock_stone.add(new MaterialData(Material.STONE, (byte) 5));
-		rock_stone.add(new MaterialData(Material.STONE, (byte) 6));
-		rock_stone.add(new MaterialData(Material.COBBLESTONE, (byte) 0));
-		rock_stone.add(new MaterialData(Material.SMOOTH_BRICK, (byte) 0));
-		rock_stone.add(new MaterialData(Material.CONCRETE, (byte) 8));
+		rock_stone.add(Material.STONE);
+		rock_stone.add(Material.ANDESITE);
+		rock_stone.add(Material.POLISHED_ANDESITE);
+		rock_stone.add(Material.COBBLESTONE);
+		rock_stone.add(Material.SMOOTH_STONE);
+		rock_stone.add(Material.GRAY_CONCRETE);
 
 		rock_types.add(Material.DIAMOND_ORE);
 		rock_types.add(Material.EMERALD_ORE);
@@ -38,7 +37,7 @@ public class StuffPopulator extends BlockPopulator {
 		rock_types.add(Material.REDSTONE_ORE);
 		rock_types.add(Material.LAPIS_ORE);
 		rock_types.add(Material.STONE);
-		rock_types.add(Material.MAGMA);
+		rock_types.add(Material.MAGMA_BLOCK);
 	}
 
 	public StuffPopulator() {
@@ -90,11 +89,7 @@ public class StuffPopulator extends BlockPopulator {
 			final int rad = Math.max(1, ra);
 			BlockUtil.makeCylinder(l.add(cH % 2 == 0 ? xr : 0, -1, cH % 2 == 1 ? zr : 0), 1, ra).forEach(o -> {
 				if (r.nextInt(rad) >= o.distance(l) && r.nextBoolean()) o.getBlock().setType(rockType);
-				else {
-					MaterialData m = rock_stone.get(r.nextInt(rock_stone.size()));
-					o.getBlock().setType(m.getItemType());
-					o.getBlock().setData(m.getData());
-				}
+				else o.getBlock().setType(rock_stone.get(r.nextInt(rock_stone.size())));
 			});
 		}
 	}
@@ -104,13 +99,10 @@ public class StuffPopulator extends BlockPopulator {
 			for (int z = -10; z < 10; z++) {
 				Location q = l.clone().add(x, 0, z);
 				if (r.nextInt((int) Math.max(1, q.distance(l))) == 0 && q.getBlock().isEmpty()) {
-					q.getBlock().setType(Material.LONG_GRASS);
-					q.getBlock().setData((byte) 1);
+					q.getBlock().setType(Material.GRASS);
 					if (Math.abs(x) + Math.abs(z) < 4 && r.nextBoolean()) {
-						q.getBlock().setType(Material.DOUBLE_PLANT);
-						q.getBlock().setData((byte) 2);
-						q.clone().add(0, 1, 0).getBlock().setType(Material.DOUBLE_PLANT);
-						q.clone().add(0, 1, 0).getBlock().setData((byte) 9);
+						q.getBlock().setType(Material.TALL_GRASS);
+						q.clone().add(0, 1, 0).getBlock().setType(Material.TALL_GRASS);
 					}
 				}
 			}
@@ -128,11 +120,7 @@ public class StuffPopulator extends BlockPopulator {
 			final int rad = Math.max(1, ra);
 			BlockUtil.makeCylinder(l.add(cH % 4 == 0 ? xr : 0, -1, cH % 4 == 2 ? zr : 0), 1, ra).forEach(o -> {
 				if (r.nextInt(rad) >= o.distance(l) && r.nextBoolean()) o.getBlock().setType(r.nextBoolean() ? rockType1 : rockType2);
-				else {
-					MaterialData m = rock_stone.get(r.nextInt(rock_stone.size()));
-					o.getBlock().setType(m.getItemType());
-					o.getBlock().setData(m.getData());
-				}
+				else o.getBlock().setType(rock_stone.get(r.nextInt(rock_stone.size())));
 			});
 		}
 	}

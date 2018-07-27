@@ -7,6 +7,7 @@ import java.util.HashMap;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,8 +18,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import de.maanex.utils.Particle;
-import net.minecraft.server.v1_12_R1.EnumParticle;
+import de.maanex.utils.ParticleUtil;
 
 
 public class Jetpack implements Listener {
@@ -37,7 +37,7 @@ public class Jetpack implements Listener {
 	public static void registerRecipe() {
 		ShapedRecipe res = new ShapedRecipe(ITEM);
 		res.shape("SRS", "RBR", "KKK");
-		res.setIngredient('S', Material.SULPHUR);
+		res.setIngredient('S', Material.GUNPOWDER);
 		res.setIngredient('R', Material.REDSTONE_BLOCK);
 		res.setIngredient('B', Material.IRON_CHESTPLATE);
 		res.setIngredient('K', Material.COAL);
@@ -122,8 +122,7 @@ public class Jetpack implements Listener {
 					}
 				} else fuel.put(p, fuel.get(p) - 1);
 
-				Particle pa = new Particle(EnumParticle.FLAME, p.getLocation().clone().add(0, .3, 0), true, .3f, .3f, .1f, 0, 5);
-				pa.sendAll();
+				ParticleUtil.spawn(Particle.FLAME, p.getLocation(), 5, 0, .3, .3, .3);
 			} else if (p.isFlying() && isSurvival(p)) {
 				p.setFlying(false);
 				p.setAllowFlight(false);

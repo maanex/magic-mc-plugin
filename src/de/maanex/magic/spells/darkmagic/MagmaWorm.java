@@ -4,6 +4,7 @@ package de.maanex.magic.spells.darkmagic;
 import java.util.Random;
 
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 
@@ -15,9 +16,8 @@ import de.maanex.magic.enumeri.SpellRarity;
 import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 import de.maanex.magic.missile.MagmaMissile;
-import de.maanex.utils.Particle;
+import de.maanex.utils.ParticleUtil;
 import de.maanex.utils.TargetEntityFinder;
-import net.minecraft.server.v1_12_R1.EnumParticle;
 
 
 public class MagmaWorm extends MagicSpell {
@@ -49,8 +49,7 @@ public class MagmaWorm extends MagicSpell {
 
 			for (double d = 0; d < 1; d += .05) {
 				loc.add(x + deltaX * d, 0, z + deltaZ * d);
-				Particle pa = new Particle(EnumParticle.FLAME, loc, true, 0, 0, 0, 0, 1);
-				pa.sendAll();
+				ParticleUtil.spawn(Particle.FLAME, loc, 1, 0, 0, 0, 0);
 				loc.subtract(x + deltaX * d, 0, z + deltaZ * d);
 			}
 		}

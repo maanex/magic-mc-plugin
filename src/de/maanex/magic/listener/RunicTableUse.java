@@ -10,6 +10,7 @@ import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -31,8 +32,7 @@ import de.maanex.magic.SpellRecipe;
 import de.maanex.magic.spells.basic.Elementum;
 import de.maanex.magic.structures.RunicTableSpotter;
 import de.maanex.main.Main;
-import de.maanex.utils.Particle;
-import net.minecraft.server.v1_12_R1.EnumParticle;
+import de.maanex.utils.ParticleUtil;
 
 
 public class RunicTableUse implements Listener {
@@ -45,14 +45,13 @@ public class RunicTableUse implements Listener {
 	@EventHandler
 	public void onInteract(PlayerInteractEvent e) {
 		if (e.getClickedBlock() == null) return;
-		if (e.getClickedBlock().getType().equals(Material.ENCHANTMENT_TABLE) && e.getItem() != null && e.getItem().getType().equals(Material.PAPER)) {
+		if (e.getClickedBlock().getType().equals(Material.ENCHANTING_TABLE) && e.getItem() != null && e.getItem().getType().equals(Material.PAPER)) {
 			if (MagicPlayer.get(e.getPlayer()).getMana() > 0) {
 				MagicPlayer.get(e.getPlayer()).addMana(-1);
 				e.getItem().setAmount(e.getItem().getAmount() - 1);
 				e.getPlayer().getWorld().dropItem(e.getPlayer().getEyeLocation(), MagicManager.getSpell(Elementum.class).getItemStack());
 			} else {
-				Particle pa = new Particle(EnumParticle.SMOKE_NORMAL, e.getClickedBlock().getLocation(), false, 1, 1, 1, .2f, 50);
-				pa.sendPlayer(e.getPlayer());
+				ParticleUtil.spawn(e.getPlayer(), Particle.SMOKE_NORMAL, e.getClickedBlock().getLocation(), 50, .2, 1, 1, 1);
 			}
 			e.setCancelled(true);
 			return;

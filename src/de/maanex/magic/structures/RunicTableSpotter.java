@@ -11,7 +11,7 @@ public class RunicTableSpotter {
 	}
 
 	public static boolean isRunicTable(Block b) {
-		return (b.getType().equals(Material.ENCHANTMENT_TABLE) //
+		return (b.getType().equals(Material.ENCHANTING_TABLE) //
 				&& b.getLocation().clone().add(-1, -1, -1).getBlock().getType().equals(Material.OBSIDIAN) //
 				&& b.getLocation().clone().add(0, -1, -1).getBlock().getType().equals(Material.OBSIDIAN) //
 				&& b.getLocation().clone().add(1, -1, -1).getBlock().getType().equals(Material.OBSIDIAN) //

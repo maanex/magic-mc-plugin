@@ -65,7 +65,7 @@ public class WandBuilder {
 	}
 
 	public ItemStack build() {
-		ItemStack res = new ItemStack(Material.WOOD_HOE, 1);
+		ItemStack res = new ItemStack(Material.WOODEN_HOE, 1);
 		short skin = getFittingSkin(mods, type, environment);
 		setSkin(res, skin);
 		ItemMeta m = res.getItemMeta();
@@ -76,7 +76,7 @@ public class WandBuilder {
 	}
 
 	public void apply(ItemStack s) {
-		s.setType(Material.WOOD_HOE);
+		s.setType(Material.WOODEN_HOE);
 		short skin = getFittingSkin(mods, type, environment);
 		setSkin(s, skin);
 		ItemMeta m = s.getItemMeta();

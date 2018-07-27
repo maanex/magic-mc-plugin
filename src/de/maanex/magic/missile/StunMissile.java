@@ -3,7 +3,9 @@ package de.maanex.magic.missile;
 
 import java.util.Collection;
 
+import org.bukkit.Color;
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
@@ -11,8 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.utils.Particle;
-import net.minecraft.server.v1_12_R1.EnumParticle;
+import de.maanex.utils.ParticleUtil;
 
 
 public class StunMissile extends MagicMissile {
@@ -41,14 +42,13 @@ public class StunMissile extends MagicMissile {
 				n.setVelocity(new Vector(0, 0, 0));
 				if (n instanceof LivingEntity) ((LivingEntity) n).addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 3, 250));
 
-				new Particle(EnumParticle.REDSTONE, n.getLocation(), true, .5f, .5f, .5f, 1, 200).sendAll();
+				ParticleUtil.spawn(Particle.REDSTONE, position, 200, 1, .5, .5, .5);
 
 				destroy();
 			}
 		});
 
-		Particle pa1 = new Particle(EnumParticle.SPELL_INSTANT, position, true, 0, 0, 0, 0, 1);
-		pa1.sendAll();
+		ParticleUtil.spawn(org.bukkit.Particle.SPELL_INSTANT, position, 1, 0, 0, 0, 0);
 
 		Location pi = dir.clone();
 		pi.setPitch(dir.getPitch() + 90);
@@ -59,14 +59,13 @@ public class StunMissile extends MagicMissile {
 		Location pa2loc = position.clone();
 		pa2loc.add(pi.getDirection().multiply(Math.sin(life * .2)));
 		pa2loc.add(ya.getDirection().multiply(Math.cos(life * .2)));
-		Particle pa2 = new Particle(EnumParticle.REDSTONE, pa2loc, true, 1, 1, 0, 1, 0);
-		pa2.sendAll();
+
+		ParticleUtil.spawn(Particle.REDSTONE, pa2loc, 1, 1, 0, 0, 0, Color.ORANGE, 1f);
 
 		Location pa3loc = position.clone();
 		pa3loc.add(pi.getDirection().multiply(-Math.sin(life * .2)));
 		pa3loc.add(ya.getDirection().multiply(-Math.cos(life * .2)));
-		Particle pa3 = new Particle(EnumParticle.REDSTONE, pa3loc, true, 0, 0, 1, 1, 0);
-		pa3.sendAll();
+		ParticleUtil.spawn(Particle.REDSTONE, pa3loc, 1, 1, 0, 0, 0, Color.PURPLE, 1f);
 	}
 
 }

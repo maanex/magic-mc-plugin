@@ -42,12 +42,10 @@ public class ProtectionWall extends MagicSpell {
 		return l;
 	}
 
-	@SuppressWarnings("deprecation")
 	private void place(Location l, int del) {
 		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> {
 			if (l.getBlock().isEmpty()) {
 				l.getBlock().setType(Material.GLASS);
-				l.getBlock().setData((byte) 0);
 
 				Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> l.getBlock().breakNaturally(), 80 + del);
 			}

@@ -8,6 +8,7 @@ import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -23,8 +24,7 @@ import de.maanex.magic.enumeri.SpellRarity;
 import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 import de.maanex.main.Main;
-import de.maanex.utils.Particle;
-import net.minecraft.server.v1_12_R1.EnumParticle;
+import de.maanex.utils.ParticleUtil;
 
 
 public class Frostwave extends MagicSpell {
@@ -54,9 +54,7 @@ public class Frostwave extends MagicSpell {
 
 							for (Player p : Bukkit.getOnlinePlayers())
 								p.sendBlockChange(b.getLocation(), Material.PACKED_ICE, (byte) 0);
-							Particle pa = new Particle(EnumParticle.BLOCK_CRACK, b.getLocation().add(0.5, 1, 0.5), false, 0, 0, 0, 1, 5);
-							pa.setC(Material.PACKED_ICE.getId());
-							pa.sendAll();
+							ParticleUtil.spawn(Particle.BLOCK_CRACK, b.getLocation().add(.5, 1, .5), 5, 1, 0, 0, 0, Material.PACKED_ICE.getData());
 
 							Bukkit.getScheduler().runTaskLater(Main.instance, new Runnable() {
 
@@ -64,9 +62,7 @@ public class Frostwave extends MagicSpell {
 								public void run() {
 									for (Player p : Bukkit.getOnlinePlayers())
 										p.sendBlockChange(b.getLocation(), b.getType(), b.getData());
-									Particle pa = new Particle(EnumParticle.BLOCK_CRACK, b.getLocation().add(0.5, 1, 0.5), false, 0, 0, 0, 1, 5);
-									pa.setC(b.getTypeId() + (b.getData() * 4096));
-									pa.sendAll();
+									ParticleUtil.spawn(Particle.BLOCK_CRACK, b.getLocation().add(.5, 1, .5), 5, 1, 0, 0, 0, b.getBlockData());
 								}
 							}, new Random().nextInt(40) + 60);
 						}

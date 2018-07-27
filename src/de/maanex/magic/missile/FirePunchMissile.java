@@ -4,6 +4,7 @@ package de.maanex.magic.missile;
 import java.util.Collection;
 
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
@@ -11,8 +12,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.utils.Particle;
-import net.minecraft.server.v1_12_R1.EnumParticle;
+import de.maanex.utils.ParticleUtil;
 
 
 public class FirePunchMissile extends MagicMissile {
@@ -47,7 +47,7 @@ public class FirePunchMissile extends MagicMissile {
 						((LivingEntity) n).damage(2, sender.getMCPlayer());
 					}
 
-					new Particle(EnumParticle.LAVA, n.getLocation(), true, .3f, 0, .3f, 1, 5).sendAll();
+					ParticleUtil.spawn(Particle.LAVA, n.getLocation(), 5, 1, .3, 0, .3);
 
 					destroy();
 				}
@@ -60,8 +60,7 @@ public class FirePunchMissile extends MagicMissile {
 			Location paloc = position.clone();
 			paloc.add(pi.getDirection().multiply(Math.sin(life * .2) * .3));
 			paloc.add(ya.getDirection().multiply(Math.cos(life * .2) * .3));
-			Particle pa = new Particle(EnumParticle.FLAME, paloc, true, 0, 0, 0, 0, 1);
-			pa.sendAll();
+			ParticleUtil.spawn(Particle.FLAME, paloc, 1, 0, 0, 0, 0);
 		}
 	}
 

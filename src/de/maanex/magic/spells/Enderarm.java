@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -17,9 +18,8 @@ import de.maanex.magic.enumeri.SpellCategory;
 import de.maanex.magic.enumeri.SpellRarity;
 import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
-import de.maanex.utils.Particle;
+import de.maanex.utils.ParticleUtil;
 import de.maanex.utils.TargetEntityFinder;
-import net.minecraft.server.v1_12_R1.EnumParticle;
 
 
 public class Enderarm extends MagicSpell {
@@ -90,7 +90,7 @@ public class Enderarm extends MagicSpell {
 		src.setDirection(tar.toVector().subtract(src.toVector()));
 		while (ldis > (ldis = src.distance(tar))) {
 			src.add(src.getDirection().multiply(.5));
-			new Particle(EnumParticle.DRAGON_BREATH, src, true, .05f, .05f, .05f, 0, 1).sendAll();
+			ParticleUtil.spawn(Particle.DRAGON_BREATH, src, 1, 0, .05, .05, .05);
 		}
 	}
 }

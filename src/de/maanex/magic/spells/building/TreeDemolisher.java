@@ -36,10 +36,19 @@ public class TreeDemolisher extends MagicSpell {
 	static {
 		remove = new ArrayList<>();
 
-		remove.add(Material.LOG);
-		remove.add(Material.LOG_2);
-		remove.add(Material.LEAVES);
-		remove.add(Material.LEAVES_2);
+		remove.add(Material.OAK_LOG);
+		remove.add(Material.SPRUCE_LOG);
+		remove.add(Material.BIRCH_LOG);
+		remove.add(Material.JUNGLE_LOG);
+		remove.add(Material.DARK_OAK_LOG);
+		remove.add(Material.ACACIA_LOG);
+
+		remove.add(Material.OAK_LEAVES);
+		remove.add(Material.SPRUCE_LEAVES);
+		remove.add(Material.BIRCH_LEAVES);
+		remove.add(Material.JUNGLE_LEAVES);
+		remove.add(Material.DARK_OAK_LEAVES);
+		remove.add(Material.ACACIA_LEAVES);
 	}
 
 	private void checkAndBreakBlock(Location loc, int counter) {

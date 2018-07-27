@@ -1,6 +1,8 @@
 package de.maanex.magic.spells.basic;
 
 
+import org.bukkit.Particle;
+
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
 import de.maanex.magic.WandModifiers;
@@ -8,8 +10,7 @@ import de.maanex.magic.enumeri.SpellCategory;
 import de.maanex.magic.enumeri.SpellRarity;
 import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
-import de.maanex.utils.Particle;
-import net.minecraft.server.v1_12_R1.EnumParticle;
+import de.maanex.utils.ParticleUtil;
 
 
 public class FireSpirit extends MagicSpell {
@@ -20,8 +21,7 @@ public class FireSpirit extends MagicSpell {
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandModifiers mods) {
-		Particle pa = new Particle(EnumParticle.FLAME, caster.getMCPlayer().getEyeLocation(), false, 2, .3f, 2, .2f, 300);
-		pa.sendPlayer(caster.getMCPlayer());
+		ParticleUtil.spawn(caster.getMCPlayer(), Particle.FLAME, caster.getMCPlayer().getEyeLocation(), 300, .2, 2, .3, 2);
 	}
 
 }

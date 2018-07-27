@@ -7,20 +7,21 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.utils.Particle;
+import de.maanex.utils.ParticleUtil;
+import de.maanex.utils.ParticleUtil.ParticlePreset;
 
 
 public class MineMissile extends MagicMissile {
 
 	private int				lifedur, damage;
 	private double			rad;
-	private Particle		particle;
+	private ParticlePreset	particle;
 	private PotionEffect[]	effects;
 
 	private Runnable				tickRun;
 	private EntityEnterMineListener	list;
 
-	public MineMissile(Location pos, MagicPlayer sender, int lifedur, int damage, double rad, Particle particle, PotionEffect... effects) {
+	public MineMissile(Location pos, MagicPlayer sender, int lifedur, int damage, double rad, ParticlePreset particle, PotionEffect... effects) {
 		super(pos, sender);
 		this.lifedur = lifedur;
 		this.damage = damage;
@@ -43,7 +44,7 @@ public class MineMissile extends MagicMissile {
 			destroy();
 			return;
 		}
-		if (particle != null) particle.sendAll();
+		if (particle != null) ParticleUtil.spawn(particle);
 		if (tickRun != null) tickRun.run();
 
 		for (Entity e : position.getWorld().getNearbyEntities(position, rad, rad, rad)) {

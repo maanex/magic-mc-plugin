@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,8 +20,7 @@ import de.maanex.magic.enumeri.SpellRarity;
 import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 import de.maanex.main.Main;
-import de.maanex.utils.Particle;
-import net.minecraft.server.v1_12_R1.EnumParticle;
+import de.maanex.utils.ParticleUtil;
 
 
 public class Phase extends MagicSpell implements Listener {
@@ -55,7 +55,7 @@ public class Phase extends MagicSpell implements Listener {
 
 	public static void tick() {
 		for (Player p : inPhase) {
-			new Particle(EnumParticle.CLOUD, p.getLocation().clone().add(0, .5, 0), true, .5f, 1f, .5f, 0, 2).sendAll();
+			ParticleUtil.spawn(Particle.CLOUD, p.getEyeLocation().clone().add(0, .5, 0), 2, 0, .5, 1, .5);
 		}
 	}
 

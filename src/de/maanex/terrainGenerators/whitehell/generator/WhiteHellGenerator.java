@@ -28,7 +28,7 @@ public class WhiteHellGenerator extends ChunkGenerator {
 
 		ChunkData chunk = createChunkData(world);
 
-		chunk.setRegion(0, 20, 0, 16, GROUND_Y, 16, Material.CONCRETE);
+		chunk.setRegion(0, 20, 0, 16, GROUND_Y, 16, Material.WHITE_CONCRETE);
 
 		for (int y = 5; y < 10; y++) { // WHY??
 			for (int x = 0; x < 16; x++) {

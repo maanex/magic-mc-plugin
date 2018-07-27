@@ -1,6 +1,7 @@
 package de.maanex.magic.spells;
 
 
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -14,9 +15,8 @@ import de.maanex.magic.enumeri.SpellRarity;
 import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 import de.maanex.magic.missile.PainfullStingMissile;
-import de.maanex.utils.Particle;
+import de.maanex.utils.ParticleUtil;
 import de.maanex.utils.TargetEntityFinder;
-import net.minecraft.server.v1_12_R1.EnumParticle;
 
 
 public class PainfullSting extends MagicSpell {
@@ -35,12 +35,10 @@ public class PainfullSting extends MagicSpell {
 		if (tar instanceof Player) {
 			Player p = (Player) tar;
 			p.playSound(p.getEyeLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1, 1);
-			Particle pa = new Particle(EnumParticle.NOTE, p.getEyeLocation(), true, 1, 0, 1, .1f, 20);
-			pa.sendPlayer(p);
-			pa.sendPlayer(caster.getMCPlayer());
+			ParticleUtil.spawn(p, Particle.NOTE, p.getEyeLocation(), 20, .1, 1, 0, 1);
+			ParticleUtil.spawn(caster.getMCPlayer(), Particle.NOTE, p.getEyeLocation(), 20, .1, 1, 0, 1);
 		} else {
-			Particle pa = new Particle(EnumParticle.NOTE, tar.getLocation(), true, 1, 0, 1, .1f, 20);
-			pa.sendPlayer(caster.getMCPlayer());
+			ParticleUtil.spawn(caster.getMCPlayer(), Particle.NOTE, tar.getLocation(), 20, .1, 1, 0, 1);
 		}
 
 		PainfullStingMissile m = new PainfullStingMissile(caster.getMCPlayer().getEyeLocation(), caster, tar);

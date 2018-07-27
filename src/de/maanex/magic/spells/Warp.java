@@ -6,6 +6,7 @@ import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -18,8 +19,7 @@ import de.maanex.magic.enumeri.SpellRarity;
 import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 import de.maanex.main.Main;
-import de.maanex.utils.Particle;
-import net.minecraft.server.v1_12_R1.EnumParticle;
+import de.maanex.utils.ParticleUtil;
 
 
 public class Warp extends MagicSpell {
@@ -32,7 +32,7 @@ public class Warp extends MagicSpell {
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandModifiers mods) {
-		EnumParticle patype = type.equals(WandType.LIGHT) ? EnumParticle.END_ROD : EnumParticle.FLAME;
+		Particle patype = type.equals(WandType.LIGHT) ? Particle.END_ROD : Particle.FLAME;
 
 		Location org = caster.getMCPlayer().getEyeLocation().clone();
 		Location l = caster.getMCPlayer().getEyeLocation().clone().add(caster.getMCPlayer().getLocation().getDirection().normalize().multiply(6)).subtract(0, 1, 0);
@@ -51,10 +51,10 @@ public class Warp extends MagicSpell {
 			double zoff = (l.getZ() - org.getZ()) * dis;
 			for (double d = 0; d < 1; d += dis) {
 				org.add(xoff, yoff, zoff);
-				new Particle(patype, org, true, .02f, .02f, .02f, 0, 2).sendAll();
+				ParticleUtil.spawn(patype, org, 2, 0, .02, .02, .02);
 			}
 		} else {
-			if (!caster.getMCPlayer().hasPotionEffect(PotionEffectType.INVISIBILITY)) new Particle(EnumParticle.SMOKE_LARGE, org, true, .5f, .5f, .5f, 0, 70).sendAll();
+			if (!caster.getMCPlayer().hasPotionEffect(PotionEffectType.INVISIBILITY)) ParticleUtil.spawn(Particle.SMOKE_LARGE, org, 70, 0, .5, .5, .5);
 
 			if (dark_wand_show_tasks.containsKey(caster.getMCPlayer())) Bukkit.getScheduler().cancelTask(dark_wand_show_tasks.get(caster.getMCPlayer()));
 			else Bukkit.getOnlinePlayers().stream().filter(p -> !p.equals(caster.getMCPlayer())).forEach(p -> p.hidePlayer(caster.getMCPlayer()));

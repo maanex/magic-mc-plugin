@@ -4,6 +4,7 @@ package de.maanex.magic.missile;
 import java.util.Collection;
 
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
@@ -11,8 +12,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.utils.Particle;
-import net.minecraft.server.v1_12_R1.EnumParticle;
+import de.maanex.utils.ParticleUtil;
 
 
 public class WaterPunchMissile extends MagicMissile {
@@ -47,7 +47,7 @@ public class WaterPunchMissile extends MagicMissile {
 						((LivingEntity) n).damage(4, sender.getMCPlayer());
 					}
 
-					new Particle(EnumParticle.WATER_BUBBLE, n.getLocation(), true, .3f, .3f, .3f, 1, 70).sendAll();
+					ParticleUtil.spawn(Particle.WATER_BUBBLE, n.getLocation(), 70, 1, .3, .3, .3);
 
 					destroy();
 				}
@@ -60,8 +60,7 @@ public class WaterPunchMissile extends MagicMissile {
 			Location paloc = position.clone();
 			paloc.add(pi.getDirection().multiply(Math.sin(life * .2) * .5));
 			paloc.add(ya.getDirection().multiply(Math.cos(life * .2) * .5));
-			Particle pa = new Particle(EnumParticle.DRIP_WATER, paloc, true, .01f, .01f, .01f, .01f, 2);
-			pa.sendAll();
+			ParticleUtil.spawn(Particle.DRIP_WATER, paloc, 2, .01, .01, .01, .01);
 		}
 	}
 

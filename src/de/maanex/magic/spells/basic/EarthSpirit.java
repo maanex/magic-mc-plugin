@@ -2,6 +2,7 @@ package de.maanex.magic.spells.basic;
 
 
 import org.bukkit.Material;
+import org.bukkit.Particle;
 
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
@@ -10,8 +11,7 @@ import de.maanex.magic.enumeri.SpellCategory;
 import de.maanex.magic.enumeri.SpellRarity;
 import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
-import de.maanex.utils.Particle;
-import net.minecraft.server.v1_12_R1.EnumParticle;
+import de.maanex.utils.ParticleUtil;
 
 
 public class EarthSpirit extends MagicSpell {
@@ -20,12 +20,9 @@ public class EarthSpirit extends MagicSpell {
 		super(25, "Erdgeist", "Spiritus terrae", 0, 0, SpellType.NOT_USEABLE, SpellCategory.UTILITY, SpellRarity.COMMON);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandModifiers mods) {
-		Particle pa = new Particle(EnumParticle.BLOCK_CRACK, caster.getMCPlayer().getEyeLocation(), false, 2, .3f, 2, .2f, 300);
-		pa.setC(Material.DIRT.getId());
-		pa.sendPlayer(caster.getMCPlayer());
+		ParticleUtil.spawn(caster.getMCPlayer(), Particle.BLOCK_CRACK, caster.getMCPlayer().getEyeLocation(), 300, .2, 2, .3, 2, Material.DIRT.getData());
 	}
 
 }

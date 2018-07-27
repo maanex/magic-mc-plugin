@@ -30,8 +30,10 @@ public class WastelandsGenerator extends ChunkGenerator {
 
 		for (int x = 0; x < 16; x++) {
 			for (int z = 0; z < 16; z++) {
-				biome.setBiome(x, z, Biome.SKY);
 				int wx = cx * 16 + x, wz = cz * 16 + z;
+				boolean swamp = biome.getBiome(x, z).equals(Biome.SWAMP);
+
+				biome.setBiome(x, z, Biome.THE_END);
 
 				double pr = basicGen.noise(wx, wz, .2d, .5d);
 				double ps = basicGen.noise(wx, wz, .001d, 1d) - .1;
@@ -43,7 +45,13 @@ public class WastelandsGenerator extends ChunkGenerator {
 				}
 
 				bl = Math.abs(bl);
-				if (Math.abs(ps) + (double) r.nextInt(100) / 1000 < .85) {
+				if (swamp) {
+					double q = basicGen.noise(wx, wz, .02d, .5d);
+					q = q / 10 + 1;
+					int h = (int) (bl * q);
+					chunk.setRegion(x, 0, z, x + 1, h, z + 1, Material.OBSIDIAN);
+
+				} else if (Math.abs(ps) + (double) r.nextInt(100) / 1000 < .85) {
 					chunk.setRegion(x, 0, z, x + 1, bl / 5 * 4, z + 1, Material.STONE);
 					chunk.setRegion(x, bl / 5 * 4, z, x + 1, bl - 1, z + 1, Material.DIRT);
 					chunk.setRegion(x, bl - 1, z, x + 1, bl, z + 1, new MaterialData(Material.DIRT, (byte) 2));
@@ -69,6 +77,7 @@ public class WastelandsGenerator extends ChunkGenerator {
 		chunk.setRegion(0, 0, 0, 16, GROUND_Y, 16, Material.BEDROCK);
 
 		return chunk;
+
 	}
 
 	@Override

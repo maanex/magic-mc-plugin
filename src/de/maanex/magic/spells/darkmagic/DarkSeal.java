@@ -4,6 +4,7 @@ package de.maanex.magic.spells.darkmagic;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
@@ -19,9 +20,8 @@ import de.maanex.magic.enumeri.SpellRarity;
 import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 import de.maanex.main.Main;
-import de.maanex.utils.Particle;
+import de.maanex.utils.ParticleUtil;
 import de.maanex.utils.TargetEntityFinder;
-import net.minecraft.server.v1_12_R1.EnumParticle;
 
 
 public class DarkSeal extends MagicSpell {
@@ -50,7 +50,6 @@ public class DarkSeal extends MagicSpell {
 		takeMana(caster, mods);
 	}
 
-	@SuppressWarnings("deprecation")
 	private void partDel(Entity tar, int i) {
 		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> {
 			Location loc = tar.getLocation().clone().add(0, 1, 0);
@@ -67,15 +66,9 @@ public class DarkSeal extends MagicSpell {
 				double deltaX = x2 - x;
 				double deltaZ = z2 - z;
 
-				Particle pa2 = new Particle(EnumParticle.BLOCK_DUST, loc.clone().add(x, 0, z), true, .1f, 0, .1f, 0, 5);
-				pa2.setC(Material.LAVA.getId());
-				pa2.sendAll();
-
 				for (double d = 0; d < 1; d += .1) {
 					loc.add(x + deltaX * d, 0, z + deltaZ * d);
-					Particle pa = new Particle(EnumParticle.BLOCK_DUST, loc, true, 0, 0, 0, 0, 1);
-					pa.setC(Material.COAL_BLOCK.getId());
-					pa.sendAll();
+					ParticleUtil.spawn(Particle.BLOCK_DUST, loc, 1, 0, 0, 0, 0, Material.COAL_BLOCK.getData());
 					loc.subtract(x + deltaX * d, 0, z + deltaZ * d);
 				}
 			}

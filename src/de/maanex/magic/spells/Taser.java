@@ -5,6 +5,7 @@ import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -18,8 +19,7 @@ import de.maanex.magic.enumeri.SpellRarity;
 import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 import de.maanex.main.Main;
-import de.maanex.utils.Particle;
-import net.minecraft.server.v1_12_R1.EnumParticle;
+import de.maanex.utils.ParticleUtil;
 
 
 public class Taser extends MagicSpell {
@@ -41,7 +41,7 @@ public class Taser extends MagicSpell {
 		src.setVelocity(new Vector(0, 0, 0));
 		while (dis-- > 0) {
 			l.add(l.getDirection().multiply(.5));
-			new Particle(EnumParticle.CRIT_MAGIC, l, true, (float) ((double) r.nextInt(10) / 20), (float) ((double) r.nextInt(10) / 20), (float) ((double) r.nextInt(10) / 20), 0, 1).sendAll();
+			ParticleUtil.spawn(Particle.CRIT_MAGIC, l, 1, 0, ((double) r.nextInt(10) / 20), ((double) r.nextInt(10) / 20), ((double) r.nextInt(10) / 20));
 
 			for (Entity e : l.getWorld().getNearbyEntities(l, .6, .6, .6)) {
 				if (e.equals(src)) continue;

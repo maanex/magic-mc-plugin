@@ -2,6 +2,7 @@ package de.maanex.magic.spells;
 
 
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Fireball;
 import org.bukkit.util.Vector;
@@ -13,8 +14,7 @@ import de.maanex.magic.enumeri.SpellCategory;
 import de.maanex.magic.enumeri.SpellRarity;
 import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
-import de.maanex.utils.Particle;
-import net.minecraft.server.v1_12_R1.EnumParticle;
+import de.maanex.utils.ParticleUtil;
 
 
 public class Comet extends MagicSpell {
@@ -28,8 +28,7 @@ public class Comet extends MagicSpell {
 		Block target = caster.getMCPlayer().getTargetBlock(null, 20 + mods.getEnergy() - 100);
 		if (target.getType().equals(Material.AIR)) return;
 
-		Particle pa = new Particle(EnumParticle.REDSTONE, target.getLocation(), true, 2, 0, 2, 0, 200);
-		pa.sendPlayer(caster.getMCPlayer());
+		ParticleUtil.spawn(Particle.REDSTONE, target.getLocation(), 200, 0, 2, 0, 2);
 		Fireball f = target.getWorld().spawn(target.getLocation().clone().add(0, 20, 0), Fireball.class);
 		f.setDirection(new Vector(0, -0.001, 0));
 		f.setVelocity(f.getVelocity().multiply(.1));

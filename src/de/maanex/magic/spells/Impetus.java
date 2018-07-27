@@ -2,6 +2,7 @@ package de.maanex.magic.spells;
 
 
 import org.bukkit.Bukkit;
+import org.bukkit.Particle;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -15,8 +16,7 @@ import de.maanex.magic.enumeri.SpellRarity;
 import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
 import de.maanex.main.Main;
-import de.maanex.utils.Particle;
-import net.minecraft.server.v1_12_R1.EnumParticle;
+import de.maanex.utils.ParticleUtil;
 
 
 public class Impetus extends MagicSpell {
@@ -35,7 +35,7 @@ public class Impetus extends MagicSpell {
 	private void perform(Player p, int delay) {
 		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> {
 			p.setVelocity(vel(p));
-			new Particle(EnumParticle.DRAGON_BREATH, p.getLocation().clone().add(0, 1, 0), true, .5f, 1, .5f, .01f, 20).sendAll();
+			ParticleUtil.spawn(Particle.DRAGON_BREATH, p.getLocation().clone().add(0, 1, 0), 20, .01, .5, 1, .5);
 			for (Entity e : p.getWorld().getNearbyEntities(p.getLocation(), 2, 3, 2)) {
 				if (e.equals(p)) continue;
 				if (!(e instanceof LivingEntity)) continue;
