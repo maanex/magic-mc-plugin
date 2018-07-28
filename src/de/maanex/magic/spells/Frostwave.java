@@ -30,7 +30,7 @@ import de.maanex.utils.ParticleUtil;
 public class Frostwave extends MagicSpell {
 
 	public Frostwave() {
-		super(13, "Frostwelle", "Brrrr!", 2, 4, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.VERY_RARE);
+		super(13, "Frostwelle", "Brrrr!", 2, 3, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.VERY_RARE);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -54,7 +54,7 @@ public class Frostwave extends MagicSpell {
 
 							for (Player p : Bukkit.getOnlinePlayers())
 								p.sendBlockChange(b.getLocation(), Material.PACKED_ICE, (byte) 0);
-							ParticleUtil.spawn(Particle.BLOCK_CRACK, b.getLocation().add(.5, 1, .5), 5, 1, 0, 0, 0, Material.PACKED_ICE.getData());
+							ParticleUtil.spawn(Particle.BLOCK_CRACK, b.getLocation().add(.5, 1, .5), 5, 1, 0, 0, 0, Material.PACKED_ICE.createBlockData());
 
 							Bukkit.getScheduler().runTaskLater(Main.instance, new Runnable() {
 
@@ -71,7 +71,7 @@ public class Frostwave extends MagicSpell {
 								if (en.getLocation().distance(b.getLocation()) < 1.1 && !damaged.contains(en)) {
 									damaged.add(en);
 									try {
-										((LivingEntity) en).damage(5, caster.getMCPlayer());
+										((LivingEntity) en).damage(7, caster.getMCPlayer());
 										((LivingEntity) en).addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 60, 1));
 									} catch (Exception e2) {
 										// 8)

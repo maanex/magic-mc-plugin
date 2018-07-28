@@ -1,8 +1,10 @@
 package de.maanex.magic.spells.waterbender;
 
 
+import java.util.Random;
+
 import org.bukkit.Location;
-import org.bukkit.util.Vector;
+import org.bukkit.Material;
 
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
@@ -22,14 +24,20 @@ public class WaterBenderSplash extends MagicSpell {
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandModifiers mods) {
-		int mis = 10;
+		int mis = 40;
+		Location center = caster.getMCPlayer().getLocation().clone();
 		while (mis-- > 0) {
-			Location dir = caster.getMCPlayer().getLocation().clone();
-			dir.setDirection(dir.getDirection().add(Vector.getRandom().multiply(.4)));
-			dir.setDirection(dir.getDirection().subtract(Vector.getRandom().multiply(.4)));
-			new WaterSplashMissile(caster.getMCPlayer().getEyeLocation(), caster, dir, mods.getEnergy()).launch();
+			// Location dir = caster.getMCPlayer().getLocation().clone();
+			// dir.setDirection(dir.getDirection().add(Vector.getRandom().multiply(.4)));
+			// dir.setDirection(dir.getDirection().subtract(Vector.getRandom().multiply(.4)));
+			Location loc = caster.getMCPlayer().getTargetBlock(null, mods.getEnergy() / 10).getLocation().clone().add(r(), r(), r());
+			if (loc.getBlock().getType().equals(Material.WATER)) new WaterSplashMissile(loc, caster, mods.getEnergy(), center).launch();
 		}
 		takeMana(caster, mods);
 
+	}
+
+	private int r() {
+		return new Random().nextInt(10) - 5;
 	}
 }

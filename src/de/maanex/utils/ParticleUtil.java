@@ -13,37 +13,39 @@ public class ParticleUtil {
 	}
 
 	public static void spawn(Particle particle, Location l, int am, double speed, double xr, double yr, double zr) {
-		l.getWorld().spawnParticle(particle, l, am, speed, xr, yr, zr);
+		l.getWorld().spawnParticle(particle, l, am, xr, yr, zr, speed);
 	}
 
 	public static void spawn(Particle particle, Location l, int am, double speed, double xr, double yr, double zr, int color, float size) {
-		spawn(particle, l, am, speed, xr, yr, zr, Color.fromRGB(color), size);
+		spawn(particle, l, am, xr, yr, zr, speed, Color.fromRGB(color), size);
 	}
 
 	public static void spawn(Particle particle, Location l, int am, double speed, double xr, double yr, double zr, Color color, float size) {
-		l.getWorld().spawnParticle(particle, l, am, speed, xr, yr, zr, new Particle.DustOptions(color, size));
+		l.getWorld().spawnParticle(particle, l, am, xr, yr, zr, speed, new Particle.DustOptions(color, size));
 	}
 
 	public static <T> void spawn(Particle particle, Location l, int am, double speed, double xr, double yr, double zr, T t) {
-		l.getWorld().spawnParticle(particle, l, am, speed, xr, yr, zr, t);
+		if (t == null || !t.getClass().equals(particle.getDataType())) return;// spawn(particle, l, am, speed, xr, yr, zr);
+		l.getWorld().spawnParticle(particle, l, am, xr, yr, zr, speed, t);
 	}
 
 	//
 
 	public static void spawn(Player p, Particle particle, Location l, int am, double speed, double xr, double yr, double zr) {
-		p.spawnParticle(particle, l, am, speed, xr, yr, zr);
+		p.spawnParticle(particle, l, am, xr, yr, zr, speed);
 	}
 
 	public static void spawn(Player p, Particle particle, Location l, int am, double speed, double xr, double yr, double zr, int color, float size) {
-		spawn(p, particle, l, am, speed, xr, yr, zr, Color.fromRGB(color), size);
+		spawn(p, particle, l, am, xr, yr, zr, speed, Color.fromRGB(color), size);
 	}
 
 	public static void spawn(Player p, Particle particle, Location l, int am, double speed, double xr, double yr, double zr, Color color, float size) {
-		p.spawnParticle(particle, l, am, speed, xr, yr, zr, new Particle.DustOptions(color, size));
+		p.spawnParticle(particle, l, am, xr, yr, zr, speed, new Particle.DustOptions(color, size));
 	}
 
 	public static <T> void spawn(Player p, Particle particle, Location l, int am, double speed, double xr, double yr, double zr, T t) {
-		p.spawnParticle(particle, l, am, speed, xr, yr, zr, t);
+		if (t == null || !t.getClass().equals(particle.getDataType())) return;// spawn(p, particle, l, am, speed, xr, yr, zr);
+		p.spawnParticle(particle, l, am, xr, yr, zr, speed, t);
 	}
 
 	//

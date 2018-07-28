@@ -17,9 +17,9 @@ public class JoinNames implements Listener {
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
 		switch (e.getPlayer().getName()) {
-			case "Ordodi":
-				e.getPlayer().setPlayerListName("§7[§cOwner§7] §fOrdodi");
-				break;
+			// case "Ordodi":
+			// e.getPlayer().setPlayerListName("§7[§cOwner§7] §fOrdodi");
+			// break;
 			case "Maanex":
 				e.getPlayer().setPlayerListName("§7[§9Dev§7] §fMaanex");
 				break;

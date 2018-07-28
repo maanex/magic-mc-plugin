@@ -26,7 +26,7 @@ public class EarthBenderBridge extends MagicSpell {
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandModifiers mods) {
-		Block b = caster.getMCPlayer().getTargetBlock(null, 30 + mods.getEnergy() - 100);
+		Block b = caster.getMCPlayer().getTargetBlock(null, 40 + mods.getEnergy() - 100);
 		if (b.getType().equals(Material.AIR)) return;
 
 		Random r = new Random();

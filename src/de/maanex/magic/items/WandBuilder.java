@@ -27,7 +27,7 @@ public class WandBuilder {
 	//
 
 	static {
-		skinNames.put((short) 1, "§bUnindentifizierter Zauberstab");
+		skinNames.put((short) 1, "§bUnidentifizierter Zauberstab");
 		skinNames.put((short) 2, "§bGewöhnlicher Zauberstab");
 		skinNames.put((short) 3, "§bLangstab");
 		skinNames.put((short) 4, "§bLichtbringer Stab");

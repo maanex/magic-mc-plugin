@@ -22,13 +22,16 @@ import de.maanex.utils.ParticleUtil;
 
 public class WaterSplashMissile extends MagicMissile {
 
-	private Location	dir;
 	private int			life;
+	private Location	target;
 
-	public WaterSplashMissile(Location startPos, MagicPlayer sender, Location direction, int life) {
+	public WaterSplashMissile(Location startPos, MagicPlayer sender, int life, Location target) {
 		super(startPos, sender);
-		this.dir = direction;
 		this.life = life;
+		this.target = target;
+
+		position.setPitch(-90);
+		position.setYaw(0);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -39,12 +42,9 @@ public class WaterSplashMissile extends MagicMissile {
 			return;
 		}
 
-		float p = dir.getPitch() - 90;
-		if (p > 0) p -= 3;
-		if (p < 0) p += 3;
-		if (Math.abs(p) <= 2) p = 0;
-		dir.setPitch(p + 90);
-		position.add(dir.getDirection().multiply(.8));
+		Vector v = target.clone().subtract(position).toVector().normalize();
+		position.setDirection(position.getDirection().add(v.multiply(1 - (Math.min(1, (double) life / 100)))));
+		position.add(position.getDirection().multiply((double) life / 100));
 
 		Collection<Entity> e = position.getWorld().getNearbyEntities(position, 2, .5, 2);
 		if (!e.isEmpty()) e.forEach(n -> {

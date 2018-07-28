@@ -75,14 +75,13 @@ public class AntiExplode implements Listener {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onFallingBlockLand(EntityChangeBlockEvent e) {
 		if (e.getEntity() instanceof FallingBlock) {
 			FallingBlock b = (FallingBlock) e.getEntity();
 			if (pushed.contains(b)) {
 				e.setCancelled(true);
-				ParticleUtil.spawn(Particle.DRIP_LAVA, b.getLocation(), 5, 1, 0, 0, 0, b.getBlockData());
+				ParticleUtil.spawn(Particle.BLOCK_CRACK, b.getLocation(), 5, 1, 0, 0, 0, b.getBlockData());
 
 				for (Entity en : b.getNearbyEntities(2, 2, 2)) {
 					try {

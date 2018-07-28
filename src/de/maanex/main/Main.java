@@ -35,7 +35,6 @@ import de.maanex.magic.spells.Knock;
 import de.maanex.magic.spells.Levitate;
 import de.maanex.magic.spells.Nitro;
 import de.maanex.magic.spells.PainfullSting;
-import de.maanex.magic.spells.Phase;
 import de.maanex.magic.spells.ProtectionWall;
 import de.maanex.magic.spells.Sniper;
 import de.maanex.magic.spells.Strike;
@@ -62,6 +61,7 @@ import de.maanex.magic.spells.darkmagic.MagmaWorm;
 import de.maanex.magic.spells.darkmagic.TheSeeker;
 import de.maanex.magic.spells.earthbender.EarthBenderBridge;
 import de.maanex.magic.spells.earthbender.EarthBenderCannon;
+import de.maanex.magic.spells.lightmagic.Phase;
 import de.maanex.magic.spells.lightmagic.TrueSight;
 import de.maanex.magic.spells.waterbender.WaterBenderSplash;
 import de.maanex.news.News;
@@ -71,6 +71,7 @@ import de.maanex.survival.ForceResoucrepack;
 import de.maanex.survival.Jetpack;
 import de.maanex.survival.JoinNames;
 import de.maanex.survival.Schlafenszeit;
+import de.maanex.survival.ServerlistPing;
 import de.maanex.sysad.Backdoor;
 import de.maanex.sysad.CpuTerminal;
 import de.maanex.terrainGenerators.wastelands.generator.WastelandsGenerator;
@@ -130,7 +131,7 @@ public class Main extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(MagicManager.getSpell(Phase.class), this);
 
 		// Survival
-		// Bukkit.getPluginManager().registerEvents(new ServerlistPing(), this);
+		Bukkit.getPluginManager().registerEvents(new ServerlistPing(), this);
 		Bukkit.getPluginManager().registerEvents(new AntiExplode(), this);
 		Bukkit.getPluginManager().registerEvents(new BeimSterben(), this);
 		Bukkit.getPluginManager().registerEvents(new Schlafenszeit(), this);
