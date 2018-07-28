@@ -33,6 +33,7 @@ import de.maanex.magic.spells.HolyShield;
 import de.maanex.magic.spells.Impetus;
 import de.maanex.magic.spells.Knock;
 import de.maanex.magic.spells.Levitate;
+import de.maanex.magic.spells.MegaKnock;
 import de.maanex.magic.spells.Nitro;
 import de.maanex.magic.spells.PainfullSting;
 import de.maanex.magic.spells.ProtectionWall;
@@ -42,9 +43,10 @@ import de.maanex.magic.spells.Stun;
 import de.maanex.magic.spells.Taser;
 import de.maanex.magic.spells.TheConnector;
 import de.maanex.magic.spells.Timewarp;
+import de.maanex.magic.spells.UltimateKnock;
 import de.maanex.magic.spells.Warp;
-import de.maanex.magic.spells.Waterball;
-import de.maanex.magic.spells.Waterpunch;
+import de.maanex.magic.spells.WaterChop;
+import de.maanex.magic.spells.WaterPunch;
 import de.maanex.magic.spells.basic.AirSpirit;
 import de.maanex.magic.spells.basic.EarthSpirit;
 import de.maanex.magic.spells.basic.Elementum;
@@ -55,6 +57,7 @@ import de.maanex.magic.spells.basic.FireSpirit;
 import de.maanex.magic.spells.basic.WaterSpirit;
 import de.maanex.magic.spells.building.BlockSwarper;
 import de.maanex.magic.spells.building.DeGrasser;
+import de.maanex.magic.spells.building.Drill;
 import de.maanex.magic.spells.building.TreeDemolisher;
 import de.maanex.magic.spells.darkmagic.DarkSeal;
 import de.maanex.magic.spells.darkmagic.MagmaWorm;
@@ -218,12 +221,15 @@ public class Main extends JavaPlugin {
 		MagicManager.registerSpell(new Firering());
 		MagicManager.registerSpell(new Timewarp());
 		MagicManager.registerSpell(new Enderarm());
-		MagicManager.registerSpell(new Waterpunch());
-		MagicManager.registerSpell(new Waterball());
+		MagicManager.registerSpell(new WaterPunch());
+		MagicManager.registerSpell(new WaterChop());
 		MagicManager.registerSpell(new Phase());
 		MagicManager.registerSpell(new DeGrasser());
 		MagicManager.registerSpell(new TreeDemolisher());
 		MagicManager.registerSpell(new BlockSwarper());
+		MagicManager.registerSpell(new MegaKnock());
+		MagicManager.registerSpell(new UltimateKnock());
+		MagicManager.registerSpell(new Drill());
 	}
 
 	private void registerSpellRecipes() {
@@ -247,6 +253,10 @@ public class Main extends JavaPlugin {
 		MagicManager.registerSpellRecipe(new SpellRecipe(Fireball.class, Fireball.class, Comet.class, 80));
 		MagicManager.registerSpellRecipe(new SpellRecipe(Fireball.class, Fireball.class, Firepunch.class, 1));
 
+		MagicManager.registerSpellRecipe(new SpellRecipe(Comet.class, Comet.class, Fireball.class, 15));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Comet.class, Comet.class, Comet.class, 80));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Comet.class, Comet.class, Firering.class, 5));
+
 		MagicManager.registerSpellRecipe(new SpellRecipe(Knock.class, FireSpirit.class, Firepunch.class, 10));
 		MagicManager.registerSpellRecipe(new SpellRecipe(Knock.class, FireSpirit.class, FireSpirit.class, 45));
 		MagicManager.registerSpellRecipe(new SpellRecipe(Knock.class, FireSpirit.class, Knock.class, 45));
@@ -260,24 +270,23 @@ public class Main extends JavaPlugin {
 		MagicManager.registerSpellRecipe(new SpellRecipe(EarthSpirit.class, EarthSpirit.class, ProtectionWall.class, 99));
 
 		// Water Stuff
-		// MagicManager.registerSpellRecipe(new SpellRecipe(WaterSpirit.class,
-		// WaterSpirit.class, AirBlast.class, 1));
-		// MagicManager.registerSpellRecipe(new SpellRecipe(WaterSpirit.class,
-		// WaterSpirit.class, Levitate.class, 99));
+		MagicManager.registerSpellRecipe(new SpellRecipe(WaterSpirit.class, WaterSpirit.class, WaterChop.class, 999));
+		MagicManager.registerSpellRecipe(new SpellRecipe(WaterSpirit.class, WaterSpirit.class, WaterPunch.class, 1));
 
-		MagicManager.registerSpellRecipe(new SpellRecipe(Knock.class, WaterSpirit.class, Waterpunch.class, 10));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Knock.class, WaterSpirit.class, WaterPunch.class, 10));
 		MagicManager.registerSpellRecipe(new SpellRecipe(Knock.class, WaterSpirit.class, WaterSpirit.class, 45));
 		MagicManager.registerSpellRecipe(new SpellRecipe(Knock.class, WaterSpirit.class, Knock.class, 45));
 
 		// Bender Stuff
-		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceBender.class, EarthSpirit.class, EarthBenderCannon.class, 20));
-		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceBender.class, EarthSpirit.class, EarthBenderBridge.class, 20));
+		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceBender.class, EarthSpirit.class, EarthBenderCannon.class, 30));
+		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceBender.class, EarthSpirit.class, EarthBenderBridge.class, 10));
 
 		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceBender.class, WaterSpirit.class, WaterBenderSplash.class, 20));
 
 		// Mixing Elements
 		MagicManager.registerSpellRecipe(new SpellRecipe(AirSpirit.class, WaterSpirit.class, Knock.class, 60));
 		MagicManager.registerSpellRecipe(new SpellRecipe(AirSpirit.class, WaterSpirit.class, Strike.class, 20));
+		MagicManager.registerSpellRecipe(new SpellRecipe(AirSpirit.class, WaterSpirit.class, Taser.class, 1));
 
 		MagicManager.registerSpellRecipe(new SpellRecipe(EarthSpirit.class, WaterSpirit.class, Knock.class, 60));
 		MagicManager.registerSpellRecipe(new SpellRecipe(EarthSpirit.class, WaterSpirit.class, Frostwave.class, 20));
@@ -292,11 +301,59 @@ public class Main extends JavaPlugin {
 		MagicManager.registerSpellRecipe(new SpellRecipe(AirSpirit.class, EarthSpirit.class, Knock.class, 60));
 		MagicManager.registerSpellRecipe(new SpellRecipe(AirSpirit.class, EarthSpirit.class, ArrowStorm.class, 20));
 		MagicManager.registerSpellRecipe(new SpellRecipe(AirSpirit.class, EarthSpirit.class, Warp.class, 10));
-		MagicManager.registerSpellRecipe(new SpellRecipe(AirSpirit.class, EarthSpirit.class, Nitro.class, 10));
 
 		MagicManager.registerSpellRecipe(new SpellRecipe(WaterSpirit.class, FireSpirit.class, Knock.class, 60));
 		MagicManager.registerSpellRecipe(new SpellRecipe(WaterSpirit.class, FireSpirit.class, PainfullSting.class, 20));
 		MagicManager.registerSpellRecipe(new SpellRecipe(WaterSpirit.class, FireSpirit.class, Stun.class, 20));
+
+		// Knock
+		MagicManager.registerSpellRecipe(new SpellRecipe(Knock.class, Knock.class, Knock.class, 90));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Knock.class, Knock.class, MegaKnock.class, 10));
+
+		MagicManager.registerSpellRecipe(new SpellRecipe(MegaKnock.class, MegaKnock.class, MegaKnock.class, 90));
+		MagicManager.registerSpellRecipe(new SpellRecipe(MegaKnock.class, MegaKnock.class, Knock.class, 9));
+		MagicManager.registerSpellRecipe(new SpellRecipe(MegaKnock.class, MegaKnock.class, UltimateKnock.class, 1));
+
+		MagicManager.registerSpellRecipe(new SpellRecipe(UltimateKnock.class, UltimateKnock.class, UltimateKnock.class, 900));
+		MagicManager.registerSpellRecipe(new SpellRecipe(UltimateKnock.class, UltimateKnock.class, MegaKnock.class, 90));
+		MagicManager.registerSpellRecipe(new SpellRecipe(UltimateKnock.class, UltimateKnock.class, Knock.class, 9));
+		MagicManager.registerSpellRecipe(new SpellRecipe(UltimateKnock.class, UltimateKnock.class, TheConnector.class, 1));
+
+		/*
+		 * Crossing Spells
+		 */
+		MagicManager.registerSpellRecipe(new SpellRecipe(Warp.class, Warp.class, Impetus.class, 10));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Warp.class, Warp.class, Nitro.class, 20));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Warp.class, Warp.class, Warp.class, 40));
+
+		MagicManager.registerSpellRecipe(new SpellRecipe(Nitro.class, Nitro.class, Impetus.class, 40));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Nitro.class, Nitro.class, Warp.class, 10));
+
+		MagicManager.registerSpellRecipe(new SpellRecipe(Impetus.class, Warp.class, Impetus.class, 40));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Impetus.class, Warp.class, Warp.class, 40));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Impetus.class, Warp.class, Timewarp.class, 20));
+
+		MagicManager.registerSpellRecipe(new SpellRecipe(Nitro.class, Warp.class, Nitro.class, 40));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Nitro.class, Warp.class, Warp.class, 40));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Nitro.class, Warp.class, Timewarp.class, 20));
+
+		MagicManager.registerSpellRecipe(new SpellRecipe(Nitro.class, Impetus.class, Nitro.class, 40));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Nitro.class, Impetus.class, Impetus.class, 40));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Nitro.class, Impetus.class, Timewarp.class, 20));
+
+		//
+		MagicManager.registerSpellRecipe(new SpellRecipe(ArrowStorm.class, Impetus.class, Sniper.class, 20));
+		MagicManager.registerSpellRecipe(new SpellRecipe(ArrowStorm.class, Impetus.class, ArrowStorm.class, 40));
+		MagicManager.registerSpellRecipe(new SpellRecipe(ArrowStorm.class, Impetus.class, Impetus.class, 40));
+
+		MagicManager.registerSpellRecipe(new SpellRecipe(ArrowStorm.class, Nitro.class, Sniper.class, 20));
+		MagicManager.registerSpellRecipe(new SpellRecipe(ArrowStorm.class, Nitro.class, ArrowStorm.class, 40));
+		MagicManager.registerSpellRecipe(new SpellRecipe(ArrowStorm.class, Nitro.class, Nitro.class, 40));
+
+		//
+		MagicManager.registerSpellRecipe(new SpellRecipe(Levitate.class, PainfullSting.class, Enderarm.class, 20));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Levitate.class, PainfullSting.class, PainfullSting.class, 40));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Levitate.class, PainfullSting.class, Levitate.class, 40));
 	}
 
 	//

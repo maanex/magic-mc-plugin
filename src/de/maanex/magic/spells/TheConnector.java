@@ -57,10 +57,10 @@ public class TheConnector extends MagicSpell {
 			double g = l1.distance(l2);
 			for (double d = 0; d < l1.distance(l2); d += .5) {
 				Location l = l1.clone().add(-x * d / g + .5, -y * d / g + .5, -z * d / g + .5);
-				ParticleUtil.spawn(Particle.END_ROD, l, 10, .01, .1, .1, .1);
-				for (Entity e : l.getWorld().getNearbyEntities(l, 1, 1, 1)) {
+				ParticleUtil.spawn(Particle.END_ROD, l, 30, .01, .4, .4, .4);
+				for (Entity e : l.getWorld().getNearbyEntities(l, 2, 2, 2)) {
 					if (e instanceof LivingEntity) {
-						((LivingEntity) e).damage(5, caster.getMCPlayer());
+						((LivingEntity) e).damage(20, caster.getMCPlayer());
 					}
 				}
 			}

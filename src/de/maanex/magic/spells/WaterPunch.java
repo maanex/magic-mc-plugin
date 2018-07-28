@@ -8,17 +8,19 @@ import de.maanex.magic.enumeri.SpellCategory;
 import de.maanex.magic.enumeri.SpellRarity;
 import de.maanex.magic.enumeri.SpellType;
 import de.maanex.magic.enumeri.WandType;
+import de.maanex.magic.missile.WaterPunchMissile;
 
 
-public class Waterball extends MagicSpell {
+public class WaterPunch extends MagicSpell {
 
-	public Waterball() {
-		super(40, "Wasserball", "Wie ein gelöschter Feuerball!\n(Nur zu stark gelöscht!)", 1, 8, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.COMMON);
+	public WaterPunch() {
+		super(39, "Wasserschlag", "Knock, nur 5x besser!", 2, 1, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.RARE);
 	}
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandModifiers mods) {
-
+		WaterPunchMissile mis = new WaterPunchMissile(caster.getMCPlayer().getEyeLocation(), caster, caster.getMCPlayer().getLocation().clone(), mods.getEnergy());
+		mis.launch();
 		takeMana(caster, mods);
 	}
 
