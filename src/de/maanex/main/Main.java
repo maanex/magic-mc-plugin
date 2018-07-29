@@ -31,9 +31,7 @@ import de.maanex.magic.spells.Firering;
 import de.maanex.magic.spells.Frostwave;
 import de.maanex.magic.spells.HolyShield;
 import de.maanex.magic.spells.Impetus;
-import de.maanex.magic.spells.Knock;
 import de.maanex.magic.spells.Levitate;
-import de.maanex.magic.spells.MegaKnock;
 import de.maanex.magic.spells.Nitro;
 import de.maanex.magic.spells.PainfullSting;
 import de.maanex.magic.spells.ProtectionWall;
@@ -43,7 +41,6 @@ import de.maanex.magic.spells.Stun;
 import de.maanex.magic.spells.Taser;
 import de.maanex.magic.spells.TheConnector;
 import de.maanex.magic.spells.Timewarp;
-import de.maanex.magic.spells.UltimateKnock;
 import de.maanex.magic.spells.Warp;
 import de.maanex.magic.spells.WaterChop;
 import de.maanex.magic.spells.WaterPunch;
@@ -58,12 +55,20 @@ import de.maanex.magic.spells.basic.WaterSpirit;
 import de.maanex.magic.spells.building.BlockSwarper;
 import de.maanex.magic.spells.building.DeGrasser;
 import de.maanex.magic.spells.building.Drill;
+import de.maanex.magic.spells.building.MasterBuildersEssence;
 import de.maanex.magic.spells.building.TreeDemolisher;
 import de.maanex.magic.spells.darkmagic.DarkSeal;
 import de.maanex.magic.spells.darkmagic.MagmaWorm;
 import de.maanex.magic.spells.darkmagic.TheSeeker;
 import de.maanex.magic.spells.earthbender.EarthBenderBridge;
 import de.maanex.magic.spells.earthbender.EarthBenderCannon;
+import de.maanex.magic.spells.earthbender.EarthBenderPotter;
+import de.maanex.magic.spells.earthbender.EarthBenderThorn;
+import de.maanex.magic.spells.knock.DarkKnock;
+import de.maanex.magic.spells.knock.Knock;
+import de.maanex.magic.spells.knock.LightKnock;
+import de.maanex.magic.spells.knock.MegaKnock;
+import de.maanex.magic.spells.knock.UltimateKnock;
 import de.maanex.magic.spells.lightmagic.Phase;
 import de.maanex.magic.spells.lightmagic.TrueSight;
 import de.maanex.magic.spells.waterbender.WaterBenderSplash;
@@ -230,6 +235,11 @@ public class Main extends JavaPlugin {
 		MagicManager.registerSpell(new MegaKnock());
 		MagicManager.registerSpell(new UltimateKnock());
 		MagicManager.registerSpell(new Drill());
+		MagicManager.registerSpell(new MasterBuildersEssence());
+		MagicManager.registerSpell(new DarkKnock());
+		MagicManager.registerSpell(new LightKnock());
+		MagicManager.registerSpell(new EarthBenderThorn());
+		MagicManager.registerSpell(new EarthBenderPotter());
 	}
 
 	private void registerSpellRecipes() {
@@ -267,7 +277,8 @@ public class Main extends JavaPlugin {
 
 		// Earth Stuff
 		MagicManager.registerSpellRecipe(new SpellRecipe(EarthSpirit.class, EarthSpirit.class, HolyShield.class, 1));
-		MagicManager.registerSpellRecipe(new SpellRecipe(EarthSpirit.class, EarthSpirit.class, ProtectionWall.class, 99));
+		MagicManager.registerSpellRecipe(new SpellRecipe(EarthSpirit.class, EarthSpirit.class, ProtectionWall.class, 79));
+		MagicManager.registerSpellRecipe(new SpellRecipe(EarthSpirit.class, EarthSpirit.class, MasterBuildersEssence.class, 20));
 
 		// Water Stuff
 		MagicManager.registerSpellRecipe(new SpellRecipe(WaterSpirit.class, WaterSpirit.class, WaterChop.class, 999));
@@ -279,7 +290,9 @@ public class Main extends JavaPlugin {
 
 		// Bender Stuff
 		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceBender.class, EarthSpirit.class, EarthBenderCannon.class, 30));
-		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceBender.class, EarthSpirit.class, EarthBenderBridge.class, 10));
+		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceBender.class, EarthSpirit.class, EarthBenderBridge.class, 20));
+		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceBender.class, EarthSpirit.class, EarthBenderThorn.class, 10));
+		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceBender.class, EarthSpirit.class, EarthBenderPotter.class, 20));
 
 		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceBender.class, WaterSpirit.class, WaterBenderSplash.class, 20));
 
@@ -311,13 +324,25 @@ public class Main extends JavaPlugin {
 		MagicManager.registerSpellRecipe(new SpellRecipe(Knock.class, Knock.class, MegaKnock.class, 10));
 
 		MagicManager.registerSpellRecipe(new SpellRecipe(MegaKnock.class, MegaKnock.class, MegaKnock.class, 90));
-		MagicManager.registerSpellRecipe(new SpellRecipe(MegaKnock.class, MegaKnock.class, Knock.class, 9));
-		MagicManager.registerSpellRecipe(new SpellRecipe(MegaKnock.class, MegaKnock.class, UltimateKnock.class, 1));
+		MagicManager.registerSpellRecipe(new SpellRecipe(MegaKnock.class, MegaKnock.class, UltimateKnock.class, 10));
 
-		MagicManager.registerSpellRecipe(new SpellRecipe(UltimateKnock.class, UltimateKnock.class, UltimateKnock.class, 900));
-		MagicManager.registerSpellRecipe(new SpellRecipe(UltimateKnock.class, UltimateKnock.class, MegaKnock.class, 90));
-		MagicManager.registerSpellRecipe(new SpellRecipe(UltimateKnock.class, UltimateKnock.class, Knock.class, 9));
-		MagicManager.registerSpellRecipe(new SpellRecipe(UltimateKnock.class, UltimateKnock.class, TheConnector.class, 1));
+		MagicManager.registerSpellRecipe(new SpellRecipe(UltimateKnock.class, UltimateKnock.class, UltimateKnock.class, 90));
+		MagicManager.registerSpellRecipe(new SpellRecipe(UltimateKnock.class, UltimateKnock.class, TheConnector.class, 10));
+
+		// Building
+		MagicManager.registerSpellRecipe(new SpellRecipe(MasterBuildersEssence.class, FireSpirit.class, DeGrasser.class, 100));
+
+		MagicManager.registerSpellRecipe(new SpellRecipe(DeGrasser.class, DeGrasser.class, TreeDemolisher.class, 100));
+
+		MagicManager.registerSpellRecipe(new SpellRecipe(MasterBuildersEssence.class, EarthSpirit.class, Drill.class, 100));
+
+		MagicManager.registerSpellRecipe(new SpellRecipe(MasterBuildersEssence.class, AirSpirit.class, BlockSwarper.class, 100));
+
+		// Dark
+		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceDarkness.class, Knock.class, DarkKnock.class, 100));
+
+		// Light
+		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceBrightness.class, Knock.class, LightKnock.class, 100));
 
 		/*
 		 * Crossing Spells

@@ -1,7 +1,6 @@
-package de.maanex.magic.spells.basic;
+package de.maanex.magic.spells.building;
 
 
-import org.bukkit.Material;
 import org.bukkit.Particle;
 
 import de.maanex.magic.MagicPlayer;
@@ -14,15 +13,15 @@ import de.maanex.magic.enumeri.WandType;
 import de.maanex.utils.ParticleUtil;
 
 
-public class EarthSpirit extends MagicSpell {
+public class MasterBuildersEssence extends MagicSpell {
 
-	public EarthSpirit() {
-		super(25, "Erdgeist", "Spiritus terrae", 0, 0, SpellType.NOT_USEABLE, SpellCategory.UTILITY, SpellRarity.COMMON);
+	public MasterBuildersEssence() {
+		super(48, "Baumeisters Essenz", "Entdecke den Bob in dir!", 1, 5, SpellType.ACTIVE, SpellCategory.BUILDING, SpellRarity.COMMON);
 	}
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandModifiers mods) {
-		ParticleUtil.spawn(caster.getMCPlayer(), Particle.BLOCK_CRACK, caster.getMCPlayer().getEyeLocation(), 300, .2, 2, .3, 2, Material.DIRT.createBlockData());
+		ParticleUtil.spawn(caster.getMCPlayer(), Particle.NAUTILUS, caster.getMCPlayer().getEyeLocation(), 300, .2, .3, 1, .3);
 	}
 
 }

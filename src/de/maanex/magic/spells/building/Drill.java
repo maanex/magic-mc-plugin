@@ -29,6 +29,7 @@ public class Drill extends MagicSpell {
 		breakable = new ArrayList<>();
 
 		breakable.add(Material.STONE);
+		breakable.add(Material.DIRT);
 		breakable.add(Material.COBBLESTONE);
 		breakable.add(Material.ANDESITE);
 		breakable.add(Material.DIORITE);

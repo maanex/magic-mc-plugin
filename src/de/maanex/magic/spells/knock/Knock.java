@@ -1,4 +1,4 @@
-package de.maanex.magic.spells;
+package de.maanex.magic.spells.knock;
 
 
 import org.bukkit.Location;
@@ -15,20 +15,20 @@ import de.maanex.magic.enumeri.WandType;
 import de.maanex.utils.ParticleUtil;
 
 
-public class MegaKnock extends MagicSpell {
+public class Knock extends MagicSpell {
 
-	public MegaKnock() {
-		super(45, "Mega Knock", "KNOCK KNOCK KNOCK KNOCK KNOCK!", 1, 5, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.EPIC);
+	public Knock() {
+		super(4, "Knock", "KNOCK KNOCK!", 1, 2, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.COMMON);
 	}
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandModifiers mods) {
-		for (int i = 0; i < 13; i++) {
+		for (int i = 0; i < 10; i++) {
 			Location l = caster.getMCPlayer().getEyeLocation().clone().add(caster.getMCPlayer().getLocation().getDirection().multiply(i));
-			ParticleUtil.spawn(Particle.CRIT, l, 50, .05, .1, .1, .1);
+			ParticleUtil.spawn(Particle.CRIT, l, 15, .05, .1, .1, .1);
 
-			if (i % 3 == 0) l.getWorld().getNearbyEntities(l, 1.4, 1.4, 1.4).forEach(e -> {
-				if (e instanceof LivingEntity && !e.isDead() && !e.equals(caster.getMCPlayer())) ((LivingEntity) e).damage(3, caster.getMCPlayer());
+			if (i % 3 == 0) l.getWorld().getNearbyEntities(l, 1.2, 1.2, 1.2).forEach(e -> {
+				if (e instanceof LivingEntity && !e.isDead() && !e.equals(caster.getMCPlayer())) ((LivingEntity) e).damage(1, caster.getMCPlayer());
 			});
 		}
 		takeMana(caster, mods);
