@@ -2,6 +2,7 @@ package de.maanex.magic.missile;
 
 
 import java.util.Collection;
+import java.util.Random;
 
 import org.bukkit.Color;
 import org.bukkit.Location;
@@ -42,7 +43,7 @@ public class StunMissile extends MagicMissile {
 				n.setVelocity(new Vector(0, 0, 0));
 				if (n instanceof LivingEntity) ((LivingEntity) n).addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 3, 250));
 
-				ParticleUtil.spawn(Particle.REDSTONE, position, 200, 1, .5, .5, .5);
+				ParticleUtil.spawn(Particle.REDSTONE, position, 200, 1, .5, .5, .5, Color.fromRGB(new Random().nextInt(0xffffff)), 1f);
 
 				destroy();
 			}

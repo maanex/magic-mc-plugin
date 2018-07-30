@@ -1,6 +1,7 @@
 package de.maanex.survival;
 
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -49,10 +50,11 @@ public class ServerlistPing implements Listener {
 	public void onPing(ServerListPingEvent e) {
 		e.setMaxPlayers(Bukkit.getOnlinePlayers().size() + 1);
 		e.setMotd(FIRST_LINE + "\n§a> " + SECOND_LINE.get(new Random().nextInt(SECOND_LINE.size())));
-		// try {
-		// e.setServerIcon(Bukkit.loadServerIcon(new File("Icon.png")));
-		// } catch (Exception e1) {
-		// e1.printStackTrace();
-		// }
+
+		try {
+			e.setServerIcon(Bukkit.loadServerIcon(new File("./server-icon" + (1 + new Random().nextInt(6)) + ".png")));
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 	}
 }

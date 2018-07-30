@@ -21,6 +21,7 @@ import de.maanex.magic.listener.ManapotDrink;
 import de.maanex.magic.listener.RunicTableUse;
 import de.maanex.magic.missile.MagicMissile;
 import de.maanex.magic.spells.AirBlast;
+import de.maanex.magic.spells.Airpuff;
 import de.maanex.magic.spells.ArrowStorm;
 import de.maanex.magic.spells.Comet;
 import de.maanex.magic.spells.Enderarm;
@@ -30,11 +31,13 @@ import de.maanex.magic.spells.Firepunch;
 import de.maanex.magic.spells.Firering;
 import de.maanex.magic.spells.Frostwave;
 import de.maanex.magic.spells.HolyShield;
+import de.maanex.magic.spells.Hook;
 import de.maanex.magic.spells.Impetus;
 import de.maanex.magic.spells.Levitate;
 import de.maanex.magic.spells.Nitro;
 import de.maanex.magic.spells.PainfullSting;
 import de.maanex.magic.spells.ProtectionWall;
+import de.maanex.magic.spells.Slimeshot;
 import de.maanex.magic.spells.Sniper;
 import de.maanex.magic.spells.Strike;
 import de.maanex.magic.spells.Stun;
@@ -240,6 +243,9 @@ public class Main extends JavaPlugin {
 		MagicManager.registerSpell(new LightKnock());
 		MagicManager.registerSpell(new EarthBenderThorn());
 		MagicManager.registerSpell(new EarthBenderPotter());
+		MagicManager.registerSpell(new Hook());
+		MagicManager.registerSpell(new Airpuff());
+		MagicManager.registerSpell(new Slimeshot());
 	}
 
 	private void registerSpellRecipes() {
@@ -297,7 +303,7 @@ public class Main extends JavaPlugin {
 		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceBender.class, WaterSpirit.class, WaterBenderSplash.class, 20));
 
 		// Mixing Elements
-		MagicManager.registerSpellRecipe(new SpellRecipe(AirSpirit.class, WaterSpirit.class, Knock.class, 60));
+		MagicManager.registerSpellRecipe(new SpellRecipe(AirSpirit.class, WaterSpirit.class, Knock.class, 59));
 		MagicManager.registerSpellRecipe(new SpellRecipe(AirSpirit.class, WaterSpirit.class, Strike.class, 20));
 		MagicManager.registerSpellRecipe(new SpellRecipe(AirSpirit.class, WaterSpirit.class, Taser.class, 1));
 
@@ -341,8 +347,18 @@ public class Main extends JavaPlugin {
 		// Dark
 		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceDarkness.class, Knock.class, DarkKnock.class, 100));
 
+		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceDarkness.class, Fireball.class, MagmaWorm.class, 100));
+
+		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceDarkness.class, PainfullSting.class, TheSeeker.class, 100));
+
+		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceDarkness.class, Stun.class, DarkSeal.class, 100));
+
 		// Light
 		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceBrightness.class, Knock.class, LightKnock.class, 100));
+
+		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceBrightness.class, Levitate.class, TrueSight.class, 100));
+
+		MagicManager.registerSpellRecipe(new SpellRecipe(EssenceBrightness.class, Nitro.class, Phase.class, 100));
 
 		/*
 		 * Crossing Spells
