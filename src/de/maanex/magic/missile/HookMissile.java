@@ -49,7 +49,7 @@ public class HookMissile extends MagicMissile {
 				}
 			});
 
-			ParticleUtil.spawn(Particle.DRAGON_BREATH, position, 1, 0, 0, 0, 0);
+			ParticleUtil.spawn(Particle.TOWN_AURA, position, 15, 0, 0.02, 0.02, 0.02);
 		}
 	}
 

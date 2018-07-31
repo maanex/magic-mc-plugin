@@ -206,6 +206,9 @@ public class MagicPlayer {
 			uuids.add(k);
 		});
 
+		for (String uuid : Database.uudis_cache)
+			if (!uuids.contains(uuid)) uuids.add(uuid);
+
 		Database.getConfig().set("players", uuids);
 	}
 

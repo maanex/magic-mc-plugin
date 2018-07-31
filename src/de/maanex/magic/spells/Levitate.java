@@ -31,7 +31,7 @@ public class Levitate extends MagicSpell {
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandModifiers mods) {
 		if (!caster.getMCPlayer().isOnGround()) return;
-		caster.getMCPlayer().addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 20 * 10, 255, true));
+		caster.getMCPlayer().addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 20 * 10, -1, true));
 		caster.getMCPlayer().setVelocity(new Vector(0, 2, 0));
 		inAir.add(caster.getMCPlayer());
 		takeMana(caster, mods);

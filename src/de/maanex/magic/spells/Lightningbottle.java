@@ -1,10 +1,10 @@
 package de.maanex.magic.spells;
 
 
+import java.util.Random;
+
+import org.bukkit.Color;
 import org.bukkit.Particle;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
@@ -18,25 +18,31 @@ import de.maanex.magic.missile.BasicMissile.BlockHitBehaviour;
 import de.maanex.utils.ParticleUtil;
 
 
-public class Airpuff extends MagicSpell {
+public class Lightningbottle extends MagicSpell {
 
-	public Airpuff() {
-		super(54, "Lufthauch", "*hauch*", 2, 4, SpellType.ACTIVE, SpellCategory.UTILITY, SpellRarity.RARE);
+	public Lightningbottle() {
+		super(70, "Flaschenblitz", "Ja!", 1, 4, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.COMMON);
 	}
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandModifiers mods) {
-		BasicMissile m = new BasicMissile(caster.getMCPlayer().getEyeLocation(), caster, caster.getMCPlayer().getLocation(), 80, .7, BlockHitBehaviour.ABSORB, //
+		Random r = new Random();
+
+		BasicMissile m = new BasicMissile(caster, 60, .4, BlockHitBehaviour.REFLECT, //
 				l -> {
-					ParticleUtil.spawn(Particle.FIREWORKS_SPARK, l, 20, .01, .2, .2, .2);
+					ParticleUtil.spawn(Particle.REDSTONE, l, 5, .1, .1, .1, .1, Color.fromRGB(0x66 + r.nextInt(0x33), 0x66 + r.nextInt(0x33), 0x66 + r.nextInt(0x66)), 1f);
 					return null;
 				}, e -> {
-					e.damage(5, caster.getMCPlayer());
-					e.setVelocity(new Vector(0, .6, 0));
-					e.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 60, -1, true, false));
+					ParticleUtil.spawn(Particle.SWEEP_ATTACK, e.getLocation(), 20, .1, .3, .3, .3);
+					e.getWorld().strikeLightning(e.getLocation());
 					return null;
 				});
+		m.destroy = l -> {
+			l.getWorld().strikeLightningEffect(l);
+			return null;
+		};
 		m.launch();
+
 		takeMana(caster, mods);
 	}
 

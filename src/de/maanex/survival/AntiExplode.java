@@ -57,14 +57,14 @@ public class AntiExplode implements Listener {
 					@Override
 					public void run() {
 						for (Player p : Bukkit.getOnlinePlayers())
-							p.sendBlockChange(b.getLocation(), b.getType(), b.getData());
+							p.sendBlockChange(b.getLocation(), b.getBlockData());
 						ParticleUtil.spawn(Particle.BLOCK_CRACK, b.getLocation(), 5, 1, 0, 0, 0, b.getBlockData());
 					}
 				}, new Random().nextInt(40) + 60);
 
 				if (b.getType().isSolid() && new Random().nextInt(e.blockList().size() < 20 ? 1 : 2) == 0) {
 					Location l = b.getLocation();
-					FallingBlock f = l.getWorld().spawnFallingBlock(l, b.getType(), b.getData());
+					FallingBlock f = l.getWorld().spawnFallingBlock(l, b.getBlockData());
 
 					f.setVelocity((l.subtract(e.getEntity().getLocation())).toVector().normalize().add(new Vector(0, 1, 0)));
 					f.setDropItem(false);

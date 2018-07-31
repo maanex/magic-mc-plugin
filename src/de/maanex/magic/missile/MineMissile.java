@@ -52,7 +52,7 @@ public class MineMissile extends MagicMissile {
 			if (e instanceof LivingEntity) {
 				destroy();
 
-				((LivingEntity) e).damage(damage, sender.getMCPlayer());
+				if (damage > 0) ((LivingEntity) e).damage(damage, sender.getMCPlayer());
 				for (PotionEffect f : effects)
 					((LivingEntity) e).addPotionEffect(f);
 				if (list != null) list.onEnter(e);

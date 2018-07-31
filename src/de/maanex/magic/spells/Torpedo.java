@@ -1,10 +1,9 @@
 package de.maanex.magic.spells;
 
 
+import java.util.Random;
+
 import org.bukkit.Particle;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
@@ -18,25 +17,27 @@ import de.maanex.magic.missile.BasicMissile.BlockHitBehaviour;
 import de.maanex.utils.ParticleUtil;
 
 
-public class Airpuff extends MagicSpell {
+public class Torpedo extends MagicSpell {
 
-	public Airpuff() {
-		super(54, "Lufthauch", "*hauch*", 2, 4, SpellType.ACTIVE, SpellCategory.UTILITY, SpellRarity.RARE);
+	public Torpedo() {
+		super(69, "Torpedo", "Wusch?", 1, 4, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.COMMON);
 	}
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandModifiers mods) {
-		BasicMissile m = new BasicMissile(caster.getMCPlayer().getEyeLocation(), caster, caster.getMCPlayer().getLocation(), 80, .7, BlockHitBehaviour.ABSORB, //
+		Random r = new Random();
+
+		BasicMissile m = new BasicMissile(caster, 30, 1, BlockHitBehaviour.ABSORB, //
 				l -> {
-					ParticleUtil.spawn(Particle.FIREWORKS_SPARK, l, 20, .01, .2, .2, .2);
+					ParticleUtil.spawn(Particle.EXPLOSION_NORMAL, l, 5, .1, .1, .1, .1);
 					return null;
 				}, e -> {
-					e.damage(5, caster.getMCPlayer());
-					e.setVelocity(new Vector(0, .6, 0));
-					e.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 60, -1, true, false));
+					ParticleUtil.spawn(Particle.EXPLOSION_HUGE, e.getLocation(), 20, .1, .3, .3, .3);
+					e.damage(8);
 					return null;
 				});
 		m.launch();
+
 		takeMana(caster, mods);
 	}
 

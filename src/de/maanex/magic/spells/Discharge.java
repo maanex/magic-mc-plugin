@@ -18,25 +18,29 @@ import de.maanex.magic.missile.BasicMissile.BlockHitBehaviour;
 import de.maanex.utils.ParticleUtil;
 
 
-public class Airpuff extends MagicSpell {
+public class Discharge extends MagicSpell {
 
-	public Airpuff() {
-		super(54, "Lufthauch", "*hauch*", 2, 4, SpellType.ACTIVE, SpellCategory.UTILITY, SpellRarity.RARE);
+	public Discharge() {
+		super(67, "Entladung", "Nimmt dein gesamtes Mana und verwandelt es in pure Energie!", 1, 4, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.EPIC);
 	}
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandModifiers mods) {
-		BasicMissile m = new BasicMissile(caster.getMCPlayer().getEyeLocation(), caster, caster.getMCPlayer().getLocation(), 80, .7, BlockHitBehaviour.ABSORB, //
+		int mana = caster.getMana();
+		caster.setMana(0);
+
+		BasicMissile m = new BasicMissile(caster, (int) Math.sqrt(mana * mods.getEnergy()), .8, BlockHitBehaviour.ABSORB, //
 				l -> {
-					ParticleUtil.spawn(Particle.FIREWORKS_SPARK, l, 20, .01, .2, .2, .2);
+					ParticleUtil.spawn(Particle.CRIT_MAGIC, l, 10, .2, .3, .3, .3);
 					return null;
 				}, e -> {
-					e.damage(5, caster.getMCPlayer());
-					e.setVelocity(new Vector(0, .6, 0));
-					e.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 60, -1, true, false));
+					e.damage(mana, caster.getMCPlayer());
+					e.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20, 20));
+					e.setVelocity(new Vector(0, -1, 0));
 					return null;
 				});
 		m.launch();
+
 		takeMana(caster, mods);
 	}
 

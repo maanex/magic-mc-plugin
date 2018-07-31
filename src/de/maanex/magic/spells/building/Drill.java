@@ -46,7 +46,6 @@ public class Drill extends MagicSpell {
 		for (int i = -1; i < 2; i++)
 			for (int y = -1; y < 2; y++) {
 				Location l = target.getLocation().clone().add(face ? i : 0, y, face ? 0 : i);
-				System.out.println(l.getBlock().getType() + " + " + breakable.contains(l.getBlock().getType()));
 				if (breakable.contains(l.getBlock().getType())) l.getBlock().breakNaturally();
 			}
 

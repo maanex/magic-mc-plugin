@@ -3,7 +3,9 @@ package de.maanex.magic.database;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -18,11 +20,23 @@ public class Database {
 	private static HashMap<String, Object>	cache	= new HashMap<>();
 	private static YamlConfiguration		config;
 
+	public static List<String> uudis_cache = new ArrayList<>();
+
 	static {
 		config = YamlConfiguration.loadConfiguration(new File(DefaultValues.DATABASE_PATH));
 	}
 
 	//
+
+	public static void load() {
+		uudis_cache = config.getStringList("players");
+		for (String uuid : uudis_cache) {
+			get(uuid + ".mana");
+			get(uuid + ".maxMana");
+			get(uuid + ".manaCap");
+			get(uuid + ".researchedRecipes");
+		}
+	}
 
 	public static void save() {
 		cache.forEach((k, v) -> config.set(k, v));
