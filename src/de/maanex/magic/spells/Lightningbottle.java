@@ -21,7 +21,7 @@ import de.maanex.utils.ParticleUtil;
 public class Lightningbottle extends MagicSpell {
 
 	public Lightningbottle() {
-		super(70, "Flaschenblitz", "Ja!", 1, 4, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.COMMON);
+		super(70, "Flaschenblitz", "Ja!", 3, 5, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.COMMON);
 	}
 
 	@Override

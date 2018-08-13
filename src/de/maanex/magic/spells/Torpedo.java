@@ -20,7 +20,7 @@ import de.maanex.utils.ParticleUtil;
 public class Torpedo extends MagicSpell {
 
 	public Torpedo() {
-		super(69, "Torpedo", "Wusch?", 1, 4, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.COMMON);
+		super(69, "Torpedo", "Wusch?", 3, 4, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.VERY_RARE);
 	}
 
 	@Override

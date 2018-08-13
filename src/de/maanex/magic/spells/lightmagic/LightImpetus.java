@@ -24,7 +24,7 @@ import de.maanex.utils.ParticleUtil;
 public class LightImpetus extends MagicSpell {
 
 	public LightImpetus() {
-		super(61, "Licht Impetus", "(Helles) WUUUSCH!", 1, 10, SpellType.ACTIVE, SpellCategory.UTILITY, SpellRarity.GODLIKE, WandType.LIGHT);
+		super(61, "Licht Impetus", "(Helles) WUUUSCH!", 3, 12, SpellType.ACTIVE, SpellCategory.UTILITY, SpellRarity.GODLIKE, WandType.LIGHT);
 	}
 
 	@Override
@@ -32,9 +32,8 @@ public class LightImpetus extends MagicSpell {
 		for (int i = 0; i < mods.getEnergy(); i += 2)
 			perform(caster.getMCPlayer(), i);
 
+		caster.getMCPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, mods.getEnergy() + 20 * 5, 1, true, false));
 		caster.getMCPlayer().addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, mods.getEnergy(), 1, true, false));
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> caster.getMCPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 20 * 5, 1, true, false)),
-				mods.getEnergy());
 
 		takeMana(caster, mods);
 	}

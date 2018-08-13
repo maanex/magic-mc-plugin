@@ -26,7 +26,7 @@ import de.maanex.utils.ParticleUtil;
 public class Phase extends MagicSpell implements Listener {
 
 	public Phase() {
-		super(41, "Phase", "Bewege dich durch Materie!", 1, 2, SpellType.ACTIVE, SpellCategory.UTILITY, SpellRarity.GODLIKE, WandType.LIGHT);
+		super(41, "Phase", "Bewege dich durch Materie!", 1, 5, SpellType.ACTIVE, SpellCategory.UTILITY, SpellRarity.GODLIKE, WandType.LIGHT);
 	}
 
 	@Override
@@ -34,6 +34,7 @@ public class Phase extends MagicSpell implements Listener {
 		caster.getMCPlayer().setGameMode(GameMode.SPECTATOR);
 		startTimer(caster);
 		inPhase.add(caster.getMCPlayer());
+		takeMana(caster, mods);
 	}
 
 	private static List<Player> inPhase = new ArrayList<>();

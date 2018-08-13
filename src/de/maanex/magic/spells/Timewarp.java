@@ -33,7 +33,7 @@ public class Timewarp extends MagicSpell {
 		} else {
 			Location loc = pos.get(caster.getMCPlayer());
 			pos.remove(caster.getMCPlayer());
-			if (!loc.getWorld().equals(caster.getMCPlayer().getWorld()) || loc.distance(caster.getMCPlayer().getLocation()) > 100) {
+			if (!loc.getWorld().equals(caster.getMCPlayer().getWorld()) || loc.distance(caster.getMCPlayer().getLocation()) > mods.getEnergy()) {
 				caster.getMCPlayer().sendMessage("§8Distanz zu groß!");
 				return;
 			}

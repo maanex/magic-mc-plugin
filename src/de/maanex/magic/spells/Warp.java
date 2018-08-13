@@ -35,13 +35,17 @@ public class Warp extends MagicSpell {
 		Particle patype = type.equals(WandType.LIGHT) ? Particle.END_ROD : Particle.FLAME;
 
 		Location org = caster.getMCPlayer().getEyeLocation().clone();
-		Location l = caster.getMCPlayer().getEyeLocation().clone().add(caster.getMCPlayer().getLocation().getDirection().normalize().multiply(6)).subtract(0, 1, 0);
 
-		if (l.getBlock().isEmpty()) {
-			caster.getMCPlayer().teleport(l);
-			caster.getMCPlayer().setVelocity(l.getDirection());
-		} else return;
+		Location l = null;
+		boolean s = caster.getMCPlayer().isSneaking();
+		int c = s ? 1 : 6;
+		do {
+			l = caster.getMCPlayer().getEyeLocation().clone().add(caster.getMCPlayer().getLocation().getDirection().normalize().multiply(c += s ? 1 : -1)).subtract(0, 1, 0);
+			if (c <= 0 || c >= 7) return;
+		} while (!l.getBlock().isEmpty() || !l.clone().add(0, -.4, 0).getBlock().isEmpty());
 
+		caster.getMCPlayer().teleport(l.clone().add(0, -.4, 0));
+		caster.getMCPlayer().setVelocity(l.getDirection());
 		caster.getMCPlayer().setFallDistance(0);
 
 		if (!type.equals(WandType.DARK)) {

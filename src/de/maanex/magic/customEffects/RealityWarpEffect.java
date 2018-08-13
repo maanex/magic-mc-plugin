@@ -12,14 +12,13 @@ import de.maanex.magic.MagicPlayer;
 
 public class RealityWarpEffect extends MagicEffect {
 
-	public int stenght;
+	public int strength;
 
-	public RealityWarpEffect(int duration, int stenght) {
+	public RealityWarpEffect(int duration, int strength) {
 		super(duration);
-		this.stenght = stenght;
+		this.strength = strength;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void tick(MagicPlayer m) {
 		Random r = new Random();
@@ -45,8 +44,8 @@ public class RealityWarpEffect extends MagicEffect {
 			}
 		}
 
-		if (stenght > 1 && r.nextInt(3) == 0) m.getMCPlayer().setPlayerTime(r.nextLong(), true);
+		if (strength > 1 && r.nextInt(3) == 0) m.getMCPlayer().setPlayerTime(r.nextLong(), true);
 
-		if (stenght > 2 && r.nextInt(5) == 0) m.getMCPlayer().setPlayerWeather(WeatherType.values()[r.nextInt(WeatherType.values().length)]);
+		if (strength > 2 && r.nextInt(5) == 0) m.getMCPlayer().setPlayerWeather(WeatherType.values()[r.nextInt(WeatherType.values().length)]);
 	}
 }

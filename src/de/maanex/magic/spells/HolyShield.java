@@ -17,7 +17,7 @@ import de.maanex.magic.enumeri.WandType;
 public class HolyShield extends MagicSpell {
 
 	public HolyShield() {
-		super(9, "Glorreiches Schild!", "Es Schützt!", 2, 30, SpellType.ACTIVE, SpellCategory.PROTECTION, SpellRarity.RARE);
+		super(9, "Glorreiches Schild!", "Es Schützt!", 2, 15, SpellType.ACTIVE, SpellCategory.PROTECTION, SpellRarity.RARE);
 	}
 
 	@Override

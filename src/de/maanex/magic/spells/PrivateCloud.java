@@ -30,7 +30,7 @@ public class PrivateCloud extends MagicSpell {
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandModifiers mods) {
 		if (!caster.getMCPlayer().isOnGround()) return;
 
-		for (int i = 0; i <= 200; i += 5)
+		for (int i = 0; i <= 200; i += 3)
 			tick(caster, i);
 
 		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> {

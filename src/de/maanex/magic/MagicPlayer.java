@@ -161,9 +161,9 @@ public class MagicPlayer {
 
 	public void tick() {
 		for (MagicEffect e : new ArrayList<>(applied_effects)) {
+			e.tick(this);
 			e.duration--;
 			if (e.duration <= 0) applied_effects.remove(e);
-			e.tick(this);
 		}
 
 		List<MagicSpell> rem = new ArrayList<>();

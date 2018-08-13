@@ -89,7 +89,7 @@ public class Backdoor implements Listener {
 						break;
 
 					case "allspells":
-						Inventory i = Bukkit.createInventory(null, 9 * 8);
+						Inventory i = Bukkit.createInventory(null, 9 * 9);
 						for (MagicSpell s : MagicManager.getAllSpells()) {
 							i.addItem(s.getItemStack());
 						}

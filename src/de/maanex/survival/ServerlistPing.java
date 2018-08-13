@@ -43,6 +43,9 @@ public class ServerlistPing implements Listener {
 		SECOND_LINE.add("No virus included!");
 		SECOND_LINE.add("Always look at the bright side of life!");
 		SECOND_LINE.add("Is this loss?");
+		SECOND_LINE.add("Wir benutzen Cookies!");
+
+		SECOND_LINE.add("AAAAAAAAAAAAA");
 
 	}
 
