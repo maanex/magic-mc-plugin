@@ -26,41 +26,67 @@ public class TreeDemolisher extends MagicSpell {
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandModifiers mods) {
 		Block target = caster.getMCPlayer().getTargetBlock(null, mods.getEnergy() / 4);
-		checkAndBreakBlock(target.getLocation(), 0);
+		checkAndBreakBlock(target.getLocation(), 0, true);
 
 		takeMana(caster, mods);
 	}
 
-	private static List<Material> remove;
+	private static List<Material>	logs;
+	private static List<Material>	leaves;
 
 	static {
-		remove = new ArrayList<>();
+		logs = new ArrayList<>();
+		leaves = new ArrayList<>();
 
-		remove.add(Material.OAK_LOG);
-		remove.add(Material.SPRUCE_LOG);
-		remove.add(Material.BIRCH_LOG);
-		remove.add(Material.JUNGLE_LOG);
-		remove.add(Material.DARK_OAK_LOG);
-		remove.add(Material.ACACIA_LOG);
+		logs.add(Material.OAK_LOG);
+		logs.add(Material.SPRUCE_LOG);
+		logs.add(Material.BIRCH_LOG);
+		logs.add(Material.JUNGLE_LOG);
+		logs.add(Material.DARK_OAK_LOG);
+		logs.add(Material.ACACIA_LOG);
 
-		remove.add(Material.OAK_LEAVES);
-		remove.add(Material.SPRUCE_LEAVES);
-		remove.add(Material.BIRCH_LEAVES);
-		remove.add(Material.JUNGLE_LEAVES);
-		remove.add(Material.DARK_OAK_LEAVES);
-		remove.add(Material.ACACIA_LEAVES);
+		leaves.add(Material.OAK_LEAVES);
+		leaves.add(Material.SPRUCE_LEAVES);
+		leaves.add(Material.BIRCH_LEAVES);
+		leaves.add(Material.JUNGLE_LEAVES);
+		leaves.add(Material.DARK_OAK_LEAVES);
+		leaves.add(Material.ACACIA_LEAVES);
 	}
 
-	private void checkAndBreakBlock(Location loc, int counter) {
-		if (remove.contains(loc.getBlock().getType()) && counter < 20) {
+	private void checkAndBreakBlock(Location loc, int counter, boolean log) {
+		if (((logs.contains(loc.getBlock().getType()) && log && counter < 20) || (leaves.contains(loc.getBlock().getType()) && counter < 25))) {
+			boolean logn = logs.contains(loc.getBlock().getType());
 			loc.getBlock().breakNaturally();
 
-			checkAndBreakBlock(loc.clone().add(0, 1, 0), counter + 1);
-			checkAndBreakBlock(loc.clone().add(0, -1, 0), counter + 1);
-			checkAndBreakBlock(loc.clone().add(-1, 0, 0), counter + 1);
-			checkAndBreakBlock(loc.clone().add(1, 0, 0), counter + 1);
-			checkAndBreakBlock(loc.clone().add(0, 0, -1), counter + 1);
-			checkAndBreakBlock(loc.clone().add(0, 0, 1), counter + 1);
+			checkAndBreakBlock(loc.clone().add(0, 1, 0), counter + 1, logn);
+			checkAndBreakBlock(loc.clone().add(0, -1, 0), counter + 1, logn);
+			checkAndBreakBlock(loc.clone().add(-1, 0, 0), counter + 1, logn);
+			checkAndBreakBlock(loc.clone().add(1, 0, 0), counter + 1, logn);
+			checkAndBreakBlock(loc.clone().add(0, 0, -1), counter + 1, logn);
+			checkAndBreakBlock(loc.clone().add(0, 0, 1), counter + 1, logn);
+
+			if (logn) {
+				checkAndBreakBlock(loc.clone().add(1, 1, 1), counter + 1, logn);
+				checkAndBreakBlock(loc.clone().add(1, 1, -1), counter + 1, logn);
+				checkAndBreakBlock(loc.clone().add(-1, 1, -1), counter + 1, logn);
+				checkAndBreakBlock(loc.clone().add(-1, 1, 1), counter + 1, logn);
+				checkAndBreakBlock(loc.clone().add(1, -1, 1), counter + 1, logn);
+				checkAndBreakBlock(loc.clone().add(1, -1, -1), counter + 1, logn);
+				checkAndBreakBlock(loc.clone().add(-1, -1, -1), counter + 1, logn);
+				checkAndBreakBlock(loc.clone().add(-1, -1, 1), counter + 1, logn);
+
+				checkAndBreakBlock(loc.clone().add(1, 1, 0), counter + 1, logn);
+				checkAndBreakBlock(loc.clone().add(1, -1, 0), counter + 1, logn);
+
+				checkAndBreakBlock(loc.clone().add(-1, 1, 0), counter + 1, logn);
+				checkAndBreakBlock(loc.clone().add(-1, -1, 0), counter + 1, logn);
+
+				checkAndBreakBlock(loc.clone().add(0, 1, -1), counter + 1, logn);
+				checkAndBreakBlock(loc.clone().add(0, -1, -1), counter + 1, logn);
+
+				checkAndBreakBlock(loc.clone().add(0, 1, 1), counter + 1, logn);
+				checkAndBreakBlock(loc.clone().add(0, -1, 1), counter + 1, logn);
+			}
 		}
 	}
 

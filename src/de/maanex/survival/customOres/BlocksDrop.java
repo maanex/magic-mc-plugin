@@ -42,7 +42,7 @@ public class BlocksDrop implements Listener {
 		if (e.getBlock().getType().equals(CustomBlocks.CRYSTALLIT.getBlock())) {
 			e.setDropItems(false);
 			if (i == null || !pickaxes.contains(i.getType())) return;
-			ItemStack drop = new ItemStack(CustomItems.CRYSTALLIT.getItem());
+			ItemStack drop = new ItemStack(CustomOreItems.CRYSTALLIT.getItem());
 			if (i.containsEnchantment(Enchantment.SILK_TOUCH)) drop = new ItemStack(CustomBlocks.CRYSTALLIT.getBlock());
 			else if (i.containsEnchantment(Enchantment.LOOT_BONUS_BLOCKS)) drop.setAmount(1 + r.nextInt(i.getEnchantmentLevel(Enchantment.LOOT_BONUS_BLOCKS) + 1));
 			e.getBlock().getWorld().dropItemNaturally(e.getBlock().getLocation().clone().add(.5, .5, .5), drop);
@@ -51,8 +51,17 @@ public class BlocksDrop implements Listener {
 		if (e.getBlock().getType().equals(CustomBlocks.TUDIUM.getBlock())) {
 			e.setDropItems(false);
 			if (i == null || !pickaxes.contains(i.getType())) return;
-			ItemStack drop = new ItemStack(CustomItems.TUDIUM.getItem());
+			ItemStack drop = new ItemStack(CustomOreItems.TUDIUM.getItem());
 			if (i.containsEnchantment(Enchantment.SILK_TOUCH)) drop = new ItemStack(CustomBlocks.TUDIUM.getBlock());
+			else if (i.containsEnchantment(Enchantment.LOOT_BONUS_BLOCKS)) drop.setAmount(1 + r.nextInt((i.getEnchantmentLevel(Enchantment.LOOT_BONUS_BLOCKS) + 1)));
+			e.getBlock().getWorld().dropItemNaturally(e.getBlock().getLocation().clone().add(.5, .5, .5), drop);
+		}
+
+		if (e.getBlock().getType().equals(CustomBlocks.ENDERIT.getBlock())) {
+			e.setDropItems(false);
+			if (i == null || !pickaxes.contains(i.getType())) return;
+			ItemStack drop = new ItemStack(CustomOreItems.ENDERIT.getItem());
+			if (i.containsEnchantment(Enchantment.SILK_TOUCH)) drop = new ItemStack(CustomBlocks.ENDERIT.getBlock());
 			else if (i.containsEnchantment(Enchantment.LOOT_BONUS_BLOCKS)) drop.setAmount(1 + r.nextInt((i.getEnchantmentLevel(Enchantment.LOOT_BONUS_BLOCKS) + 1)));
 			e.getBlock().getWorld().dropItemNaturally(e.getBlock().getLocation().clone().add(.5, .5, .5), drop);
 		}

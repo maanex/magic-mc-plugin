@@ -6,6 +6,9 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 
+import de.maanex.survival.customItems.CustomItems;
+import de.maanex.survival.customOres.CustomOreItems;
+
 
 public class Recipes {
 
@@ -14,6 +17,8 @@ public class Recipes {
 
 	public static void registerAll() {
 		registerSmoothStone();
+		registerCrystallitPickaxe();
+		registerEndOrb();
 	}
 
 	public static void registerSmoothStone() {
@@ -22,6 +27,29 @@ public class Recipes {
 		res.shape("000", "0B0", "0B0");
 
 		res.setIngredient('B', Material.STONE_SLAB);
+
+		Bukkit.addRecipe(res);
+	}
+
+	public static void registerCrystallitPickaxe() {
+		ShapedRecipe res = new ShapedRecipe(CustomItems.CRYSTALLIT_PICKAXE.getItem());
+
+		res.shape("ECE", "0S0", "0S0");
+
+		res.setIngredient('E', Material.EMERALD);
+		res.setIngredient('C', CustomOreItems.CRYSTALLIT.getItem());
+		res.setIngredient('S', Material.STICK);
+
+		Bukkit.addRecipe(res);
+	}
+
+	public static void registerEndOrb() {
+		ShapedRecipe res = new ShapedRecipe(CustomItems.END_ORB.getItem());
+
+		res.shape("EEE", "EOE", "EEE");
+
+		res.setIngredient('E', CustomOreItems.ENDERIT.getItem());
+		res.setIngredient('O', Material.OBSIDIAN);
 
 		Bukkit.addRecipe(res);
 	}

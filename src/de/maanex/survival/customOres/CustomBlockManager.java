@@ -15,6 +15,7 @@ public class CustomBlockManager {
 		Bukkit.getPluginManager().registerEvents(new NoLogStripping(), Main.instance);
 		Bukkit.getPluginManager().registerEvents(new BlockPopulator(), Main.instance);
 		Bukkit.getPluginManager().registerEvents(new BlocksDrop(), Main.instance);
+		Bukkit.getPluginManager().registerEvents(new NoSpawneggUse(), Main.instance);
 	}
 
 }

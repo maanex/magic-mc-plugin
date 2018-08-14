@@ -65,6 +65,17 @@ public class BlockPopulator implements Listener {
 										}
 							}
 						}, 20);
+					} else if (e.getWorld().getEnvironment().equals(Environment.THE_END)) {
+						if (r.nextInt(128 * 16 * 16 / 2) == 0) Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> {
+							if (block.getType().equals(Material.END_STONE)) {
+								for (int ax = -4; ax <= 4; ax++)
+									for (int ay = -4; ay <= 4; ay++)
+										for (int az = -4; az <= 4; az++) {
+											Block b = block.getLocation().clone().add(ax, ay, az).getBlock();
+											if (r.nextInt(20) == 0 && b.getType().equals(Material.END_STONE)) b.setType(CustomBlocks.ENDERIT.getBlock());
+										}
+							}
+						}, 20);
 					}
 				}
 	}

@@ -11,6 +11,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
@@ -40,11 +42,13 @@ public class Phase extends MagicSpell implements Listener {
 	private static List<Player> inPhase = new ArrayList<>();
 
 	private void startTimer(MagicPlayer caster) {
+		caster.getMCPlayer().addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 5000, 1, true, false));
 		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> {
 			caster.addMana(-1);
 			if (caster.getMana() <= 0 || (!caster.getMCPlayer().getLocation().getBlock().getType().isSolid() && !caster.getMCPlayer().getEyeLocation().getBlock().getType().isSolid())) {
 				caster.getMCPlayer().setGameMode(GameMode.SURVIVAL);
 				inPhase.remove(caster.getMCPlayer());
+				caster.getMCPlayer().removePotionEffect(PotionEffectType.BLINDNESS);
 			} else startTimer(caster);
 		}, 20);
 	}

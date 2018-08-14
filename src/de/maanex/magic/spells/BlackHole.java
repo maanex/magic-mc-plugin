@@ -22,10 +22,10 @@ import de.maanex.utils.ParticleUtil;
 import de.maanex.utils.TargetEntityFinder;
 
 
-public class Bottomless extends MagicSpell {
+public class BlackHole extends MagicSpell {
 
-	public Bottomless() {
-		super(71, "Bodenlos", "Huch!", 5, 30, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.EPIC);
+	public BlackHole() {
+		super(71, "Schwarzes Loch", "Huch!", 5, 30, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.EPIC);
 	}
 
 	@Override
@@ -42,16 +42,24 @@ public class Bottomless extends MagicSpell {
 
 			for (int x = -1; x < 2; x++)
 				for (int z = -1; z < 2; z++)
-					for (int y = 0; y > -5; y--)
-						block(p, p.getLocation().clone().add(x, y, z));
+					for (int y = -1; y > -5; y--)
+						block(p, p.getLocation().clone().add(x, y, z), Material.AIR);
 		}
+
+		for (int i = 0; i < 40; i += 2)
+			Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> tar.teleport(tar.getLocation().clone().add(0, -.2, 0)), i);
+
+		for (Player p : caster.getMCPlayer().getWorld().getPlayers())
+			if (!p.equals(tar)) for (int x = -1; x < 2; x++)
+				for (int z = -1; z < 2; z++)
+					block(p, tar.getLocation().clone().add(x, -1, z), Material.BLACK_CONCRETE);
 
 		takeMana(caster, mods);
 	}
 
-	private void block(Player p, Location l) {
-		p.sendBlockChange(l, Material.AIR.createBlockData());
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> p.sendBlockChange(l, l.getBlock().getBlockData()), 20);
+	private void block(Player p, Location l, Material m) {
+		p.sendBlockChange(l, m.createBlockData());
+		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> p.sendBlockChange(l, l.getBlock().getBlockData()), 40);
 	}
 
 }
