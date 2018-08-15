@@ -33,12 +33,13 @@ public class Timewarp extends MagicSpell {
 		} else {
 			Location loc = pos.get(caster.getMCPlayer());
 			pos.remove(caster.getMCPlayer());
-			if (!loc.getWorld().equals(caster.getMCPlayer().getWorld()) || loc.distance(caster.getMCPlayer().getLocation()) > mods.getEnergy()) {
+			if (!loc.getWorld().equals(caster.getMCPlayer().getWorld()) || loc.distance(caster.getMCPlayer().getLocation()) > mods.getEnergy() * 2) {
 				caster.getMCPlayer().sendMessage("ß8Distanz zu groﬂ!");
 				return;
 			}
 
 			ParticleUtil.spawn(Particle.ENCHANTMENT_TABLE, caster.getMCPlayer().getLocation(), 100, 1, .5, 1, .5);
+			caster.getMCPlayer().setFallDistance(0);
 			caster.getMCPlayer().teleport(loc);
 			takeMana(caster, mods);
 		}

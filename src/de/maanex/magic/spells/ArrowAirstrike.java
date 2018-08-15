@@ -23,7 +23,7 @@ import de.maanex.main.Main;
 public class ArrowAirstrike extends MagicSpell {
 
 	public ArrowAirstrike() {
-		super(79, "Luftangriff Pfeilsturm", "*tröt*", 4, 30, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.EPIC);
+		super(76, "Luftangriff Pfeilsturm", "*tröt*", 4, 30, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.EPIC);
 	}
 
 	@Override

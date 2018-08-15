@@ -48,8 +48,8 @@ public class ItemCrystallitPickaxe implements Listener {
 			e.getItem().setAmount(0);
 		}
 
-		if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-			if (e.getItem() == null) return;
+		if (e.getItem() == null) return;
+		if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK) && e.getItem().getType().equals(Material.SPAWNER)) {
 			if (!e.getItem().getItemMeta().hasLore()) return;
 
 			String s = e.getItem().getItemMeta().getLore().get(0);

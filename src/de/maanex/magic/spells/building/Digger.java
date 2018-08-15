@@ -21,7 +21,7 @@ import de.maanex.magic.enumeri.WandType;
 public class Digger extends MagicSpell {
 
 	public Digger() {
-		super(78, "Bagger", "Brum brum brum brum!", 3, 0, SpellType.ACTIVE, SpellCategory.BUILDING, SpellRarity.RARE);
+		super(75, "Bagger", "Brum brum brum brum!", 3, 0, SpellType.ACTIVE, SpellCategory.BUILDING, SpellRarity.RARE);
 	}
 
 	private static List<Material> breakable;

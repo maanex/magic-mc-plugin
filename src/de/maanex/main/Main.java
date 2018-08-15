@@ -558,8 +558,12 @@ public class Main extends JavaPlugin {
 
 		//
 		MagicManager.registerSpellRecipe(new SpellRecipe(Fireball.class, EarthSpirit.class, Fireball.class, 45));
-		MagicManager.registerSpellRecipe(new SpellRecipe(Fireball.class, EarthSpirit.class, AirSpirit.class, 45));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Fireball.class, EarthSpirit.class, EarthSpirit.class, 45));
 		MagicManager.registerSpellRecipe(new SpellRecipe(Fireball.class, EarthSpirit.class, Witherhead.class, 10));
+
+		MagicManager.registerSpellRecipe(new SpellRecipe(Firering.class, Witherhead.class, Witherhead.class, 45));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Firering.class, Witherhead.class, Firering.class, 45));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Firering.class, Witherhead.class, BlackHole.class, 10));
 
 		//
 		MagicManager.registerSpellRecipe(new SpellRecipe(Hook.class, Hook.class, Hook.class, 50));
