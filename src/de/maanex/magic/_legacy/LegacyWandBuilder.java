@@ -1,4 +1,4 @@
-package de.maanex.magic.items;
+package de.maanex.magic._legacy;
 
 
 import java.util.ArrayList;
@@ -12,16 +12,15 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import de.maanex.magic.WandModifiers;
-import de.maanex.magic.enumeri.WandType;
+import de.maanex.magic.wands.WandType;
 
 
-public class WandBuilder {
+public class LegacyWandBuilder {
 
 	private static HashMap<Short, String> skinNames = new HashMap<>();
 
 	private WandType		type	= WandType.WOODEN;
-	private WandModifiers	mods	= new WandModifiers(100, 100, 100);
+	private LegacyWandModifiers	mods	= new LegacyWandModifiers(100, 100, 100);
 	private Environment		environment;
 
 	//
@@ -43,23 +42,23 @@ public class WandBuilder {
 		skinNames.put((short) 14, "§aWeltenreiser Stab");
 	}
 
-	private WandBuilder() {
+	private LegacyWandBuilder() {
 	}
 
 	//
 
-	public static WandBuilder get(Environment worldEnvironment) {
-		WandBuilder b = new WandBuilder();
+	public static LegacyWandBuilder get(Environment worldEnvironment) {
+		LegacyWandBuilder b = new LegacyWandBuilder();
 		b.environment = worldEnvironment;
 		return b;
 	}
 
-	public WandBuilder withType(WandType type) {
+	public LegacyWandBuilder withType(WandType type) {
 		this.type = type;
 		return this;
 	}
 
-	public WandBuilder withMods(WandModifiers mods) {
+	public LegacyWandBuilder withMods(LegacyWandModifiers mods) {
 		this.mods = mods;
 		return this;
 	}
@@ -90,7 +89,7 @@ public class WandBuilder {
 	 * 
 	 */
 
-	private static short getFittingSkin(WandModifiers mods, WandType type, Environment environment) {
+	private static short getFittingSkin(LegacyWandModifiers mods, WandType type, Environment environment) {
 		if (mods.getEnergy() == -1) return 1;
 
 		if (type.equals(WandType.DARK)) {
@@ -130,7 +129,7 @@ public class WandBuilder {
 		return s;
 	}
 
-	private static ItemMeta applyWandModifiers(ItemMeta m, WandModifiers mod, WandType type) {
+	private static ItemMeta applyWandModifiers(ItemMeta m, LegacyWandModifiers mod, WandType type) {
 		List<String> lore = new ArrayList<>();
 
 		lore.add("§0" + type.getLoreName());

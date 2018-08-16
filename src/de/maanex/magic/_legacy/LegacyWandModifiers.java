@@ -1,4 +1,4 @@
-package de.maanex.magic;
+package de.maanex.magic._legacy;
 
 
 import java.util.List;
@@ -6,11 +6,11 @@ import java.util.List;
 import org.bukkit.inventory.meta.ItemMeta;
 
 
-public class WandModifiers {
+public class LegacyWandModifiers {
 
 	private int manause, savety, energy;
 
-	public WandModifiers(int manause, int savety, int energy) {
+	public LegacyWandModifiers(int manause, int savety, int energy) {
 		this.manause = manause;
 		this.savety = savety;
 		this.energy = energy;
@@ -40,13 +40,13 @@ public class WandModifiers {
 		this.energy = energy;
 	}
 
-	public static WandModifiers fromItem(ItemMeta meta) {
+	public static LegacyWandModifiers fromItem(ItemMeta meta) {
 		List<String> lore = meta.getLore();
 
 		int manause = get(lore.get(2).split(" ")[1].replace("%", ""));
 		int savety = get(lore.get(3).split(" ")[1].replace("%", ""));
 		int energy = get(lore.get(4).split(" ")[1]);
-		return new WandModifiers(manause, savety, energy);
+		return new LegacyWandModifiers(manause, savety, energy);
 	}
 
 	private static int get(String s) {

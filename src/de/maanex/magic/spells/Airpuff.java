@@ -7,14 +7,14 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic.MagicSpell;
-import de.maanex.magic.WandModifiers;
-import de.maanex.magic.enumeri.SpellCategory;
-import de.maanex.magic.enumeri.SpellRarity;
-import de.maanex.magic.enumeri.SpellType;
-import de.maanex.magic.enumeri.WandType;
+import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.missile.BasicMissile;
 import de.maanex.magic.missile.BasicMissile.BlockHitBehaviour;
+import de.maanex.magic.spell.MagicSpell;
+import de.maanex.magic.spell.SpellCategory;
+import de.maanex.magic.spell.SpellRarity;
+import de.maanex.magic.spell.SpellType;
+import de.maanex.magic.wands.WandType;
 import de.maanex.utils.ParticleUtil;
 
 
@@ -25,7 +25,7 @@ public class Airpuff extends MagicSpell {
 	}
 
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, WandModifiers mods) {
+	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
 		BasicMissile m = new BasicMissile(caster.getMCPlayer().getEyeLocation(), caster, caster.getMCPlayer().getLocation(), 80, .7, BlockHitBehaviour.ABSORB, //
 				l -> {
 					ParticleUtil.spawn(Particle.FIREWORKS_SPARK, l, 20, .01, .2, .2, .2);

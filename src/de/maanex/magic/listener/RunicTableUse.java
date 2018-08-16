@@ -27,8 +27,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import de.maanex.magic.MagicManager;
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic.MagicSpell;
-import de.maanex.magic.SpellRecipe;
+import de.maanex.magic.spell.MagicSpell;
+import de.maanex.magic.spell.SpellRecipe;
 import de.maanex.magic.spells.basic.Elementum;
 import de.maanex.magic.structures.RunicTableSpotter;
 import de.maanex.main.Main;

@@ -16,11 +16,13 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+import de.maanex.magic._legacy.LegacyWandBuilder;
+import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.crafting.Spellbook;
-import de.maanex.magic.enumeri.WandType;
 import de.maanex.magic.generators.WandModsGen;
 import de.maanex.magic.items.DefaultItems;
-import de.maanex.magic.items.WandBuilder;
+import de.maanex.magic.spell.MagicSpell;
+import de.maanex.magic.wands.WandType;
 import de.maanex.utils.ParticleUtil;
 
 
@@ -33,7 +35,7 @@ public class UseWand implements Listener {
 	public void onInteract(PlayerInteractEvent e) {
 		WandType t = WandType.getFromItem(e.getItem());
 		if (t == null) return;
-		WandModifiers m = WandModifiers.fromItem(e.getItem().getItemMeta());
+		LegacyWandModifiers m = LegacyWandModifiers.fromItem(e.getItem().getItemMeta());
 
 		if (e.getClickedBlock() != null && e.getClickedBlock().getType().equals(Material.GRASS)) e.setCancelled(true);
 
@@ -49,18 +51,18 @@ public class UseWand implements Listener {
 							ParticleUtil.spawn(e.getPlayer(), Particle.LAVA, e.getClickedBlock().getLocation(), 100, 1, 3, 0, 3);
 							e.getPlayer().playSound(e.getPlayer().getEyeLocation(), "entity.wither.ambient", 1, 1);
 
-							WandBuilder.get(env).withMods(WandModsGen.generate()).withType(WandType.DARK).apply(e.getItem());
+							LegacyWandBuilder.get(env).withMods(WandModsGen.generate()).withType(WandType.DARK).apply(e.getItem());
 						} else {
 							ParticleUtil.spawn(e.getPlayer(), Particle.END_ROD, e.getClickedBlock().getLocation(), 500, 1, 5, 0, 5);
 							e.getPlayer().playSound(e.getPlayer().getEyeLocation(), "ui.toast.challenge_complete", 1, 1);
 
-							WandBuilder.get(env).withMods(WandModsGen.generate()).withType(WandType.LIGHT).apply(e.getItem());
+							LegacyWandBuilder.get(env).withMods(WandModsGen.generate()).withType(WandType.LIGHT).apply(e.getItem());
 						}
 					} else {
 						ParticleUtil.spawn(e.getPlayer(), Particle.TOTEM, e.getClickedBlock().getLocation(), 100, 1, 3, 3, 3);
 						e.getPlayer().playSound(e.getPlayer().getEyeLocation(), "item.totem.use", 1, 1);
 
-						WandBuilder.get(env).withMods(WandModsGen.generate()).withType(WandType.WOODEN).apply(e.getItem());
+						LegacyWandBuilder.get(env).withMods(WandModsGen.generate()).withType(WandType.WOODEN).apply(e.getItem());
 					}
 				} else {
 					ParticleUtil.spawn(e.getPlayer(), Particle.SMOKE_LARGE, e.getClickedBlock().getLocation(), 50, 0, 1, 1, 1);
@@ -68,9 +70,6 @@ public class UseWand implements Listener {
 			}
 
 			return;
-		} else if (!e.getItem().getType().equals(Material.WOODEN_HOE)) {
-			Environment env = e.getPlayer().getWorld().getEnvironment();
-			WandBuilder.get(env).withMods(m).withType(t).apply(e.getItem());
 		}
 
 		ItemStack offhand = e.getPlayer().getInventory().getItemInOffHand();
@@ -94,7 +93,8 @@ public class UseWand implements Listener {
 				e.getPlayer().setCooldown(Material.BOOK, 10);
 			} else if (e.getAction().equals(Action.LEFT_CLICK_AIR) || e.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
 				if (new Random().nextInt(100) >= m.getSavety()) {
-					p.setMana(0);
+					p.cooldown.put(spell, spell.getCooldown());
+					p.setMana(p.getMana() - spell.getManacost());
 					p.getMCPlayer().sendMessage("§7Zauber fehlgeschlagen!");
 					p.getMCPlayer().playSound(p.getMCPlayer().getEyeLocation(), Sound.BLOCK_BREWING_STAND_BREW, 1, 0);
 					return;

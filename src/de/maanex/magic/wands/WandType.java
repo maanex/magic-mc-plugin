@@ -1,4 +1,4 @@
-package de.maanex.magic.enumeri;
+package de.maanex.magic.wands;
 
 
 import org.bukkit.inventory.ItemStack;
@@ -7,7 +7,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public enum WandType {
 
-	WOODEN("§3Zauberstab", "wooden_wand"), //
+	UNIDENTIFIED("§3Unidentifizierter Zauberstab", "unidentified_wand"), //
+	WOODEN("§bZauberstab", "wooden_wand"), //
 	DARK("§cDunkelstab", "dark_wand"), //
 	LIGHT("§6Lichtstab", "light_wand"),//
 

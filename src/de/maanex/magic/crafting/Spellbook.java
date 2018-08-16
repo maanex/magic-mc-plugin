@@ -18,8 +18,8 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import de.maanex.magic.MagicManager;
-import de.maanex.magic.MagicSpell;
 import de.maanex.magic.items.DefaultItems;
+import de.maanex.magic.spell.MagicSpell;
 
 
 public class Spellbook implements Listener {

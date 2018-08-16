@@ -3,11 +3,10 @@ package de.maanex.magic.crafting;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.World.Environment;
 import org.bukkit.inventory.ShapedRecipe;
 
-import de.maanex.magic.WandModifiers;
-import de.maanex.magic.items.WandBuilder;
+import de.maanex.magic.wands.Wand;
+import de.maanex.magic.wands.WandBuilder.WandPreset;
 
 
 public class Wands {
@@ -17,7 +16,10 @@ public class Wands {
 
 	@SuppressWarnings("deprecation")
 	public static void registerRecipe() {
-		ShapedRecipe res = new ShapedRecipe(WandBuilder.get(Environment.NORMAL).withMods(new WandModifiers(-1, -1, -1)).build());
+		// ShapedRecipe res = new
+		// ShapedRecipe(LegacyWandBuilder.get(Environment.NORMAL).withMods(new
+		// LegacyWandModifiers(-1, -1, -1)).build());
+		ShapedRecipe res = new ShapedRecipe(Wand.builder().applyPreset(WandPreset.UNIDENTIFIED).build().asItem());
 
 		res.shape("AAI", "ASA", "IAA");
 

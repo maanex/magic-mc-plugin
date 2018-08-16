@@ -7,9 +7,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 
 import de.maanex.survival.customItems.CustomItems;
+import de.maanex.survival.customOres.CustomBlocks;
 import de.maanex.survival.customOres.CustomOreItems;
 
 
+@SuppressWarnings("deprecation")
 public class Recipes {
 
 	private Recipes() {
@@ -19,6 +21,7 @@ public class Recipes {
 		registerSmoothStone();
 		registerCrystallitPickaxe();
 		registerEndOrb();
+		registerWandWorkbench();
 	}
 
 	public static void registerSmoothStone() {
@@ -50,6 +53,17 @@ public class Recipes {
 
 		res.setIngredient('E', CustomOreItems.ENDERIT.getItem());
 		res.setIngredient('O', Material.OBSIDIAN);
+
+		Bukkit.addRecipe(res);
+	}
+
+	public static void registerWandWorkbench() {
+		ShapedRecipe res = new ShapedRecipe(new ItemStack(CustomBlocks.WAND_WORKBENCH.getBlock()));
+
+		res.shape("EEE", "EWE", "EEE");
+
+		res.setIngredient('E', Material.IRON_NUGGET);
+		res.setIngredient('W', Material.CRAFTING_TABLE);
 
 		Bukkit.addRecipe(res);
 	}

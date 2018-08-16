@@ -1,5 +1,6 @@
-package de.maanex.magic;
+package de.maanex.magic.spell;
 
+import de.maanex.magic.MagicManager;
 
 public class SpellRecipe {
 

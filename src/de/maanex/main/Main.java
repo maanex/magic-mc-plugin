@@ -9,7 +9,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import de.maanex.magic.MagicManager;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.ManaRegeneration;
-import de.maanex.magic.SpellRecipe;
 import de.maanex.magic.UseWand;
 import de.maanex.magic.VisualUpdater;
 import de.maanex.magic.crafting.Spellbook;
@@ -19,9 +18,11 @@ import de.maanex.magic.listener.GoldEat;
 import de.maanex.magic.listener.JoinLeave;
 import de.maanex.magic.listener.ManapotDrink;
 import de.maanex.magic.listener.RunicTableUse;
+import de.maanex.magic.listener.WandWorkbenchUse;
 import de.maanex.magic.manapots.ManaCauldron;
 import de.maanex.magic.manapots.ManaCauldronInteraction;
 import de.maanex.magic.missile.MagicMissile;
+import de.maanex.magic.spell.SpellRecipe;
 import de.maanex.magic.spells.AirArrowStorm;
 import de.maanex.magic.spells.AirBlast;
 import de.maanex.magic.spells.Airpuff;
@@ -170,6 +171,7 @@ public class Main extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new ManapotDrink(), this);
 		Bukkit.getPluginManager().registerEvents(new GoldEat(), this);
 		Bukkit.getPluginManager().registerEvents(new ManaCauldronInteraction(), this);
+		Bukkit.getPluginManager().registerEvents(new WandWorkbenchUse(), this);
 
 		Bukkit.getPluginManager().registerEvents(new EarthBenderCannon(), this);
 

@@ -2,13 +2,13 @@ package de.maanex.magic.spells;
 
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic.MagicSpell;
-import de.maanex.magic.WandModifiers;
-import de.maanex.magic.enumeri.SpellCategory;
-import de.maanex.magic.enumeri.SpellRarity;
-import de.maanex.magic.enumeri.SpellType;
-import de.maanex.magic.enumeri.WandType;
+import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.missile.WaterPunchMissile;
+import de.maanex.magic.spell.MagicSpell;
+import de.maanex.magic.spell.SpellCategory;
+import de.maanex.magic.spell.SpellRarity;
+import de.maanex.magic.spell.SpellType;
+import de.maanex.magic.wands.WandType;
 
 
 public class WaterPunch extends MagicSpell {
@@ -18,7 +18,7 @@ public class WaterPunch extends MagicSpell {
 	}
 
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, WandModifiers mods) {
+	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
 		WaterPunchMissile mis = new WaterPunchMissile(caster.getMCPlayer().getEyeLocation(), caster, caster.getMCPlayer().getLocation().clone(), mods.getEnergy());
 		mis.launch();
 		takeMana(caster, mods);

@@ -11,7 +11,8 @@ import org.bukkit.entity.Player;
 import de.maanex.magic.crafting.Spellbook;
 import de.maanex.magic.customEffects.ManaLockEffect;
 import de.maanex.magic.customEffects.ManaRegenEffect;
-import de.maanex.magic.enumeri.WandType;
+import de.maanex.magic.spell.MagicSpell;
+import de.maanex.magic.wands.WandType;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 

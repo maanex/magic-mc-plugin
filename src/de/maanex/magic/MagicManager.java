@@ -4,6 +4,9 @@ package de.maanex.magic;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.maanex.magic.spell.MagicSpell;
+import de.maanex.magic.spell.SpellRecipe;
+
 
 public class MagicManager {
 

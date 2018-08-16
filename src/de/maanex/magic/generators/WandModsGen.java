@@ -3,7 +3,7 @@ package de.maanex.magic.generators;
 
 import java.util.Random;
 
-import de.maanex.magic.WandModifiers;
+import de.maanex.magic._legacy.LegacyWandModifiers;
 
 
 public class WandModsGen {
@@ -11,7 +11,7 @@ public class WandModsGen {
 	private WandModsGen() {
 	}
 
-	public static WandModifiers generate() {
+	public static LegacyWandModifiers generate() {
 		Random r = new Random();
 		int[] val = new int[] { 100, 100, 100 };
 
@@ -27,7 +27,7 @@ public class WandModsGen {
 		}
 		val[dyn] = 100 - yo;
 
-		return new WandModifiers(-val[0] + 200, Math.min(100, val[1]), val[2]);
+		return new LegacyWandModifiers(-val[0] + 200, Math.min(100, val[1]), val[2]);
 	}
 
 }

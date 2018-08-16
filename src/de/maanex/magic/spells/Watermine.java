@@ -13,14 +13,14 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic.MagicSpell;
-import de.maanex.magic.WandModifiers;
-import de.maanex.magic.enumeri.SpellCategory;
-import de.maanex.magic.enumeri.SpellRarity;
-import de.maanex.magic.enumeri.SpellType;
-import de.maanex.magic.enumeri.WandType;
+import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.missile.MineMissile;
 import de.maanex.magic.missile.MineMissile.EntityEnterMineListener;
+import de.maanex.magic.spell.MagicSpell;
+import de.maanex.magic.spell.SpellCategory;
+import de.maanex.magic.spell.SpellRarity;
+import de.maanex.magic.spell.SpellType;
+import de.maanex.magic.wands.WandType;
 import de.maanex.utils.ParticleUtil;
 import de.maanex.utils.ParticleUtil.ParticlePreset;
 
@@ -32,7 +32,7 @@ public class Watermine extends MagicSpell {
 	}
 
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, WandModifiers mods) {
+	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
 		Block b = caster.getMCPlayer().getTargetBlock(null, mods.getEnergy() / 20);
 		if (b == null || !b.getType().isSolid()) return;
 		Location l = b.getLocation().clone().add(.5, 1.05, .5);

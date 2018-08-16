@@ -20,8 +20,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import de.maanex.magic.MagicManager;
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic.MagicSpell;
 import de.maanex.magic.customEffects.RealityWarpEffect;
+import de.maanex.magic.spell.MagicSpell;
 import de.maanex.utils.ChatIcons;
 
 

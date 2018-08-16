@@ -15,12 +15,12 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic.MagicSpell;
-import de.maanex.magic.WandModifiers;
-import de.maanex.magic.enumeri.SpellCategory;
-import de.maanex.magic.enumeri.SpellRarity;
-import de.maanex.magic.enumeri.SpellType;
-import de.maanex.magic.enumeri.WandType;
+import de.maanex.magic._legacy.LegacyWandModifiers;
+import de.maanex.magic.spell.MagicSpell;
+import de.maanex.magic.spell.SpellCategory;
+import de.maanex.magic.spell.SpellRarity;
+import de.maanex.magic.spell.SpellType;
+import de.maanex.magic.wands.WandType;
 
 
 public class Waterbomb extends MagicSpell implements Listener {
@@ -32,7 +32,7 @@ public class Waterbomb extends MagicSpell implements Listener {
 	private List<FallingBlock> bombs = new ArrayList<>();
 
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, WandModifiers mods) {
+	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
 		FallingBlock f = caster.getMCPlayer().getLocation().getWorld().spawnFallingBlock(caster.getMCPlayer().getEyeLocation(), Material.LIGHT_BLUE_STAINED_GLASS.createBlockData());
 
 		f.setVelocity(caster.getMCPlayer().getLocation().getDirection());

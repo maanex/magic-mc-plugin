@@ -10,9 +10,10 @@ public enum CustomBlocks {
 	TUDIUM("Tudium", Material.STRIPPED_SPRUCE_WOOD), //
 	CRYSTALLIT("Crystallit", Material.STRIPPED_BIRCH_WOOD), //
 
-	UNUSED0("TODO", Material.STRIPPED_JUNGLE_WOOD), //
-	UNUSED1("TODO", Material.STRIPPED_ACACIA_WOOD), //
-	UNUSED2("TODO", Material.STRIPPED_DARK_OAK_WOOD),//
+	WAND_WORKBENCH("Zauberstab Werkbank", Material.STRIPPED_JUNGLE_WOOD), //
+
+	UNUSED0("TODO", Material.STRIPPED_ACACIA_WOOD), //
+	UNUSED1("TODO", Material.STRIPPED_DARK_OAK_WOOD),//
 
 	;
 

@@ -1,4 +1,4 @@
-package de.maanex.magic;
+package de.maanex.magic.spell;
 
 
 import java.util.ArrayList;
@@ -10,10 +10,11 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import de.maanex.magic.enumeri.SpellCategory;
-import de.maanex.magic.enumeri.SpellRarity;
-import de.maanex.magic.enumeri.SpellType;
-import de.maanex.magic.enumeri.WandType;
+import de.maanex.magic.MagicManager;
+import de.maanex.magic.MagicPlayer;
+import de.maanex.magic.VisualUpdater;
+import de.maanex.magic._legacy.LegacyWandModifiers;
+import de.maanex.magic.wands.WandType;
 
 
 public abstract class MagicSpell {
@@ -48,20 +49,20 @@ public abstract class MagicSpell {
 		this.reqWandType = reqWandType;
 	}
 
-	protected abstract void onCastPerform(MagicPlayer caster, WandType type, WandModifiers mods);
+	protected abstract void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods);
 
-	protected boolean canAffortSpell(MagicPlayer caster, WandModifiers mods) {
+	protected boolean canAffortSpell(MagicPlayer caster, LegacyWandModifiers mods) {
 		return (int) (manacost * ((double) mods.getManause() / 100)) <= caster.getMana();
 	}
 
-	protected void takeMana(MagicPlayer caster, WandModifiers mods) {
+	protected void takeMana(MagicPlayer caster, LegacyWandModifiers mods) {
 		caster.addMana((int) (-manacost * ((double) mods.getManause() / 100)));
 
 		if (cooldown > 0 && !caster.getMCPlayer().getGameMode().equals(GameMode.CREATIVE)) caster.cooldown.put(this, cooldown);
 		VisualUpdater.updateCooldown(caster, true);
 	}
 
-	public void interaction(MagicPlayer player, WandType type, WandModifiers mod) {
+	public void interaction(MagicPlayer player, WandType type, LegacyWandModifiers mod) {
 		if (canAffortSpell(player, mod)) {
 			if (player.cooldown.containsKey(this)) {
 				player.getMCPlayer().sendMessage("§7Spell is on Cooldown!");

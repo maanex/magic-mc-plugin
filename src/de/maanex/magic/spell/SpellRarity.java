@@ -1,4 +1,4 @@
-package de.maanex.magic.enumeri;
+package de.maanex.magic.spell;
 
 
 public enum SpellRarity {

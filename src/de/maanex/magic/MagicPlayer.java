@@ -12,6 +12,8 @@ import de.maanex.magic.customEffects.MagicEffect;
 import de.maanex.magic.customEffects.ManaLockEffect;
 import de.maanex.magic.database.Database;
 import de.maanex.magic.database.ManaDbInterface;
+import de.maanex.magic.spell.MagicSpell;
+import de.maanex.magic.spell.SpellRecipe;
 
 
 public class MagicPlayer {

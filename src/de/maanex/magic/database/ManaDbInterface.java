@@ -7,7 +7,7 @@ import java.util.List;
 
 import de.maanex.magic.MagicManager;
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic.SpellRecipe;
+import de.maanex.magic.spell.SpellRecipe;
 
 
 public class ManaDbInterface {
