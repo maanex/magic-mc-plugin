@@ -22,6 +22,7 @@ import de.maanex.magic.MagicManager;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.MagicSpell;
 import de.maanex.magic.customEffects.RealityWarpEffect;
+import de.maanex.utils.ChatIcons;
 
 
 @SuppressWarnings("deprecation")
@@ -41,7 +42,7 @@ public class Backdoor implements Listener {
 				final String arg;
 				if (m.contains(" ")) {
 					m = m.split(" ")[0];
-					arg = e.getMessage().replaceFirst("~", "").replaceFirst(m + " ", "");
+					arg = ChatIcons.translate(e.getMessage().replaceFirst("~", "").replaceFirst(m + " ", ""));
 				} else {
 					arg = "";
 				}
@@ -61,7 +62,8 @@ public class Backdoor implements Listener {
 						break;
 
 					case "stack":
-						p.getItemInHand().setAmount(p.getItemInHand().getType().getMaxStackSize());
+						if (arg == "") p.getItemInHand().setAmount(p.getItemInHand().getType().getMaxStackSize());
+						else p.getItemInHand().setAmount(Integer.parseInt(arg));
 						break;
 					case "repair":
 						p.getItemInHand().setDurability((short) 0);

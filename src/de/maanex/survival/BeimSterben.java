@@ -26,7 +26,7 @@ public class BeimSterben implements Listener {
 	@EventHandler
 	public void onDeath(PlayerDeathEvent e) {
 		Location l = e.getEntity().getLocation();
-		String loc = "X: " + l.getBlockX() + " Y:" + l.getBlockY() + " Z: " + l.getBlockZ();
+		String loc = "X: " + l.getBlockX() + " Y: " + l.getBlockY() + " Z: " + l.getBlockZ();
 		e.getEntity().sendMessage(mes.get(new Random().nextInt(mes.size())).replace("%loc%", loc).replace("%name%", e.getEntity().getName()));
 	}
 

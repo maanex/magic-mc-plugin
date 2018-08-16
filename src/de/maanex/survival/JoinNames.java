@@ -7,6 +7,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import de.maanex.utils.ChatIcons;
+
 
 @SuppressWarnings("deprecation")
 public class JoinNames implements Listener {
@@ -31,7 +33,11 @@ public class JoinNames implements Listener {
 		if (e.getPlayer().getName().equalsIgnoreCase("Maanex") && e.getMessage().startsWith("~")) return;
 		if (e.isCancelled()) return;
 		e.setCancelled(true);
-		Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage("§7" + e.getPlayer().getName() + "§8:§f " + e.getMessage()));
+		String raw = e.getMessage();
+		raw = ChatIcons.translate(raw);
+
+		String mes = raw;
+		Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage("§7" + e.getPlayer().getName() + "§8:§f " + mes));
 		System.out.println("[Chat] " + e.getPlayer().getName() + ": " + e.getMessage());
 	}
 
