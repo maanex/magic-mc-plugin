@@ -7,12 +7,12 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
+import de.maanex.magic.wands.WandValues;
 import de.maanex.utils.ParticleUtil;
 
 
@@ -23,7 +23,7 @@ public class WaterChop extends MagicSpell {
 	}
 
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
+	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
 		Location l = caster.getMCPlayer().getEyeLocation().clone().add(caster.getMCPlayer().getLocation().getDirection().multiply(3));
 		for (Entity e : l.getWorld().getNearbyEntities(l, 1.4, 1.4, 1.4)) {
 			if (!caster.getMCPlayer().equals(e) && (e instanceof LivingEntity)) {
@@ -33,7 +33,7 @@ public class WaterChop extends MagicSpell {
 		}
 		ParticleUtil.spawn(Particle.WATER_SPLASH, l, 40, 0, 1.4, 1.4, 1.4);
 
-		takeMana(caster, mods);
+		takeMana(caster, val);
 	}
 
 }

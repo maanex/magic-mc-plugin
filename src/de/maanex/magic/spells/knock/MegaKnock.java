@@ -6,12 +6,12 @@ import org.bukkit.Particle;
 import org.bukkit.entity.LivingEntity;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
+import de.maanex.magic.wands.WandValues;
 import de.maanex.utils.ParticleUtil;
 
 
@@ -22,7 +22,7 @@ public class MegaKnock extends MagicSpell {
 	}
 
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
+	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
 		for (int i = 0; i < 13; i++) {
 			Location l = caster.getMCPlayer().getEyeLocation().clone().add(caster.getMCPlayer().getLocation().getDirection().multiply(i));
 			ParticleUtil.spawn(Particle.CRIT, l, 50, .05, .1, .1, .1);
@@ -31,7 +31,7 @@ public class MegaKnock extends MagicSpell {
 				if (e instanceof LivingEntity && !e.isDead() && !e.equals(caster.getMCPlayer())) ((LivingEntity) e).damage(3, caster.getMCPlayer());
 			});
 		}
-		takeMana(caster, mods);
+		takeMana(caster, val);
 	}
 
 }

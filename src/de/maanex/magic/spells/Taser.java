@@ -12,12 +12,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
+import de.maanex.magic.wands.WandValues;
+import de.maanex.magic.wands.WandValues.WandModifier;
 import de.maanex.main.Main;
 import de.maanex.utils.ParticleUtil;
 
@@ -29,12 +30,12 @@ public class Taser extends MagicSpell {
 	}
 
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
+	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
 		Random r = new Random();
 		for (int i = 0; i <= 20; i++) {
-			Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> drawRay(r, caster.getMCPlayer(), caster.getMCPlayer().getEyeLocation(), mods.getEnergy() / 2), i);
+			Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> drawRay(r, caster.getMCPlayer(), caster.getMCPlayer().getEyeLocation(), val.getMod(WandModifier.ENERGY) / 2), i);
 		}
-		takeMana(caster, mods);
+		takeMana(caster, val);
 	}
 
 	private void drawRay(Random r, Player src, Location l, int dis) {

@@ -17,12 +17,12 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
+import de.maanex.magic.wands.WandValues;
 import de.maanex.main.Main;
 import de.maanex.utils.ParticleUtil;
 
@@ -35,7 +35,7 @@ public class Frostwave extends MagicSpell {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
+	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
 		List<Entity> damaged = new ArrayList<>();
 		Random r = new Random();
 		for (int c = 1; c != 10; c++) {
@@ -83,7 +83,7 @@ public class Frostwave extends MagicSpell {
 				}
 			}
 		}
-		takeMana(caster, mods);
+		takeMana(caster, val);
 	}
 
 }

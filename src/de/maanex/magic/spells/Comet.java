@@ -8,12 +8,13 @@ import org.bukkit.entity.Fireball;
 import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
+import de.maanex.magic.wands.WandValues;
+import de.maanex.magic.wands.WandValues.WandModifier;
 import de.maanex.utils.ParticleUtil;
 
 
@@ -24,8 +25,8 @@ public class Comet extends MagicSpell {
 	}
 
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
-		Block target = caster.getMCPlayer().getTargetBlock(null, 20 + mods.getEnergy() - 100);
+	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
+		Block target = caster.getMCPlayer().getTargetBlock(null, 20 + val.getMod(WandModifier.ENERGY) - 100);
 		if (target.getType().equals(Material.AIR)) return;
 
 		ParticleUtil.spawn(Particle.CLOUD, target.getLocation(), 200, 0, 2, 0, 2);
@@ -34,7 +35,7 @@ public class Comet extends MagicSpell {
 		f.setVelocity(f.getVelocity().multiply(.1));
 		f.setYield(2);
 
-		takeMana(caster, mods);
+		takeMana(caster, val);
 	}
 
 }

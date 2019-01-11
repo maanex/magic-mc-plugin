@@ -11,12 +11,12 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
+import de.maanex.magic.wands.WandValues;
 import de.maanex.utils.ParticleUtil;
 
 
@@ -29,12 +29,12 @@ public class Levitate extends MagicSpell {
 	public static List<Player> inAir = new ArrayList<>();
 
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
+	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
 		if (!caster.getMCPlayer().isOnGround()) return;
 		caster.getMCPlayer().addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 20 * 10, -1, true));
 		caster.getMCPlayer().setVelocity(new Vector(0, 2, 0));
 		inAir.add(caster.getMCPlayer());
-		takeMana(caster, mods);
+		takeMana(caster, val);
 	}
 
 	public static void tick() {

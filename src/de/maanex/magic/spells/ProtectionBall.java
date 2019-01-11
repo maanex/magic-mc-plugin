@@ -7,12 +7,12 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
+import de.maanex.magic.wands.WandValues;
 import de.maanex.main.Main;
 
 
@@ -23,7 +23,7 @@ public class ProtectionBall extends MagicSpell {
 	}
 
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
+	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
 		Player p = caster.getMCPlayer();
 
 		double dis = 2.5;
@@ -32,7 +32,7 @@ public class ProtectionBall extends MagicSpell {
 			for (int y = -19; y < 19; y++)
 				place(p.getEyeLocation().clone().add(mod(p.getLocation(), i * 8, y * 10).getDirection().normalize().multiply(dis + Math.abs(y) / 10)), (Math.abs(y) + Math.abs(i)) / 3);
 
-		takeMana(caster, mods);
+		takeMana(caster, val);
 	}
 
 	private Location mod(Location l, int pitch, int yaw) {

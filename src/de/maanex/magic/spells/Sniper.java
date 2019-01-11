@@ -12,12 +12,13 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
+import de.maanex.magic.wands.WandValues;
+import de.maanex.magic.wands.WandValues.WandModifier;
 import de.maanex.main.Main;
 import de.maanex.utils.ParticleUtil;
 
@@ -29,13 +30,13 @@ public class Sniper extends MagicSpell {
 	}
 
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
+	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
 		caster.getMCPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20, 100, true));
 		caster.getMCPlayer().setVelocity(new Vector(0, 0, 0));
 		Location l = caster.getMCPlayer().getEyeLocation().clone();
-		drawRay(caster.getMCPlayer(), l.clone(), (int) (mods.getEnergy() * 1.5), Particle.CLOUD, false);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> drawRay(caster.getMCPlayer(), l, (int) (mods.getEnergy() * 1.5), Particle.CRIT_MAGIC, true), 20);
-		takeMana(caster, mods);
+		drawRay(caster.getMCPlayer(), l.clone(), (int) (val.getMod(WandModifier.ENERGY) * 1.5), Particle.CLOUD, false);
+		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> drawRay(caster.getMCPlayer(), l, (int) (val.getMod(WandModifier.ENERGY) * 1.5), Particle.CRIT_MAGIC, true), 20);
+		takeMana(caster, val);
 	}
 
 	private void drawRay(Player src, Location l, int dis, Particle particle, boolean dmg) {

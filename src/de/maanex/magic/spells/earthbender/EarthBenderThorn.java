@@ -13,12 +13,12 @@ import org.bukkit.entity.Entity;
 import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
+import de.maanex.magic.wands.WandValues;
 import de.maanex.main.Main;
 import de.maanex.utils.BlockUtil;
 
@@ -30,7 +30,7 @@ public class EarthBenderThorn extends MagicSpell {
 	}
 
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
+	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
 		Location l = caster.getMCPlayer().getLocation().clone().add(caster.getMCPlayer().getLocation().getDirection().multiply(caster.getMCPlayer().isSneaking() ? 15 : 5));
 		int c = 5;
 		while (c-- > 0 && !l.getBlock().getType().isSolid()) {
@@ -42,7 +42,7 @@ public class EarthBenderThorn extends MagicSpell {
 		Vector v = caster.getMCPlayer().getLocation().toVector().subtract(l.toVector()).normalize();
 		generateRock(new Random(), l, (int) (v.getX() * 2), (int) (v.getZ() * 2));
 
-		takeMana(caster, mods);
+		takeMana(caster, val);
 	}
 
 	private void generateRock(Random r, Location l, int xr, int zr) {

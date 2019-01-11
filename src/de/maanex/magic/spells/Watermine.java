@@ -13,7 +13,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.missile.MineMissile;
 import de.maanex.magic.missile.MineMissile.EntityEnterMineListener;
 import de.maanex.magic.spell.MagicSpell;
@@ -21,6 +20,8 @@ import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
+import de.maanex.magic.wands.WandValues;
+import de.maanex.magic.wands.WandValues.WandModifier;
 import de.maanex.utils.ParticleUtil;
 import de.maanex.utils.ParticleUtil.ParticlePreset;
 
@@ -32,8 +33,8 @@ public class Watermine extends MagicSpell {
 	}
 
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
-		Block b = caster.getMCPlayer().getTargetBlock(null, mods.getEnergy() / 20);
+	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
+		Block b = caster.getMCPlayer().getTargetBlock(null, val.getMod(WandModifier.ENERGY) / 20);
 		if (b == null || !b.getType().isSolid()) return;
 		Location l = b.getLocation().clone().add(.5, 1.05, .5);
 		MineMissile mis = new MineMissile(l, caster, 20 * 60 * 2, 4, .5, new ParticlePreset(Particle.WATER_WAKE, l, 2, 0, .2f, .2f, .2f));
@@ -55,7 +56,7 @@ public class Watermine extends MagicSpell {
 		});
 		mis.launch();
 
-		takeMana(caster, mods);
+		takeMana(caster, val);
 	}
 
 }

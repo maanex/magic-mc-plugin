@@ -13,7 +13,7 @@ public class WandModsGen {
 
 	public static LegacyWandModifiers generate() {
 		Random r = new Random();
-		int[] val = new int[] { 100, 100, 100 };
+		int[] val = { 100, 100, 100 };
 
 		int dyn = r.nextInt(3);
 

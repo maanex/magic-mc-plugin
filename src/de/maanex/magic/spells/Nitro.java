@@ -5,12 +5,12 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
+import de.maanex.magic.wands.WandValues;
 
 
 public class Nitro extends MagicSpell {
@@ -20,11 +20,11 @@ public class Nitro extends MagicSpell {
 	}
 
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
+	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
 		caster.getMCPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 60, 4, true, false));
 		caster.getMCPlayer().addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 40, 4, true, false));
 		caster.getMCPlayer().setVelocity(caster.getMCPlayer().getLocation().getDirection().multiply(2));
-		takeMana(caster, mods);
+		takeMana(caster, val);
 	}
 
 }

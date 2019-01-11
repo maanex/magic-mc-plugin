@@ -42,6 +42,11 @@ public class WandBuilder {
 		return this;
 	}
 
+	public WandBuilder setName(String name) {
+		this.name = name;
+		return this;
+	}
+
 	public WandBuilder setOwner(MagicPlayer player) {
 		this.owner = player.getMCPlayer().getUniqueId().toString();
 		return this;

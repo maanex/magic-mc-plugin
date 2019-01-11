@@ -8,12 +8,13 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
+import de.maanex.magic.wands.WandValues;
+import de.maanex.magic.wands.WandValues.WandModifier;
 import de.maanex.utils.ParticleUtil;
 import de.maanex.utils.TargetEntityFinder;
 
@@ -25,7 +26,7 @@ public class Piggyback extends MagicSpell {
 	}
 
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
+	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
 		Block b = caster.getMCPlayer().getTargetBlock(null, 200);
 
 		if (caster.getMCPlayer().getPassengers().size() > 0) return;
@@ -33,7 +34,7 @@ public class Piggyback extends MagicSpell {
 		Entity tar = TargetEntityFinder.find(b);
 		if (tar == null) return;
 
-		if (tar.getLocation().distance(caster.getMCPlayer().getLocation()) > mods.getEnergy() / 10) return;
+		if (tar.getLocation().distance(caster.getMCPlayer().getLocation()) > val.getMod(WandModifier.ENERGY) / 10) return;
 
 		if (tar instanceof Player) {
 			Player p = (Player) tar;
@@ -43,7 +44,7 @@ public class Piggyback extends MagicSpell {
 
 		caster.getMCPlayer().addPassenger(tar);
 
-		takeMana(caster, mods);
+		takeMana(caster, val);
 	}
 
 }

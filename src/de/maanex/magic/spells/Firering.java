@@ -11,12 +11,13 @@ import org.bukkit.entity.Fireball;
 import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
+import de.maanex.magic.wands.WandValues;
+import de.maanex.magic.wands.WandValues.WandModifier;
 import de.maanex.main.Main;
 
 
@@ -27,9 +28,9 @@ public class Firering extends MagicSpell {
 	}
 
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
+	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
 		List<Fireball> balls = new ArrayList<>();
-		Block target = caster.getMCPlayer().getTargetBlock(null, mods.getEnergy());
+		Block target = caster.getMCPlayer().getTargetBlock(null, val.getMod(WandModifier.ENERGY));
 		if (target == null || target.isEmpty()) return;
 		Location t = target.getLocation().clone();
 
@@ -54,7 +55,7 @@ public class Firering extends MagicSpell {
 			balls.clear();
 		}, 2);
 
-		takeMana(caster, mods);
+		takeMana(caster, val);
 	}
 
 }

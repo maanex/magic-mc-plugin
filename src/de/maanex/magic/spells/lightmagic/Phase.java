@@ -15,12 +15,12 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
+import de.maanex.magic.wands.WandValues;
 import de.maanex.main.Main;
 import de.maanex.utils.ParticleUtil;
 
@@ -32,11 +32,11 @@ public class Phase extends MagicSpell implements Listener {
 	}
 
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
+	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
 		caster.getMCPlayer().setGameMode(GameMode.SPECTATOR);
 		startTimer(caster);
 		inPhase.add(caster.getMCPlayer());
-		takeMana(caster, mods);
+		takeMana(caster, val);
 	}
 
 	private static List<Player> inPhase = new ArrayList<>();

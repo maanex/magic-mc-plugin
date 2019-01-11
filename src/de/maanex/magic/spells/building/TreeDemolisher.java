@@ -9,12 +9,13 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
+import de.maanex.magic.wands.WandValues;
+import de.maanex.magic.wands.WandValues.WandModifier;
 
 
 public class TreeDemolisher extends MagicSpell {
@@ -24,11 +25,11 @@ public class TreeDemolisher extends MagicSpell {
 	}
 
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
-		Block target = caster.getMCPlayer().getTargetBlock(null, mods.getEnergy() / 4);
+	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
+		Block target = caster.getMCPlayer().getTargetBlock(null, val.getMod(WandModifier.ENERGY) / 4);
 		checkAndBreakBlock(target.getLocation(), 0, true);
 
-		takeMana(caster, mods);
+		takeMana(caster, val);
 	}
 
 	private static List<Material>	logs;

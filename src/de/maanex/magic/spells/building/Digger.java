@@ -10,12 +10,13 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
+import de.maanex.magic.wands.WandValues;
+import de.maanex.magic.wands.WandValues.WandModifier;
 
 
 public class Digger extends MagicSpell {
@@ -40,8 +41,8 @@ public class Digger extends MagicSpell {
 	}
 
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
-		Block target = caster.getMCPlayer().getTargetBlock(null, Math.max(1, 5 + mods.getEnergy() / 4 - 20));
+	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
+		Block target = caster.getMCPlayer().getTargetBlock(null, Math.max(1, 5 + val.getMod(WandModifier.ENERGY) / 4 - 20));
 
 		for (int x = -r(); x <= r(); x++)
 			for (int z = -r(); z <= r(); z++)
@@ -51,7 +52,7 @@ public class Digger extends MagicSpell {
 					if (breakable.contains(l.getBlock().getType())) l.getBlock().breakNaturally();
 				}
 
-		takeMana(caster, mods);
+		takeMana(caster, val);
 	}
 
 	private int r() {

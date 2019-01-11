@@ -438,9 +438,9 @@ public class Main extends JavaPlugin {
 
 		MagicManager.registerSpellRecipe(new SpellRecipe(DeGrasser.class, DeGrasser.class, TreeDemolisher.class, 100));
 
-		MagicManager.registerSpellRecipe(new SpellRecipe(MasterBuildersEssence.class, EarthSpirit.class, Drill.class, 100));
+		MagicManager.registerSpellRecipe(new SpellRecipe(MasterBuildersEssence.class, EarthSpirit.class, Digger.class, 100));
 
-		MagicManager.registerSpellRecipe(new SpellRecipe(Drill.class, Drill.class, Digger.class, 100));
+		MagicManager.registerSpellRecipe(new SpellRecipe(Digger.class, Digger.class, Drill.class, 100));
 
 		MagicManager.registerSpellRecipe(new SpellRecipe(MasterBuildersEssence.class, AirSpirit.class, BlockSwarper.class, 100));
 
@@ -517,8 +517,8 @@ public class Main extends JavaPlugin {
 		MagicManager.registerSpellRecipe(new SpellRecipe(SnowStorm.class, EarthSpirit.class, SnowStorm.class, 45));
 		MagicManager.registerSpellRecipe(new SpellRecipe(SnowStorm.class, EarthSpirit.class, EarthSpirit.class, 45));
 
-		MagicManager.registerSpellRecipe(new SpellRecipe(AirArrowStorm.class, AirArrowStorm.class, AirArrowStorm.class, 95));
-		MagicManager.registerSpellRecipe(new SpellRecipe(AirArrowStorm.class, AirArrowStorm.class, ArrowAirstrike.class, 5));
+		MagicManager.registerSpellRecipe(new SpellRecipe(AirArrowStorm.class, AirArrowStorm.class, AirArrowStorm.class, 70));
+		MagicManager.registerSpellRecipe(new SpellRecipe(AirArrowStorm.class, AirArrowStorm.class, ArrowAirstrike.class, 30));
 
 		MagicManager.registerSpellRecipe(new SpellRecipe(ArrowStorm.class, AirArrowStorm.class, AirArrowStorm.class, 48));
 		MagicManager.registerSpellRecipe(new SpellRecipe(ArrowStorm.class, AirArrowStorm.class, ArrowStorm.class, 48));

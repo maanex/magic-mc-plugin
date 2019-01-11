@@ -9,13 +9,13 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.missile.MagmaMissile;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
+import de.maanex.magic.wands.WandValues;
 import de.maanex.utils.ParticleUtil;
 import de.maanex.utils.TargetEntityFinder;
 
@@ -27,7 +27,7 @@ public class MagmaWorm extends MagicSpell {
 	}
 
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
+	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
 		Block b = caster.getMCPlayer().getTargetBlock(null, 200);
 
 		Entity tar = TargetEntityFinder.find(b);
@@ -63,7 +63,7 @@ public class MagmaWorm extends MagicSpell {
 		MagmaMissile m = new MagmaMissile(tar.getLocation().clone().add(x, -10, z), caster, tar);
 		m.launch();
 
-		takeMana(caster, mods);
+		takeMana(caster, val);
 	}
 
 }

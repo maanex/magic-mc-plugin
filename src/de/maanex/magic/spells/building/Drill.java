@@ -9,12 +9,13 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
+import de.maanex.magic.wands.WandValues;
+import de.maanex.magic.wands.WandValues.WandModifier;
 
 
 public class Drill extends MagicSpell {
@@ -38,8 +39,8 @@ public class Drill extends MagicSpell {
 	}
 
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
-		Block target = caster.getMCPlayer().getTargetBlock(null, Math.max(1, 5 + mods.getEnergy() / 4 - 25));
+	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
+		Block target = caster.getMCPlayer().getTargetBlock(null, Math.max(1, 5 + val.getMod(WandModifier.ENERGY) / 4 - 25));
 
 		boolean face = Math.abs(target.getX() - caster.getMCPlayer().getLocation().getX()) < Math.abs(target.getZ() - caster.getMCPlayer().getLocation().getZ());
 
@@ -49,7 +50,7 @@ public class Drill extends MagicSpell {
 				if (breakable.contains(l.getBlock().getType())) l.getBlock().breakNaturally();
 			}
 
-		takeMana(caster, mods);
+		takeMana(caster, val);
 	}
 
 }

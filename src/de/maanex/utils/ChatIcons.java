@@ -4,10 +4,14 @@ package de.maanex.utils;
 public enum ChatIcons {
 
 	ELEMENTUM("elementum", 0), //
-	EARTH("earth", 1), //
-	WATER("water", 2), //
+	WATER("water", 1), //
+	EARTH("earth", 2), //
 	FIRE("fire", 3), //
-	AIR("air", 4),//
+	AIR("air", 4), //
+	DARK("dark", 5), //
+	LIGHT("light", 6), //
+	BUILDER("builder", 7), //
+	BENDER("bender", 8),//
 
 	;
 

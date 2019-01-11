@@ -20,12 +20,12 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
+import de.maanex.magic.wands.WandValues;
 import de.maanex.main.Main;
 import de.maanex.utils.ParticleUtil;
 
@@ -41,7 +41,7 @@ public class EarthBenderCannon extends MagicSpell implements Listener {
 
 	@SuppressWarnings({ "deprecation" })
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
+	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
 		if (blocks.containsKey(caster)) {
 			for (Entity e : caster.getMCPlayer().getWorld().getNearbyEntities(caster.getMCPlayer().getEyeLocation(), 2, 1, 2)) {
 				if (blocks.containsValue(e)) {
@@ -49,7 +49,7 @@ public class EarthBenderCannon extends MagicSpell implements Listener {
 					boolean found = false;
 					if (blocks.get(caster).equals(b)) {
 						blocks.remove(caster);
-						takeMana(caster, mods);
+						takeMana(caster, val);
 
 						b.setVelocity(b.getLocation().clone().subtract(caster.getMCPlayer().getLocation()).toVector().normalize().multiply(4).setY(.1));
 						shooten.add(b);
@@ -62,7 +62,7 @@ public class EarthBenderCannon extends MagicSpell implements Listener {
 				}
 			}
 
-			takeMana(caster, mods);
+			takeMana(caster, val);
 		} else {
 			Block b = caster.getMCPlayer().getTargetBlock(null, 5);
 			if (b == null || !b.getType().isSolid() || !b.getType().isOccluding() || !b.getLocation().clone().add(0, 1, 0).getBlock().isEmpty()) return;

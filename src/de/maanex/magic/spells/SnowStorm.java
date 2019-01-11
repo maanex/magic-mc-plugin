@@ -7,12 +7,12 @@ import org.bukkit.entity.Snowball;
 import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
+import de.maanex.magic.wands.WandValues;
 
 
 public class SnowStorm extends MagicSpell {
@@ -22,13 +22,13 @@ public class SnowStorm extends MagicSpell {
 	}
 
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
+	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
 		Random r = new Random();
 		int i = 50;
 		while (i-- > 0)
 			caster.getMCPlayer().launchProjectile(Snowball.class, caster.getMCPlayer().getLocation().getDirection().add(v(r)).normalize().multiply((double) r.nextInt(20) / 10));
 
-		takeMana(caster, mods);
+		takeMana(caster, val);
 	}
 
 	private Vector v(Random r) {

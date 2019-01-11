@@ -8,12 +8,12 @@ import org.bukkit.entity.Arrow.PickupStatus;
 import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
+import de.maanex.magic.wands.WandValues;
 
 
 public class ArrowStorm extends MagicSpell {
@@ -23,7 +23,7 @@ public class ArrowStorm extends MagicSpell {
 	}
 
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
+	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
 		Random r = new Random();
 		int i = 30;
 		while (i-- > 0) {
@@ -34,7 +34,7 @@ public class ArrowStorm extends MagicSpell {
 			a.setKnockbackStrength(2);
 		}
 
-		takeMana(caster, mods);
+		takeMana(caster, val);
 	}
 
 	private Vector v(Random r) {

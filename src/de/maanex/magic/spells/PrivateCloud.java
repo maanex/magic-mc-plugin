@@ -11,12 +11,12 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
+import de.maanex.magic.wands.WandValues;
 import de.maanex.main.Main;
 
 
@@ -27,7 +27,7 @@ public class PrivateCloud extends MagicSpell {
 	}
 
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
+	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
 		if (!caster.getMCPlayer().isOnGround()) return;
 
 		for (int i = 0; i <= 200; i += 3)
@@ -37,7 +37,7 @@ public class PrivateCloud extends MagicSpell {
 			caster.getMCPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 20 * 5, 2, true, false));
 		}, 200);
 
-		takeMana(caster, mods);
+		takeMana(caster, val);
 	}
 
 	private void tick(MagicPlayer player, int cd) {

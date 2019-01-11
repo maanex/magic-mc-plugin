@@ -42,7 +42,7 @@ public enum WandType {
 		if (!m.hasLore()) return null;
 		String txt = m.getLore().get(0);
 		if (!txt.startsWith("§0")) return null;
-		return getFromLoreName(txt.replace("§0", ""));
+		return getFromLoreName(txt.replace("§0", "").split(":")[0]);
 	}
 
 }

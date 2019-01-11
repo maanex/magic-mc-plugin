@@ -9,12 +9,13 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
+import de.maanex.magic.wands.WandValues;
+import de.maanex.magic.wands.WandValues.WandModifier;
 import de.maanex.main.Main;
 
 
@@ -26,8 +27,8 @@ public class TrueSight extends MagicSpell {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
-		Block target = caster.getMCPlayer().getTargetBlock(null, 20 + mods.getEnergy() - 100);
+	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
+		Block target = caster.getMCPlayer().getTargetBlock(null, 20 + val.getMod(WandModifier.ENERGY) - 100);
 		if (target.getType().equals(Material.AIR)) return;
 
 		for (int x = -2; x < 2; x++) {
@@ -38,12 +39,12 @@ public class TrueSight extends MagicSpell {
 					caster.getMCPlayer().sendBlockChange(l, Material.GLASS, (byte) 0);
 					Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> {
 						caster.getMCPlayer().sendBlockChange(l, l.getBlock().getType(), l.getBlock().getData());
-					}, mods.getEnergy() + new Random().nextInt(40));
+					}, val.getMod(WandModifier.ENERGY) + new Random().nextInt(40));
 				}
 			}
 		}
 
-		takeMana(caster, mods);
+		takeMana(caster, val);
 	}
 
 }

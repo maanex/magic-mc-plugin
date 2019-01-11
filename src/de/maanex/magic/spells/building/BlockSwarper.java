@@ -12,12 +12,13 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
+import de.maanex.magic.wands.WandValues;
+import de.maanex.magic.wands.WandValues.WandModifier;
 
 
 public class BlockSwarper extends MagicSpell {
@@ -29,9 +30,8 @@ public class BlockSwarper extends MagicSpell {
 	private static HashMap<MagicPlayer, Material> replacementBlocks = new HashMap<>();
 
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
-		Block target = caster.getMCPlayer().getTargetBlock(null, mods.getEnergy() / 4);
-
+	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
+		Block target = caster.getMCPlayer().getTargetBlock(null, val.getMod(WandModifier.ENERGY) / 4);
 		if (caster.getMCPlayer().isSneaking()) {
 			if (!target.isEmpty()) {
 				replacementBlocks.put(caster, target.getType());
@@ -68,7 +68,7 @@ public class BlockSwarper extends MagicSpell {
 							caster.getMCPlayer().playSound(caster.getMCPlayer().getEyeLocation(), Sound.ENTITY_ARMOR_STAND_PLACE, 1f, 1f);
 						} else caster.getMCPlayer().playSound(caster.getMCPlayer().getEyeLocation(), Sound.ENTITY_ARMOR_STAND_BREAK, 1f, 1f);
 					}
-			takeMana(caster, mods);
+			takeMana(caster, val);
 		}
 	}
 

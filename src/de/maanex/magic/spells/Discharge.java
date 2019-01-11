@@ -7,7 +7,6 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.missile.BasicMissile;
 import de.maanex.magic.missile.BasicMissile.BlockHitBehaviour;
 import de.maanex.magic.spell.MagicSpell;
@@ -15,6 +14,8 @@ import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
+import de.maanex.magic.wands.WandValues;
+import de.maanex.magic.wands.WandValues.WandModifier;
 import de.maanex.utils.ParticleUtil;
 
 
@@ -25,11 +26,11 @@ public class Discharge extends MagicSpell {
 	}
 
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
+	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
 		int mana = caster.getMana();
 		caster.setMana(0);
 
-		BasicMissile m = new BasicMissile(caster, (int) Math.sqrt(mana * mods.getEnergy()), .8, BlockHitBehaviour.ABSORB, //
+		BasicMissile m = new BasicMissile(caster, (int) Math.sqrt(mana * val.getMod(WandModifier.ENERGY)), .8, BlockHitBehaviour.ABSORB, //
 				l -> {
 					ParticleUtil.spawn(Particle.CRIT_MAGIC, l, 10, .2, .3, .3, .3);
 					return null;
@@ -41,7 +42,7 @@ public class Discharge extends MagicSpell {
 				});
 		m.launch();
 
-		takeMana(caster, mods);
+		takeMana(caster, val);
 	}
 
 }

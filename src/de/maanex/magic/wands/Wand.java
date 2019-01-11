@@ -12,6 +12,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class Wand {
 
+	public static final Wand OUTDATED = new Wand();
+
+	//
+
 	private WandType	type;
 	private short		skin;
 	private String		name;
@@ -43,7 +47,7 @@ public class Wand {
 		ItemMeta m = s.getItemMeta();
 
 		List<String> lore = new ArrayList<>();
-		lore.add("§0" + type.getLoreName() + ":" + owner);
+		lore.add("§0" + type.getLoreName() + ":" + "na" /* + owner */); // TODO + owner ABER ES WIRD HALT ZU LANG SONST
 
 		if (values != null) {
 			lore.add("");
@@ -55,6 +59,52 @@ public class Wand {
 
 		s.setItemMeta(m);
 		return s;
+	}
+
+	public static Wand fromItem(ItemStack s) {
+		if (s == null) return null;
+		if (!s.getType().equals(Material.WOODEN_HOE)) return null;
+		if (!s.hasItemMeta()) return null;
+		if (!s.getItemMeta().hasLore()) return null;
+
+		ItemMeta m = s.getItemMeta();
+		WandBuilder b = builder();
+
+		if (!m.getLore().get(0).contains(":")) return OUTDATED; // OUTDATED WAND
+
+		WandType type = WandType.getFromItem(s);
+		if (type == null) return null;
+		b.setType(type);
+		b.setSkin(s.getDurability());
+
+		if (type.equals(WandType.UNIDENTIFIED)) return b.build();
+
+		b.setOwner(m.getLore().get(0).split(":")[1]);
+		b.setValues(WandValues.fromLore(m.getLore()));
+
+		return b.build();
+	}
+
+	//
+
+	public WandType getType() {
+		return type;
+	}
+
+	public short getSkin() {
+		return skin;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getOwner() {
+		return owner;
+	}
+
+	public WandValues getValues() {
+		return values;
 	}
 
 	/*

@@ -11,12 +11,12 @@ import org.bukkit.entity.Arrow.PickupStatus;
 import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
-import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
+import de.maanex.magic.wands.WandValues;
 import de.maanex.main.Main;
 
 
@@ -27,7 +27,7 @@ public class AirArrowStorm extends MagicSpell {
 	}
 
 	@Override
-	protected void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods) {
+	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
 		Random r = new Random();
 		int i = 30;
 		List<Arrow> arrows = new ArrayList<>();
@@ -50,7 +50,7 @@ public class AirArrowStorm extends MagicSpell {
 			arrows.forEach(a -> a.remove());
 		}, 20 * 20);
 
-		takeMana(caster, mods);
+		takeMana(caster, val);
 	}
 
 	private Vector v(Random r) {

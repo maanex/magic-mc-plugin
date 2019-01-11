@@ -13,8 +13,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 import de.maanex.magic.MagicManager;
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.VisualUpdater;
-import de.maanex.magic._legacy.LegacyWandModifiers;
 import de.maanex.magic.wands.WandType;
+import de.maanex.magic.wands.WandValues;
+import de.maanex.magic.wands.WandValues.WandModifier;
 
 
 public abstract class MagicSpell {
@@ -49,29 +50,29 @@ public abstract class MagicSpell {
 		this.reqWandType = reqWandType;
 	}
 
-	protected abstract void onCastPerform(MagicPlayer caster, WandType type, LegacyWandModifiers mods);
+	protected abstract void onCastPerform(MagicPlayer caster, WandType type, WandValues val);
 
-	protected boolean canAffortSpell(MagicPlayer caster, LegacyWandModifiers mods) {
-		return (int) (manacost * ((double) mods.getManause() / 100)) <= caster.getMana();
+	protected boolean canAffortSpell(MagicPlayer caster, WandValues val) {
+		return (int) (manacost * ((double) val.getMod(WandModifier.MANAUSE) / 100)) <= caster.getMana();
 	}
 
-	protected void takeMana(MagicPlayer caster, LegacyWandModifiers mods) {
-		caster.addMana((int) (-manacost * ((double) mods.getManause() / 100)));
+	protected void takeMana(MagicPlayer caster, WandValues val) {
+		caster.addMana((int) (-manacost * ((double) val.getMod(WandModifier.MANAUSE) / 100)));
 
 		if (cooldown > 0 && !caster.getMCPlayer().getGameMode().equals(GameMode.CREATIVE)) caster.cooldown.put(this, cooldown);
 		VisualUpdater.updateCooldown(caster, true);
 	}
 
-	public void interaction(MagicPlayer player, WandType type, LegacyWandModifiers mod) {
-		if (canAffortSpell(player, mod)) {
+	public void interaction(MagicPlayer player, WandType type, WandValues val) {
+		if (canAffortSpell(player, val)) {
 			if (player.cooldown.containsKey(this)) {
 				player.getMCPlayer().sendMessage("§7Spell is on Cooldown!");
 				return;
 			}
 			if (reqWandType != null) {
-				if (type.equals(reqWandType)) onCastPerform(player, type, mod);
+				if (type.equals(reqWandType)) onCastPerform(player, type, val);
 				else player.getMCPlayer().sendMessage("§7Du benötigst für diesen Zauber einen geeigneten Zauberstab!");
-			} else onCastPerform(player, type, mod);
+			} else onCastPerform(player, type, val);
 		} else player.getMCPlayer().sendMessage("§7Du hast nicht genug Mana!");
 	}
 
