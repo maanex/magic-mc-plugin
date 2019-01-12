@@ -16,7 +16,7 @@ import de.maanex.utils.ParticleUtil;
 public class FireSpirit extends MagicSpell {
 
 	public FireSpirit() {
-		super(24, "Feuergeist", "Spiritu ardoris", 0, 0, SpellType.NOT_USEABLE, SpellCategory.UTILITY, SpellRarity.COMMON);
+		super(24, "Feuergeist", "Spiritu ardoris", 0, 0, SpellType.NOT_USEABLE, SpellCategory.UTILITY, SpellRarity.BASIC);
 	}
 
 	@Override

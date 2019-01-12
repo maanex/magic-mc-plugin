@@ -13,7 +13,7 @@ import de.maanex.magic.wands.WandValues;
 public class Elementum extends MagicSpell {
 
 	public Elementum() {
-		super(23, "Elementum", "Der Grundbaustein der Magie!", 0, 0, SpellType.NOT_USEABLE, SpellCategory.UTILITY, SpellRarity.COMMON);
+		super(23, "Elementum", "Der Grundbaustein der Magie!", 0, 0, SpellType.NOT_USEABLE, SpellCategory.UTILITY, SpellRarity.BASIC);
 	}
 
 	@Override

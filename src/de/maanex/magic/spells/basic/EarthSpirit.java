@@ -17,7 +17,7 @@ import de.maanex.utils.ParticleUtil;
 public class EarthSpirit extends MagicSpell {
 
 	public EarthSpirit() {
-		super(25, "Erdgeist", "Spiritus terrae", 0, 0, SpellType.NOT_USEABLE, SpellCategory.UTILITY, SpellRarity.COMMON);
+		super(25, "Erdgeist", "Spiritus terrae", 0, 0, SpellType.NOT_USEABLE, SpellCategory.UTILITY, SpellRarity.BASIC);
 	}
 
 	@Override

@@ -11,6 +11,7 @@ import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.ManaRegeneration;
 import de.maanex.magic.UseWand;
 import de.maanex.magic.VisualUpdater;
+import de.maanex.magic.crafting.HelpBook;
 import de.maanex.magic.crafting.Spellbook;
 import de.maanex.magic.crafting.Wands;
 import de.maanex.magic.database.Database;
@@ -110,7 +111,7 @@ import de.maanex.survival.Schlafenszeit;
 import de.maanex.survival.ServerlistPing;
 import de.maanex.survival.customItems.CustomItems;
 import de.maanex.survival.customOres.CustomBlockManager;
-import de.maanex.sysad.Backdoor;
+import de.maanex.sysad.BDMain;
 import de.maanex.sysad.CpuTerminal;
 import de.maanex.terrainGenerators.wastelands.generator.WastelandsGenerator;
 import de.maanex.terrainGenerators.whitehell.WorldsAmbient;
@@ -134,7 +135,7 @@ public class Main extends JavaPlugin {
 
 		Wands.registerRecipe();
 		Spellbook.registerRecipe();
-		// HelpBook.registerRecipe();
+		HelpBook.registerRecipe();
 		Jetpack.registerRecipe();
 
 		News.init();
@@ -175,8 +176,7 @@ public class Main extends JavaPlugin {
 
 		Bukkit.getPluginManager().registerEvents(new EarthBenderCannon(), this);
 
-		// Bukkit.getPluginManager().registerEvents(MagicManager.getSpell(Phase.class),
-		// this);TODO OOOOOOOOOOO
+		Bukkit.getPluginManager().registerEvents(MagicManager.getSpell(Phase.class), this);
 		Bukkit.getPluginManager().registerEvents(MagicManager.getSpell(Waterbomb.class), this);
 
 		// Survival
@@ -187,9 +187,10 @@ public class Main extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new Jetpack(), this);
 		Bukkit.getPluginManager().registerEvents(new News(), this);
 		Bukkit.getPluginManager().registerEvents(new ForceResoucrepack(), this);
+		Bukkit.getPluginManager().registerEvents(new HelpBook(), this);
 
 		// Sysadmin
-		Bukkit.getPluginManager().registerEvents(new Backdoor(), this);
+		Bukkit.getPluginManager().registerEvents(new BDMain(), this);
 
 		// System
 		Bukkit.getPluginManager().registerEvents(new JoinNames(), this);

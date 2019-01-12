@@ -16,7 +16,7 @@ import de.maanex.utils.ParticleUtil;
 public class AirSpirit extends MagicSpell {
 
 	public AirSpirit() {
-		super(27, "Luftgeist", "Spiritus caeli", 0, 0, SpellType.NOT_USEABLE, SpellCategory.UTILITY, SpellRarity.COMMON);
+		super(27, "Luftgeist", "Spiritus caeli", 0, 0, SpellType.NOT_USEABLE, SpellCategory.UTILITY, SpellRarity.BASIC);
 	}
 
 	@Override

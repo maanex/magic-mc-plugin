@@ -14,7 +14,7 @@ import de.maanex.utils.ParticleUtil;
 public class WaterSpirit extends MagicSpell {
 
 	public WaterSpirit() {
-		super(26, "Wassergeist", "Spiritus Aqua", 0, 0, SpellType.NOT_USEABLE, SpellCategory.UTILITY, SpellRarity.COMMON);
+		super(26, "Wassergeist", "Spiritus Aqua", 0, 0, SpellType.NOT_USEABLE, SpellCategory.UTILITY, SpellRarity.BASIC);
 	}
 
 	@Override

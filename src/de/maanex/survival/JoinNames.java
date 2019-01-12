@@ -26,6 +26,9 @@ public class JoinNames implements Listener {
 			// e.getPlayer().setPlayerListName("§7[§9Dev§7] §fMaanex");
 			// break;
 		}
+
+		String msg = "§fWelcome §6%s§f!§7 This server uses the Tude Magic Addon, download the resource pack here: §9§nhttp://bit.ly/TudeMP";
+		e.getPlayer().sendMessage(String.format(msg, e.getPlayer().getName()));
 	}
 
 	@EventHandler
