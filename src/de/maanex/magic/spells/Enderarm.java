@@ -12,13 +12,13 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
+import de.maanex.magic.basic.Element;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
 import de.maanex.magic.wands.WandValues;
-import de.maanex.magic.wands.WandValues.WandModifier;
 import de.maanex.utils.ParticleUtil;
 import de.maanex.utils.TargetEntityFinder;
 
@@ -26,7 +26,7 @@ import de.maanex.utils.TargetEntityFinder;
 public class Enderarm extends MagicSpell {
 
 	public Enderarm() {
-		super(38, "Enderarm", "Muhahahaha!", 1, 0, SpellType.ACTIVE, SpellCategory.UTILITY, SpellRarity.EPIC);
+		super(38, "Enderarm", "Muhahahaha!", 1, 0, SpellType.ACTIVE, SpellCategory.UTILITY, SpellRarity.EPIC, "Reichweite :earth:");
 	}
 
 	private static HashMap<MagicPlayer, LivingEntity>	drag	= new HashMap<>();
@@ -36,13 +36,15 @@ public class Enderarm extends MagicSpell {
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
+		if (val.getElement(Element.EARTH) <= 0) return;
+
 		if (drag.containsKey(caster)) {
 			drag.remove(caster);
 			dist.remove(caster);
 			slot.remove(caster);
 			tick.remove(caster);
 		} else {
-			Block b = caster.getMCPlayer().getTargetBlock(null, val.getMod(WandModifier.ENERGY) / 2);
+			Block b = caster.getMCPlayer().getTargetBlock(null, val.getElement(Element.EARTH) * 5);
 			if (b == null || b.isEmpty()) return;
 
 			Entity tar = TargetEntityFinder.find(b);

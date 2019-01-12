@@ -192,33 +192,33 @@ public class WandGenerator {
 	}
 
 	private static short getFittingSkin(WandValues val, WandType type, Environment environment) {
-		int nrg = val.getMod(WandModifier.ENERGY);
+		int xpb = val.getMod(WandModifier.XPBONUS);
 		int mnu = val.getMod(WandModifier.MANAUSE);
-		if (nrg == -1) return 1;
+		if (xpb == -1) return 1;
 
 		if (type.equals(WandType.DARK)) {
-			if (nrg >= 115) return 8;
+			if (xpb >= 115) return 8;
 			else return 7;
 		}
 
 		if (type.equals(WandType.LIGHT)) {
-			if (nrg >= 115) return 10;
+			if (xpb >= 115) return 10;
 			else return 9;
 		}
 
 		if (Environment.NETHER.equals(environment)) {
-			if (nrg > 110) return 12;
+			if (xpb > 110) return 12;
 			if (mnu < 90) return 11;
 		}
 
 		if (Environment.THE_END.equals(environment)) {
-			if (nrg > 110) return 14;
+			if (xpb > 110) return 14;
 			if (mnu < 90) return 13;
 		}
 
 		if (new Random().nextInt(30) == 0) return 6;
 
-		if (Math.abs(nrg - 100) > 20 || Math.abs(mnu - 100) > 20) return 3;
+		if (Math.abs(xpb - 100) > 20 || Math.abs(mnu - 100) > 20) return 3;
 
 		if (val.getModsSize() > 1) return 5;
 

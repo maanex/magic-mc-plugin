@@ -9,19 +9,19 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 
 import de.maanex.magic.MagicPlayer;
+import de.maanex.magic.basic.Element;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
 import de.maanex.magic.wands.WandValues;
-import de.maanex.magic.wands.WandValues.WandModifier;
 
 
 public class Drill extends MagicSpell {
 
 	public Drill() {
-		super(47, "Bohrer", "Brum brum!", 3, 0, SpellType.ACTIVE, SpellCategory.BUILDING, SpellRarity.RARE);
+		super(47, "Bohrer", "Brum brum!", 3, 0, SpellType.ACTIVE, SpellCategory.BUILDING, SpellRarity.RARE, "Reichweite :earth:");
 	}
 
 	private static List<Material> breakable;
@@ -40,7 +40,9 @@ public class Drill extends MagicSpell {
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
-		Block target = caster.getMCPlayer().getTargetBlock(null, Math.max(1, 5 + val.getMod(WandModifier.ENERGY) / 4 - 25));
+		if (val.getElement(Element.ESSENCE_BUILDER) <= 0) return;
+
+		Block target = caster.getMCPlayer().getTargetBlock(null, Math.max(1, val.getElement(Element.EARTH)));
 
 		boolean face = Math.abs(target.getX() - caster.getMCPlayer().getLocation().getX()) < Math.abs(target.getZ() - caster.getMCPlayer().getLocation().getZ());
 

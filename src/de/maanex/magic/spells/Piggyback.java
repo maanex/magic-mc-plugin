@@ -8,13 +8,13 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import de.maanex.magic.MagicPlayer;
+import de.maanex.magic.basic.Element;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
 import de.maanex.magic.wands.WandValues;
-import de.maanex.magic.wands.WandValues.WandModifier;
 import de.maanex.utils.ParticleUtil;
 import de.maanex.utils.TargetEntityFinder;
 
@@ -22,7 +22,7 @@ import de.maanex.utils.TargetEntityFinder;
 public class Piggyback extends MagicSpell {
 
 	public Piggyback() {
-		super(72, "Huckepack", "YAY!", 0, 5, SpellType.ACTIVE, SpellCategory.UTILITY, SpellRarity.EPIC);
+		super(72, "Huckepack", "YAY!", 0, 5, SpellType.ACTIVE, SpellCategory.UTILITY, SpellRarity.EPIC, "Reichweite :air:");
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class Piggyback extends MagicSpell {
 		Entity tar = TargetEntityFinder.find(b);
 		if (tar == null) return;
 
-		if (tar.getLocation().distance(caster.getMCPlayer().getLocation()) > val.getMod(WandModifier.ENERGY) / 10) return;
+		if (tar.getLocation().distance(caster.getMCPlayer().getLocation()) > val.getElement(Element.AIR)) return;
 
 		if (tar instanceof Player) {
 			Player p = (Player) tar;

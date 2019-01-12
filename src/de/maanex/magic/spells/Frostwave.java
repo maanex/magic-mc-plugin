@@ -17,6 +17,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import de.maanex.magic.MagicPlayer;
+import de.maanex.magic.basic.Element;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
@@ -30,7 +31,7 @@ import de.maanex.utils.ParticleUtil;
 public class Frostwave extends MagicSpell {
 
 	public Frostwave() {
-		super(13, "Frostwelle", "Brrrr!", 2, 3, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.VERY_RARE);
+		super(13, "Frostwelle", "Brrrr!", 2, 3, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.VERY_RARE, "Schaden :water:", "Dauer :earth:");
 	}
 
 	@SuppressWarnings("deprecation")
@@ -64,14 +65,14 @@ public class Frostwave extends MagicSpell {
 										p.sendBlockChange(b.getLocation(), b.getType(), b.getData());
 									ParticleUtil.spawn(Particle.BLOCK_CRACK, b.getLocation().add(.5, 1, .5), 5, 1, 0, 0, 0, b.getBlockData());
 								}
-							}, new Random().nextInt(40) + 60);
+							}, new Random().nextInt(40) + val.getElement(Element.EARTH) * 5);
 						}
 						for (Entity en : b.getChunk().getEntities()) {
 							if (en.getWorld().equals(caster.getMCPlayer().getWorld()) && !en.equals(caster.getMCPlayer())) {
 								if (en.getLocation().distance(b.getLocation()) < 1.1 && !damaged.contains(en)) {
 									damaged.add(en);
 									try {
-										((LivingEntity) en).damage(7, caster.getMCPlayer());
+										((LivingEntity) en).damage(val.getElement(Element.WATER) / 2, caster.getMCPlayer());
 										((LivingEntity) en).addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 60, 1));
 									} catch (Exception e2) {
 										// 8)

@@ -8,6 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 
 import de.maanex.magic.MagicPlayer;
+import de.maanex.magic.basic.Element;
 import de.maanex.magic.missile.EarthPotterMissile;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
@@ -15,7 +16,6 @@ import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
 import de.maanex.magic.wands.WandValues;
-import de.maanex.magic.wands.WandValues.WandModifier;
 
 
 public class EarthBenderPotter extends MagicSpell {
@@ -26,7 +26,10 @@ public class EarthBenderPotter extends MagicSpell {
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
-		Block b = caster.getMCPlayer().getTargetBlock(null, 50 + val.getMod(WandModifier.ENERGY) - 100);
+		if (val.getElement(Element.EARTH) <= 0) return;
+		if (val.getElement(Element.ESSENCE_BENDER) <= 0) return;
+
+		Block b = caster.getMCPlayer().getTargetBlock(null, val.getElement(Element.EARTH) * 10);
 		if (b.getType().equals(Material.AIR)) return;
 
 		Random r = new Random();

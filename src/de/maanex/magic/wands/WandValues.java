@@ -118,7 +118,6 @@ public class WandValues {
 
 	public static enum WandModifier {
 
-		ENERGY("me", "Energie", "§fEnergie§7: §f#§7%", 100, 50), //
 		SAVETY("ms", "Sicherheit", "§eSicherheit§6: §e#§6%", 100, 50), //
 		MANAUSE("mm", "Manaverbrauch", "§3Manaverbrauch§9: §3#§9%", 100, 30), //
 		COOLDOWNREDUCTION("mc", "Cooldown", "§7Cooldown§8: §7#§8%", 100, 50), //

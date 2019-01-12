@@ -10,27 +10,27 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 
 import de.maanex.magic.MagicPlayer;
+import de.maanex.magic.basic.Element;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
 import de.maanex.magic.wands.WandValues;
-import de.maanex.magic.wands.WandValues.WandModifier;
 import de.maanex.utils.ParticleUtil;
 
 
 public class TheConnector extends MagicSpell {
 
 	public TheConnector() {
-		super(32, "Der Verbinder", "Richtig eingesetzt, vermag man ihm groﬂe Macht!", 5, 3, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.RARE);
+		super(32, "Der Verbinder", "Richtig eingesetzt, vermag man ihm groﬂe Macht!", 5, 3, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.RARE, "Reichweite :air:");
 	}
 
 	HashMap<MagicPlayer, Location> pos = new HashMap<>();
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
-		Block target = caster.getMCPlayer().getTargetBlock(null, val.getMod(WandModifier.ENERGY) / 2);
+		Block target = caster.getMCPlayer().getTargetBlock(null, 1 + val.getElement(Element.AIR) * 3);
 		if (target == null || target.isEmpty()) return;
 
 		if (!pos.containsKey(caster)) {
@@ -42,11 +42,11 @@ public class TheConnector extends MagicSpell {
 			pos.remove(caster);
 
 			if (!l1.getWorld().equals(l2.getWorld())) return;
-			if (l1.distance(l2) > val.getMod(WandModifier.ENERGY)) {
+			if (l1.distance(l2) > (1 + val.getElement(Element.AIR)) * 4) {
 				caster.getMCPlayer().sendMessage("ß8Zu weit auseinander!");
 				return;
 			}
-			if (l1.distance(l2) < 10) {
+			if (l1.distance(l2) < (1 + val.getElement(Element.AIR))) {
 				caster.getMCPlayer().sendMessage("ß8Zu nah beinander!");
 				return;
 			}

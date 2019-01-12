@@ -105,7 +105,8 @@ public class NBTEditor {
 			if (version.contains("1_12")) {
 				methodCache.put("setTileTag", getNMSClass("TileEntity").getMethod("load", getNMSClass("NBTTagCompound")));
 			} else {
-				methodCache.put("setTileTag", getNMSClass("TileEntity").getMethod("a", getNMSClass("NBTTagCompound")));
+				// methodCache.put("setTileTag", getNMSClass("TileEntity").getMethod("a",
+				// getNMSClass("NBTTagCompound"))); TODO
 			}
 			methodCache.put("getTileEntity", getNMSClass("World").getMethod("getTileEntity", getNMSClass("BlockPosition")));
 			methodCache.put("getWorldHandle", getNMSClass("CraftWorld").getMethod("getHandle"));

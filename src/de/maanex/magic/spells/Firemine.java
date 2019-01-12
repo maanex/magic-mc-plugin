@@ -10,6 +10,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 
 import de.maanex.magic.MagicPlayer;
+import de.maanex.magic.basic.Element;
 import de.maanex.magic.missile.MineMissile;
 import de.maanex.magic.missile.MineMissile.EntityEnterMineListener;
 import de.maanex.magic.spell.MagicSpell;
@@ -18,7 +19,6 @@ import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
 import de.maanex.magic.wands.WandValues;
-import de.maanex.magic.wands.WandValues.WandModifier;
 import de.maanex.utils.ParticleUtil;
 import de.maanex.utils.ParticleUtil.ParticlePreset;
 
@@ -26,12 +26,13 @@ import de.maanex.utils.ParticleUtil.ParticlePreset;
 public class Firemine extends MagicSpell {
 
 	public Firemine() {
-		super(28, "Feuermine", "Huch!", 5, 3, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.RARE);
+		super(28, "Feuermine", "Huch!", 5, 3, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.RARE, "Schaden :fire:", "Reichweite :earth:");
 	}
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
-		Block b = caster.getMCPlayer().getTargetBlock(null, val.getMod(WandModifier.ENERGY) / 20);
+		if (val.getElement(Element.FIRE) <= 0) return;
+		Block b = caster.getMCPlayer().getTargetBlock(null, val.getElement(Element.FIRE) / 2);
 		if (b == null || !b.getType().isSolid()) return;
 		Location l = b.getLocation().clone().add(.5, 1.05, .5);
 		MineMissile mis = new MineMissile(l, caster, 20 * 60 * 2, 4, .5, new ParticlePreset(Particle.FLAME, l, 1, 0, .2f, .1f, .2f));
@@ -43,7 +44,7 @@ public class Firemine extends MagicSpell {
 		mis.setListener(new EntityEnterMineListener() {
 			@Override
 			public void onEnter(Entity e) {
-				e.setFireTicks(100);
+				e.setFireTicks(val.getElement(Element.FIRE) * 10);
 				ParticleUtil.spawn(pa);
 				ParticleUtil.spawn(pa);
 				ParticleUtil.spawn(pa);

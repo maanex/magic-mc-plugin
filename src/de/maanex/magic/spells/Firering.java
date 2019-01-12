@@ -11,26 +11,27 @@ import org.bukkit.entity.Fireball;
 import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
+import de.maanex.magic.basic.Element;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
 import de.maanex.magic.wands.WandValues;
-import de.maanex.magic.wands.WandValues.WandModifier;
 import de.maanex.main.Main;
 
 
 public class Firering extends MagicSpell {
 
 	public Firering() {
-		super(36, "Feuerring", "Schaut nicht nur verdamt geil aus, sondern macht auch noch aua!", 6, 20, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.EPIC);
+		super(36, "Feuerring", "Schaut nicht nur verdamt geil aus, sondern macht auch noch aua!", 6, 20, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.EPIC, "Reichweite :fire:");
 	}
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
+		if (val.getElement(Element.FIRE) <= 0) return;
 		List<Fireball> balls = new ArrayList<>();
-		Block target = caster.getMCPlayer().getTargetBlock(null, val.getMod(WandModifier.ENERGY));
+		Block target = caster.getMCPlayer().getTargetBlock(null, val.getElement(Element.FIRE) * 10);
 		if (target == null || target.isEmpty()) return;
 		Location t = target.getLocation().clone();
 

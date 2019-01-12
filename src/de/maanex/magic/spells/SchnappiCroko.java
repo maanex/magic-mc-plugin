@@ -14,6 +14,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import de.maanex.magic.MagicPlayer;
+import de.maanex.magic.basic.Element;
 import de.maanex.magic.missile.MineMissile;
 import de.maanex.magic.missile.MineMissile.EntityEnterMineListener;
 import de.maanex.magic.spell.MagicSpell;
@@ -22,7 +23,6 @@ import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
 import de.maanex.magic.wands.WandValues;
-import de.maanex.magic.wands.WandValues.WandModifier;
 import de.maanex.utils.ParticleUtil;
 import de.maanex.utils.ParticleUtil.ParticlePreset;
 
@@ -30,12 +30,12 @@ import de.maanex.utils.ParticleUtil.ParticlePreset;
 public class SchnappiCroko extends MagicSpell {
 
 	public SchnappiCroko() {
-		super(60, "Schnappi das kleine Krokodil", "Schni schna schappi! Schappi schnappi schnap!", 5, 3, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.RARE);
+		super(60, "Schnappi das kleine Krokodil", "Schni schna schappi! Schappi schnappi schnap!", 5, 3, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.RARE, "Reichweite :earth:");
 	}
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
-		Block b = caster.getMCPlayer().getTargetBlock(null, val.getMod(WandModifier.ENERGY) / 20);
+		Block b = caster.getMCPlayer().getTargetBlock(null, val.getElement(Element.EARTH) / 2);
 		if (b == null || !b.getType().isSolid()) return;
 		Location l = b.getLocation().clone().add(.5, 1.05, .5);
 		MineMissile mis = new MineMissile(l, caster, 20 * 60 * 2, 0, .5, new ParticlePreset(Particle.SMOKE_NORMAL, l, 1, 0, .2f, .1f, .2f));

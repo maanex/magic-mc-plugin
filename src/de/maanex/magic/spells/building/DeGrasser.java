@@ -9,19 +9,19 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 
 import de.maanex.magic.MagicPlayer;
+import de.maanex.magic.basic.Element;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
 import de.maanex.magic.wands.WandValues;
-import de.maanex.magic.wands.WandValues.WandModifier;
 
 
 public class DeGrasser extends MagicSpell {
 
 	public DeGrasser() {
-		super(42, "Rasenmäher", "Ein Super Entgrasungswerkzeug!", 1, 5, SpellType.ACTIVE, SpellCategory.BUILDING, SpellRarity.COMMON);
+		super(42, "Rasenmäher", "Ein Super Entgrasungswerkzeug!", 1, 5, SpellType.ACTIVE, SpellCategory.BUILDING, SpellRarity.COMMON, "Reichweite :fire:", "Größe :builder:");
 	}
 
 	private static List<Material> grass;
@@ -36,11 +36,15 @@ public class DeGrasser extends MagicSpell {
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
-		Block target = caster.getMCPlayer().getTargetBlock(null, val.getMod(WandModifier.ENERGY) / 4);
+		if (val.getElement(Element.ESSENCE_BUILDER) <= 0) return;
 
-		for (int x = -10; x < 10; x++)
-			for (int y = -5; y < 5; y++)
-				for (int z = -10; z < 10; z++) {
+		Block target = caster.getMCPlayer().getTargetBlock(null, 1 + val.getElement(Element.FIRE) * 2);
+
+		int ra = val.getElement(Element.ESSENCE_BUILDER);
+
+		for (int x = -ra; x < ra; x++)
+			for (int y = -ra / 2; y < ra / 2; y++)
+				for (int z = -ra; z < ra; z++) {
 					Location l = target.getLocation().clone().add(x, y, z);
 					if (grass.contains(l.getBlock().getType())) l.getBlock().breakNaturally();
 				}

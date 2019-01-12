@@ -20,6 +20,7 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
+import de.maanex.magic.basic.Element;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
@@ -42,6 +43,9 @@ public class EarthBenderCannon extends MagicSpell implements Listener {
 	@SuppressWarnings({ "deprecation" })
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
+		if (val.getElement(Element.EARTH) <= 0) return;
+		if (val.getElement(Element.ESSENCE_BENDER) <= 0) return;
+
 		if (blocks.containsKey(caster)) {
 			for (Entity e : caster.getMCPlayer().getWorld().getNearbyEntities(caster.getMCPlayer().getEyeLocation(), 2, 1, 2)) {
 				if (blocks.containsValue(e)) {

@@ -8,6 +8,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import de.maanex.magic.MagicPlayer;
+import de.maanex.magic.basic.Element;
 import de.maanex.magic.missile.PainfullStingMissile;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
@@ -22,12 +23,13 @@ import de.maanex.utils.TargetEntityFinder;
 public class PainfullSting extends MagicSpell {
 
 	public PainfullSting() {
-		super(14, "Schmerzhafter Stich", "Autsch!", 5, 1, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.RARE);
+		super(14, "Schmerzhafter Stich", "Autsch!", 5, 1, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.RARE, "Reichweite :air:");
 	}
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
-		Block b = caster.getMCPlayer().getTargetBlock(null, 200);
+		if (val.getElement(Element.AIR) <= 0) return;
+		Block b = caster.getMCPlayer().getTargetBlock(null, val.getElement(Element.AIR) * 20);
 
 		Entity tar = TargetEntityFinder.find(b);
 		if (tar == null) return;

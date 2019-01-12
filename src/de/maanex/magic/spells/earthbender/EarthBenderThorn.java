@@ -13,6 +13,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
+import de.maanex.magic.basic.Element;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
@@ -31,6 +32,9 @@ public class EarthBenderThorn extends MagicSpell {
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
+		if (val.getElement(Element.EARTH) <= 0) return;
+		if (val.getElement(Element.ESSENCE_BENDER) <= 0) return;
+
 		Location l = caster.getMCPlayer().getLocation().clone().add(caster.getMCPlayer().getLocation().getDirection().multiply(caster.getMCPlayer().isSneaking() ? 15 : 5));
 		int c = 5;
 		while (c-- > 0 && !l.getBlock().getType().isSolid()) {

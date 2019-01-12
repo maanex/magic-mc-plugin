@@ -12,6 +12,7 @@ import org.bukkit.entity.EvokerFangs;
 import org.bukkit.entity.Player;
 
 import de.maanex.magic.MagicPlayer;
+import de.maanex.magic.basic.Element;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
@@ -31,6 +32,8 @@ public class TheSeeker extends MagicSpell {
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
+		if (val.getElement(Element.ESSENCE_DARK) <= 0) return;
+
 		Block b = caster.getMCPlayer().getTargetBlock(null, 200);
 		Entity tar = TargetEntityFinder.find(b);
 		if (tar == null) return;

@@ -15,6 +15,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import de.maanex.magic.MagicPlayer;
+import de.maanex.magic.basic.Element;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
@@ -33,6 +34,8 @@ public class Phase extends MagicSpell implements Listener {
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
+		if (val.getElement(Element.ESSENCE_LIGHT) <= 0) return;
+
 		caster.getMCPlayer().setGameMode(GameMode.SPECTATOR);
 		startTimer(caster);
 		inPhase.add(caster.getMCPlayer());

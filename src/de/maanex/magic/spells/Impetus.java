@@ -9,13 +9,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
+import de.maanex.magic.basic.Element;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
 import de.maanex.magic.wands.WandValues;
-import de.maanex.magic.wands.WandValues.WandModifier;
 import de.maanex.main.Main;
 import de.maanex.utils.ParticleUtil;
 
@@ -23,12 +23,12 @@ import de.maanex.utils.ParticleUtil;
 public class Impetus extends MagicSpell {
 
 	public Impetus() {
-		super(33, "Impetus", "WUUUSCH!", 1, 10, SpellType.ACTIVE, SpellCategory.UTILITY, SpellRarity.VERY_RARE);
+		super(33, "Impetus", "WUUUSCH!", 1, 10, SpellType.ACTIVE, SpellCategory.UTILITY, SpellRarity.VERY_RARE, "Dauer :air:");
 	}
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
-		for (int i = 0; i < val.getMod(WandModifier.ENERGY) / 2; i += 2)
+		for (int i = 0; i < val.getElement(Element.AIR) * 5; i += 2)
 			perform(caster.getMCPlayer(), i);
 		takeMana(caster, val);
 	}

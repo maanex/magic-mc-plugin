@@ -175,7 +175,8 @@ public class Main extends JavaPlugin {
 
 		Bukkit.getPluginManager().registerEvents(new EarthBenderCannon(), this);
 
-		Bukkit.getPluginManager().registerEvents(MagicManager.getSpell(Phase.class), this);
+		// Bukkit.getPluginManager().registerEvents(MagicManager.getSpell(Phase.class),
+		// this);TODO OOOOOOOOOOO
 		Bukkit.getPluginManager().registerEvents(MagicManager.getSpell(Waterbomb.class), this);
 
 		// Survival

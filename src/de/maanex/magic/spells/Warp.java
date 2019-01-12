@@ -25,7 +25,7 @@ import de.maanex.utils.ParticleUtil;
 public class Warp extends MagicSpell {
 
 	public Warp() {
-		super(8, "Warp", "Zack, Zack - Hier, Dort", 2, 0, SpellType.ACTIVE, SpellCategory.UTILITY, SpellRarity.RARE);
+		super(8, "Warp", "Zack, Zack - Hier, Dort", 2, 0, SpellType.ACTIVE, SpellCategory.UTILITY, SpellRarity.RARE, "Lichtwarp :light:", "Dunkelwarp :dark:");
 	}
 
 	private static HashMap<Player, Integer> dark_wand_show_tasks = new HashMap<>();

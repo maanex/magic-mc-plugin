@@ -11,6 +11,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import de.maanex.magic.MagicPlayer;
+import de.maanex.magic.basic.Element;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
@@ -23,19 +24,21 @@ import de.maanex.main.Main;
 public class PrivateCloud extends MagicSpell {
 
 	public PrivateCloud() {
-		super(65, "Private Wolke", "Luxusartikel!", 1, 30, SpellType.ACTIVE, SpellCategory.UTILITY, SpellRarity.VERY_RARE);
+		super(65, "Private Wolke", "Luxusartikel!", 1, 30, SpellType.ACTIVE, SpellCategory.UTILITY, SpellRarity.VERY_RARE, "Dauer :air:");
 	}
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
 		if (!caster.getMCPlayer().isOnGround()) return;
 
-		for (int i = 0; i <= 200; i += 3)
+		int dur = val.getElement(Element.AIR) * 20;
+
+		for (int i = 0; i <= dur; i += 3)
 			tick(caster, i);
 
 		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> {
 			caster.getMCPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW_FALLING, 20 * 5, 2, true, false));
-		}, 200);
+		}, dur);
 
 		takeMana(caster, val);
 	}

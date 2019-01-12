@@ -26,7 +26,8 @@ public class ManaDbInterface {
 		player.setMana(Database.get(struuid(player) + ".mana", Integer.class));
 		player.setManaCap(Database.get(struuid(player) + ".manaCap", Integer.class));
 		player.setMaxMana(Database.get(struuid(player) + ".maxMana", Integer.class));
-		player.setResearchedRecipes(processResRecSave(Database.get(struuid(player) + ".researchedRecipes")));
+		// player.setResearchedRecipes(processResRecSave(Database.get(struuid(player) +
+		// ".researchedRecipes"))); TODO OOOOOOOOOOO
 	}
 
 	private static String struuid(MagicPlayer player) {

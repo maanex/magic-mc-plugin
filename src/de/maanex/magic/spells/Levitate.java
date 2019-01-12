@@ -11,6 +11,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
+import de.maanex.magic.basic.Element;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
@@ -23,7 +24,7 @@ import de.maanex.utils.ParticleUtil;
 public class Levitate extends MagicSpell {
 
 	public Levitate() {
-		super(19, "Übersicht", "Gut Aussicht von hier oben!", 2, 15, SpellType.ACTIVE, SpellCategory.UTILITY, SpellRarity.RARE);
+		super(19, "Übersicht", "Gut Aussicht von hier oben!", 2, 15, SpellType.ACTIVE, SpellCategory.UTILITY, SpellRarity.RARE, "Dauer :air:");
 	}
 
 	public static List<Player> inAir = new ArrayList<>();
@@ -31,7 +32,7 @@ public class Levitate extends MagicSpell {
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
 		if (!caster.getMCPlayer().isOnGround()) return;
-		caster.getMCPlayer().addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 20 * 10, -1, true));
+		caster.getMCPlayer().addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 20 * val.getElement(Element.AIR), -1, true));
 		caster.getMCPlayer().setVelocity(new Vector(0, 2, 0));
 		inAir.add(caster.getMCPlayer());
 		takeMana(caster, val);

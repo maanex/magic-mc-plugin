@@ -16,6 +16,7 @@ import de.maanex.magic.VisualUpdater;
 import de.maanex.magic.wands.WandType;
 import de.maanex.magic.wands.WandValues;
 import de.maanex.magic.wands.WandValues.WandModifier;
+import de.maanex.utils.ChatIcons;
 
 
 public abstract class MagicSpell {
@@ -26,8 +27,9 @@ public abstract class MagicSpell {
 	private SpellType		type;
 	private SpellCategory	category;
 	private SpellRarity		rarity;
+	private String[]		params;
 
-	public MagicSpell(int id, String name, String desc, int manacost, int cooldown, SpellType type, SpellCategory category, SpellRarity rarity) {
+	public MagicSpell(int id, String name, String desc, int manacost, int cooldown, SpellType type, SpellCategory category, SpellRarity rarity, String... params) {
 		this.id = id;
 		this.name = name;
 		this.desc = desc;
@@ -36,9 +38,10 @@ public abstract class MagicSpell {
 		this.type = type;
 		this.category = category;
 		this.rarity = rarity;
+		this.params = params;
 	}
 
-	public MagicSpell(int id, String name, String desc, int manacost, int cooldown, SpellType type, SpellCategory category, SpellRarity rarity, WandType reqWandType) {
+	public MagicSpell(int id, String name, String desc, int manacost, int cooldown, SpellType type, SpellCategory category, SpellRarity rarity, WandType reqWandType, String... params) {
 		this.id = id;
 		this.name = name;
 		this.desc = desc;
@@ -48,6 +51,7 @@ public abstract class MagicSpell {
 		this.category = category;
 		this.rarity = rarity;
 		this.reqWandType = reqWandType;
+		this.params = params;
 	}
 
 	protected abstract void onCastPerform(MagicPlayer caster, WandType type, WandValues val);
@@ -145,6 +149,13 @@ public abstract class MagicSpell {
 			lore.add("§7" + s);
 		else lore.add("§7" + getDesc());
 		lore.add("§0");
+
+		if (params != null && params.length > 0) {
+			for (String s : params)
+				lore.add("§f" + ChatIcons.translate(s));
+			lore.add("§0");
+		}
+
 		lore.add("§3✤ Mana: §b" + getManacost());
 		lore.add("§2♼ Cooldown: §a" + getCooldown() + "s");
 		lore.add("§0");

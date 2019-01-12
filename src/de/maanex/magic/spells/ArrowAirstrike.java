@@ -11,25 +11,26 @@ import org.bukkit.entity.Arrow.PickupStatus;
 import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
+import de.maanex.magic.basic.Element;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
 import de.maanex.magic.wands.WandValues;
-import de.maanex.magic.wands.WandValues.WandModifier;
 import de.maanex.main.Main;
 
 
 public class ArrowAirstrike extends MagicSpell {
 
 	public ArrowAirstrike() {
-		super(76, "Luftangriff Pfeilsturm", "*tröt*", 4, 30, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.EPIC);
+		super(76, "Luftangriff Pfeilsturm", "*tröt*", 4, 30, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.EPIC, "Reichweite :air:");
 	}
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
-		Block target = caster.getMCPlayer().getTargetBlock(null, val.getMod(WandModifier.ENERGY));
+		if (val.getElement(Element.AIR) <= 0) return;
+		Block target = caster.getMCPlayer().getTargetBlock(null, val.getElement(Element.AIR) * 10);
 		Random r = new Random();
 		int i = 100;
 		while (i-- > 0) {

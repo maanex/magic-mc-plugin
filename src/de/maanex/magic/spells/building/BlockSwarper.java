@@ -12,26 +12,28 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import de.maanex.magic.MagicPlayer;
+import de.maanex.magic.basic.Element;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
 import de.maanex.magic.wands.WandValues;
-import de.maanex.magic.wands.WandValues.WandModifier;
 
 
 public class BlockSwarper extends MagicSpell {
 
 	public BlockSwarper() {
-		super(44, "Blocktauscher", "1. Ersetzblock Shift-Linksklicken\n2. Zielblöcke Normal-Linksklicken", 5, 2, SpellType.ACTIVE, SpellCategory.BUILDING, SpellRarity.VERY_RARE);
+		super(44, "Blocktauscher", "1. Ersetzblock Shift-Linksklicken\n2. Zielblöcke Normal-Linksklicken", 5, 2, SpellType.ACTIVE, SpellCategory.BUILDING, SpellRarity.VERY_RARE, "Reichweite :air:");
 	}
 
 	private static HashMap<MagicPlayer, Material> replacementBlocks = new HashMap<>();
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
-		Block target = caster.getMCPlayer().getTargetBlock(null, val.getMod(WandModifier.ENERGY) / 4);
+		if (val.getElement(Element.ESSENCE_BUILDER) <= 0) return;
+
+		Block target = caster.getMCPlayer().getTargetBlock(null, val.getElement(Element.AIR) * 2);
 		if (caster.getMCPlayer().isSneaking()) {
 			if (!target.isEmpty()) {
 				replacementBlocks.put(caster, target.getType());

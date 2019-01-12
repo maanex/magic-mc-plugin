@@ -10,19 +10,19 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 
 import de.maanex.magic.MagicPlayer;
+import de.maanex.magic.basic.Element;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
 import de.maanex.magic.spell.SpellRarity;
 import de.maanex.magic.spell.SpellType;
 import de.maanex.magic.wands.WandType;
 import de.maanex.magic.wands.WandValues;
-import de.maanex.magic.wands.WandValues.WandModifier;
 
 
 public class Digger extends MagicSpell {
 
 	public Digger() {
-		super(75, "Bagger", "Brum brum brum brum!", 3, 0, SpellType.ACTIVE, SpellCategory.BUILDING, SpellRarity.RARE);
+		super(75, "Bagger", "Brum brum brum brum!", 3, 0, SpellType.ACTIVE, SpellCategory.BUILDING, SpellRarity.RARE, "Reichweite :earth:");
 	}
 
 	private static List<Material> breakable;
@@ -42,7 +42,9 @@ public class Digger extends MagicSpell {
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
-		Block target = caster.getMCPlayer().getTargetBlock(null, Math.max(1, 5 + val.getMod(WandModifier.ENERGY) / 4 - 20));
+		if (val.getElement(Element.ESSENCE_BUILDER) <= 0) return;
+
+		Block target = caster.getMCPlayer().getTargetBlock(null, Math.max(1, val.getElement(Element.EARTH) / 2));
 
 		for (int x = -r(); x <= r(); x++)
 			for (int z = -r(); z <= r(); z++)
