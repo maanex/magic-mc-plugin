@@ -48,7 +48,6 @@ public class Firering extends MagicSpell {
 
 			Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> {
 				f.setDirection(t.toVector().subtract(f.getLocation().toVector()).normalize());
-				f.setVelocity(t.toVector().subtract(f.getLocation().toVector()).normalize());
 			}, 40 + 2 * c++);
 		}
 		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> {

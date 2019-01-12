@@ -108,7 +108,6 @@ import de.maanex.survival.Jetpack;
 import de.maanex.survival.JoinNames;
 import de.maanex.survival.Recipes;
 import de.maanex.survival.Schlafenszeit;
-import de.maanex.survival.ServerlistPing;
 import de.maanex.survival.customItems.CustomItems;
 import de.maanex.survival.customOres.CustomBlockManager;
 import de.maanex.sysad.BDMain;
@@ -180,7 +179,7 @@ public class Main extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(MagicManager.getSpell(Waterbomb.class), this);
 
 		// Survival
-		Bukkit.getPluginManager().registerEvents(new ServerlistPing(), this);
+		// Bukkit.getPluginManager().registerEvents(new ServerlistPing(), this); TODO
 		Bukkit.getPluginManager().registerEvents(new AntiExplode(), this);
 		Bukkit.getPluginManager().registerEvents(new BeimSterben(), this);
 		Bukkit.getPluginManager().registerEvents(new Schlafenszeit(), this);

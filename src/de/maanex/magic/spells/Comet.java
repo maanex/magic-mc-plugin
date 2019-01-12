@@ -26,6 +26,8 @@ public class Comet extends MagicSpell {
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
+		if (val.getElement(Element.FIRE) <= 0) return;
+
 		Block target = caster.getMCPlayer().getTargetBlock(null, val.getElement(Element.FIRE) * 2);
 		if (target.getType().equals(Material.AIR)) return;
 

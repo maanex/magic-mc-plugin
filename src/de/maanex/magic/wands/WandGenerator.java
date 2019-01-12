@@ -45,9 +45,9 @@ public class WandGenerator {
 		skinNames.put((short) 1, "§bUnidentifizierter Zauberstab");
 		skinNames.put((short) 2, "§bGewöhnlicher Zauberstab");
 		skinNames.put((short) 3, "§bLangstab");
-		skinNames.put((short) 4, "§bLichtbringer Stab");
+		skinNames.put((short) 4, "§bElementarstab");
 		skinNames.put((short) 5, "§bVerstärkter Zauberstab");
-		skinNames.put((short) 6, "§bSonnenstab");
+		skinNames.put((short) 6, "§bBaustab");
 		skinNames.put((short) 7, "§cDunkelstab");
 		skinNames.put((short) 8, "§cStab der ewigen Nacht");
 		skinNames.put((short) 9, "§6Lichtstab");
@@ -216,13 +216,13 @@ public class WandGenerator {
 			if (mnu < 90) return 13;
 		}
 
-		if (new Random().nextInt(30) == 0) return 6;
+		if (val.getElement(Element.ESSENCE_BUILDER) > 0) return 6;
+
+		if (val.getElement(Element.ESSENCE_BENDER) > 0) return 4;
 
 		if (Math.abs(xpb - 100) > 20 || Math.abs(mnu - 100) > 20) return 3;
 
 		if (val.getModsSize() > 1) return 5;
-
-		if (val.getElement(Element.AIR) > 20 || val.getElement(Element.EARTH) > 20 || val.getElement(Element.WATER) > 20 || val.getElement(Element.FIRE) > 20) { return 4; }
 
 		return 2;
 	}

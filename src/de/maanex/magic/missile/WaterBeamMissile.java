@@ -51,7 +51,7 @@ public class WaterBeamMissile extends MagicMissile {
 
 		Vector v = tar.clone().subtract(position).toVector().normalize();
 		position.setDirection(position.getDirection().add(v));
-		position.add(position.getDirection().multiply((double) life / 100));
+		position.add(position.getDirection().multiply((double) Math.min(100, life) / 100));
 
 		Collection<Entity> e = position.getWorld().getNearbyEntities(position, 2, .5, 2);
 		if (!e.isEmpty()) e.forEach(n -> {

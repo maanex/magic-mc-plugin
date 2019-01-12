@@ -35,7 +35,7 @@ public class WaterBenderBeam extends MagicSpell {
 
 		while (mis-- > 0) {
 			Location loc = caster.getMCPlayer().getLocation().clone().add(r(), r(), r());
-			if (loc.getBlock().getType().equals(Material.WATER)) new WaterBeamMissile(loc, caster, val.getElement(Element.ESSENCE_BENDER), target.getLocation()).launch();
+			if (loc.getBlock().getType().equals(Material.WATER)) new WaterBeamMissile(loc, caster, val.getElement(Element.ESSENCE_BENDER) * 50, target.getLocation()).launch();
 			else mis += .3;
 		}
 		takeMana(caster, val);
