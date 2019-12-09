@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -12,6 +13,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import de.maanex.magic.crafting.Spellbook;
 import de.maanex.magic.items.DefaultItems;
@@ -41,50 +43,7 @@ public class UseWand implements Listener {
 		MagicPlayer p = MagicPlayer.get(e.getPlayer());
 
 		if (t.equals(WandType.UNIDENTIFIED)) {
-			/*
-			 * if (e.getClickedBlock() != null &&
-			 * e.getClickedBlock().getType().equals(Material.ENCHANTING_TABLE)) {
-			 * e.setCancelled(true);
-			 * if (e.getPlayer().getLevel() >= 3 && e.getItem().getAmount() == 1) {
-			 * if (!e.getPlayer().getGameMode().equals(GameMode.CREATIVE))
-			 * e.getPlayer().setLevel(e.getPlayer().getLevel() - 3);
-			 * 
-			 * Environment env = e.getClickedBlock().getWorld().getEnvironment();
-			 * if (new Random().nextInt(20) == 0) {
-			 * if (env.equals(Environment.NETHER)) {
-			 * ParticleUtil.spawn(e.getPlayer(), Particle.LAVA,
-			 * e.getClickedBlock().getLocation(), 100, 1, 3, 0, 3);
-			 * e.getPlayer().playSound(e.getPlayer().getEyeLocation(),
-			 * "entity.wither.ambient", 1, 1);
-			 * 
-			 * LegacyWandBuilder.get(env).withMods(WandModsGen.generate()).withType(WandType
-			 * .DARK).apply(e.getItem());
-			 * } else {
-			 * ParticleUtil.spawn(e.getPlayer(), Particle.END_ROD,
-			 * e.getClickedBlock().getLocation(), 500, 1, 5, 0, 5);
-			 * e.getPlayer().playSound(e.getPlayer().getEyeLocation(),
-			 * "ui.toast.challenge_complete", 1, 1);
-			 * 
-			 * LegacyWandBuilder.get(env).withMods(WandModsGen.generate()).withType(WandType
-			 * .LIGHT).apply(e.getItem());
-			 * }
-			 * } else {
-			 * ParticleUtil.spawn(e.getPlayer(), Particle.TOTEM,
-			 * e.getClickedBlock().getLocation(), 100, 1, 3, 3, 3);
-			 * e.getPlayer().playSound(e.getPlayer().getEyeLocation(), "item.totem.use", 1,
-			 * 1);
-			 * 
-			 * LegacyWandBuilder.get(env).withMods(WandModsGen.generate()).withType(WandType
-			 * .WOODEN).apply(e.getItem());
-			 * }
-			 * } else {
-			 * ParticleUtil.spawn(e.getPlayer(), Particle.SMOKE_LARGE,
-			 * e.getClickedBlock().getLocation(), 50, 0, 1, 1, 1);
-			 * }
-			 * }
-			 */
 			p.getMCPlayer().sendMessage("§7Zauberstab muss erst identifiziert werden!");
-
 			return;
 		}
 
@@ -113,9 +72,33 @@ public class UseWand implements Listener {
 					p.getMCPlayer().playSound(p.getMCPlayer().getEyeLocation(), Sound.BLOCK_BREWING_STAND_BREW, 1, 0);
 					return;
 				}
+				
+				int oldWandLevel = m.getLevel();
 
 				spell.interaction(p, t, m);
-				e.getPlayer().setCooldown(Material.STICK, 10);
+				e.getPlayer().setCooldown(Material.WOODEN_HOE, 10);
+				
+				if (oldWandLevel < m.getLevel()) { // Wand levelup
+					e.getPlayer().spawnParticle(Particle.TOTEM, e.getPlayer().getEyeLocation(), 20);
+					e.getPlayer().playSound(e.getPlayer().getEyeLocation(), Sound.UI_TOAST_CHALLENGE_COMPLETE, 1, 1);
+					
+					m.setUpgrades(m.getUpgrades() + 1);
+					
+					String border = "";
+					for (int i = 0; i < 10; i++)
+						border += "§d-§5-";
+					e.getPlayer().sendMessage(border);
+					e.getPlayer().sendMessage("");
+					e.getPlayer().sendMessage("§f§lZauberstab Levelup!");
+					e.getPlayer().sendMessage("§dDein Zauberstab ist nun Level §5" + m.getLevel() + "§d!");
+					e.getPlayer().sendMessage("§7" + m.getUpgrades() + (m.getUpgrades() > 1 ? " Upgrades" : " Upgrade") + " möglich!");
+					e.getPlayer().sendMessage("");
+					e.getPlayer().sendMessage(border);
+				}
+				
+				ItemMeta met = e.getItem().getItemMeta();
+				met.setLore(w.asItem().getItemMeta().getLore());
+				e.getItem().setItemMeta(met);
 			}
 		} else {
 			p.getMCPlayer().sendMessage("§7Spellbook in der anderen Hand halten!");

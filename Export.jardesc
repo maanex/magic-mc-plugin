@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="WINDOWS-1252" standalone="no"?>
 <jardesc>
-    <jar path="C:/Users/andre/Desktop/Projekte/_Minnekraft/Server/1.13 Tude Server/plugins/Magic.jar"/>
+    <jar path="C:/Users/andre/Desktop/Projekte/- Minnekraft/Server/1.13 Test/plugins/Magic 1.13.jar"/>
     <options buildIfNeeded="true" compress="true" descriptionLocation="/Plugin 1.13 - Magic/Export.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>
@@ -13,8 +13,8 @@
     <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
         <javaElement handleIdentifier="=Plugin 1.13 - Magic/src"/>
         <file path="/Plugin 1.13 - Magic/.gitignore"/>
-        <file path="/Plugin 1.13 - Magic/plugin.yml"/>
         <file path="/Plugin 1.13 - Magic/.project"/>
+        <file path="/Plugin 1.13 - Magic/plugin.yml"/>
         <file path="/Plugin 1.13 - Magic/.classpath"/>
         <file path="/Plugin 1.13 - Magic/Export.jardesc"/>
     </selectedElements>

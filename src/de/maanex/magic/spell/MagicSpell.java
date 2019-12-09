@@ -65,6 +65,8 @@ public abstract class MagicSpell {
 
 		if (cooldown > 0 && !caster.getMCPlayer().getGameMode().equals(GameMode.CREATIVE)) caster.cooldown.put(this, cooldown);
 		VisualUpdater.updateCooldown(caster, true);
+		
+		val.setXp(val.getXp() + manacost);
 	}
 
 	public void interaction(MagicPlayer player, WandType type, WandValues val) {

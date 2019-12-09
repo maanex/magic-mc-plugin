@@ -26,8 +26,7 @@ public class ManaDbInterface {
 		player.setMana(Database.get(struuid(player) + ".mana", Integer.class));
 		player.setManaCap(Database.get(struuid(player) + ".manaCap", Integer.class));
 		player.setMaxMana(Database.get(struuid(player) + ".maxMana", Integer.class));
-		// player.setResearchedRecipes(processResRecSave(Database.get(struuid(player) +
-		// ".researchedRecipes"))); TODO OOOOOOOOOOO
+		 player.setResearchedRecipes(processResRecLoad(Database.get(struuid(player) + ".researchedRecipes")));
 	}
 
 	private static String struuid(MagicPlayer player) {
@@ -47,7 +46,7 @@ public class ManaDbInterface {
 		return out;
 	}
 
-	private static List<SpellRecipe> processResRecSave(Object in) {
+	private static List<SpellRecipe> processResRecLoad(Object in) {
 		String s = String.valueOf(in);
 		List<SpellRecipe> out = new ArrayList<>();
 		List<String> r = Arrays.asList(s.split(";"));

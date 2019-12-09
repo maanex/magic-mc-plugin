@@ -33,6 +33,7 @@ import de.maanex.magic.spells.BlackHole;
 import de.maanex.magic.spells.Blast;
 import de.maanex.magic.spells.Clarity;
 import de.maanex.magic.spells.Comet;
+import de.maanex.magic.spells.CustomSpell;
 import de.maanex.magic.spells.Discharge;
 import de.maanex.magic.spells.Enderarm;
 import de.maanex.magic.spells.FireArrowStorm;
@@ -120,6 +121,20 @@ import de.maanex.test.MathEqu;
 
 
 public class Main extends JavaPlugin {
+	
+	/*
+	 * Codex Magica -> mittlerer knopf -> research seiten
+	 * Hier gegen ein ink sack ein rezept aufschreiben
+	 * mit dem rezept zu einem schreibtisch
+	 * in den schreibtisch legen
+	 * den orb nach oben unten links rechts bewegen
+	 * wände sind nicht passierbar
+	 * wenn man auf einen spell drauf läuft muss man den im inventar haben sonst zählt als wand, wenn durch dann item im inventar verbrauchen
+	 * fortschritt in item meta speichern
+	 * wenn fertig dann als erforschtes rezept item -> rechtsklick um wissen freizuschalten -> nur möglich wenn dies im codex freigeschaltet ist
+	 * im codex mehrere kategorien, jeweils nach rechts und links scrollbar
+	 * 
+	 */
 
 	public static Main instance;
 
@@ -305,6 +320,8 @@ public class Main extends JavaPlugin {
 		MagicManager.registerSpell(new Homing());
 		MagicManager.registerSpell(new Digger());
 		MagicManager.registerSpell(new ArrowAirstrike());
+		
+		MagicManager.registerSpell(new CustomSpell());
 	}
 
 	private void registerSpellRecipes() {

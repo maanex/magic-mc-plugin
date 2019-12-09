@@ -18,7 +18,16 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import de.maanex.magic.basic.Element;
 import de.maanex.magic.spell.MagicSpell;
+import de.maanex.magic.spells.basic.AirSpirit;
+import de.maanex.magic.spells.basic.EarthSpirit;
+import de.maanex.magic.spells.basic.EssenceBender;
+import de.maanex.magic.spells.basic.EssenceBrightness;
+import de.maanex.magic.spells.basic.EssenceDarkness;
+import de.maanex.magic.spells.basic.FireSpirit;
+import de.maanex.magic.spells.basic.WaterSpirit;
+import de.maanex.magic.spells.building.MasterBuildersEssence;
 import de.maanex.magic.wands.Wand;
 import de.maanex.magic.wands.WandGenerator;
 import de.maanex.magic.wands.WandType;
@@ -91,21 +100,36 @@ public class WandWorkbenchUse implements Listener {
 			case IDENTIFY_SUFFIX:
 				setSkin(guiBackground, (short) 16);
 				break;
+			case UPGRADE_SUFFIX:
+				setSkin(guiBackground, (short) 16);
+				break;
 		}
 		m = guiBackground.getItemMeta();
 		m.setDisplayName("§0");
 		guiBackground.setItemMeta(m);
 		inv.setItem(0, guiBackground);
 
+		ItemStack confirm;
 		switch (type) {
 			case IDENTIFY_SUFFIX:
 				for (int i : identifySlots)
 					inv.setItem(i, null);
 
-				ItemStack confirm = new ItemStack(Material.STONE_HOE);
+				confirm = new ItemStack(Material.STONE_HOE);
 				setSkin(confirm, (short) 11);
 				m = confirm.getItemMeta();
 				m.setDisplayName("§r§aIdentifizieren");
+				confirm.setItemMeta(m);
+				inv.setItem(confirmSlot, confirm);
+				break;
+			case UPGRADE_SUFFIX:
+				for (int i : identifySlots)
+					inv.setItem(i, null);
+
+				confirm = new ItemStack(Material.STONE_HOE);
+				setSkin(confirm, (short) 11);
+				m = confirm.getItemMeta();
+				m.setDisplayName("§r§aUpgraden");
 				confirm.setItemMeta(m);
 				inv.setItem(confirmSlot, confirm);
 				break;
@@ -131,6 +155,7 @@ public class WandWorkbenchUse implements Listener {
 							Wand w = Wand.fromItem(inv.getItem(middleSlot));
 							if (w == null) return;
 							if (w.getType().equals(WandType.UNIDENTIFIED)) e.getWhoClicked().openInventory(buildInv(e.getWhoClicked(), inv, IDENTIFY_SUFFIX));
+							else if (w.getValues() != null && w.getValues().getUpgrades() > 0) e.getWhoClicked().openInventory(buildInv(e.getWhoClicked(), inv, UPGRADE_SUFFIX));
 						}
 					}, 1);
 					break;
@@ -183,6 +208,64 @@ public class WandWorkbenchUse implements Listener {
 						}
 					}, 1);
 					break;
+
+				case UPGRADE_SUFFIX:
+					if (real && e.getSlot() != middleSlot && !identifySlots.contains(e.getSlot())) {
+						e.setCancelled(true);
+					}
+					
+					ItemStack wandItem = inv.getItem(middleSlot);
+					Wand w = Wand.fromItem(wandItem);
+					if (w == null) {
+						for (int i : identifySlots)
+							if (inv.getItem(i) != null) e.getWhoClicked().getWorld().dropItem(e.getWhoClicked().getEyeLocation(), inv.getItem(i));
+						e.getWhoClicked().openInventory(buildInv(e.getWhoClicked(), inv, EMPTY_SUFFIX));
+						break;
+					}
+
+					if (real && e.getSlot() == confirmSlot) {
+						List<ItemStack> modifiers = new ArrayList<>();
+						for (int i : identifySlots)
+							if (inv.getItem(i) != null) modifiers.add(inv.getItem(i));
+						
+						if (validateUpgrade(w, modifiers) == "") {
+							applyWandUpgrade(w, modifiers);
+							ItemMeta met = wandItem.getItemMeta();
+							met.setLore(w.asItem().getItemMeta().getLore());
+							wandItem.setItemMeta(met);
+							for (int i : identifySlots)
+								inv.setItem(i, null);
+							e.getWhoClicked().openInventory(buildInv(e.getWhoClicked(), inv, EMPTY_SUFFIX));
+							break;
+						}
+					}
+
+					Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> {
+						if (inv.getItem(middleSlot) == null) {
+							for (int i : identifySlots)
+								if (inv.getItem(i) != null) e.getWhoClicked().getWorld().dropItem(e.getWhoClicked().getEyeLocation(), inv.getItem(i));
+							e.getWhoClicked().openInventory(buildInv(e.getWhoClicked(), inv, EMPTY_SUFFIX));
+						} else {
+							List<ItemStack> modifiers = new ArrayList<>();
+							for (int i : identifySlots)
+								if (inv.getItem(i) != null) modifiers.add(inv.getItem(i));
+							String s = validateUpgrade(w, modifiers);
+							ItemStack confirm = inv.getItem(confirmSlot);
+							ItemMeta m = confirm.getItemMeta();
+							if (s == "") {
+								m.setDisplayName("§r§aUpgraden");
+								m.setLore(null);
+								confirm.setItemMeta(m);
+								setSkin(confirm, (short) 11);
+							} else {
+								m.setDisplayName("§r§7Upgraden");
+								m.setLore(Arrays.asList("§c" + s));
+								confirm.setItemMeta(m);
+								setSkin(confirm, (short) 10);
+							}
+						}
+					}, 1);
+					break;
 			}
 		}
 	}
@@ -206,6 +289,71 @@ public class WandWorkbenchUse implements Listener {
 		boolean valid = WandGenerator.valid(mods);
 		if (valid) return "";
 		return "Ungültige Sprüche / Kombination";
+	}
+
+	private String validateUpgrade(Wand wand, List<ItemStack> modifiers) {
+		if (modifiers.isEmpty()) return "";
+		List<Class<? extends MagicSpell>> mods = modifiersToClass(modifiers);
+		if (mods == null || mods.isEmpty()) return "Ungültiges Item";
+		boolean valid = WandGenerator.valid(mods);
+		if (!valid) return "Nur Geister und Essenzen können zum Upgraden genutzt werden";
+		
+		int mfire = 0, mwater = 0, mair = 0, mearth = 0, mdark = 0, mlight = 0, mbuild = 0, mbend = 0;
+		for (Class<? extends MagicSpell> s : mods) {
+			if (s.equals(FireSpirit.class)) mfire++;
+			if (s.equals(WaterSpirit.class)) mwater++;
+			if (s.equals(EarthSpirit.class)) mearth++;
+			if (s.equals(AirSpirit.class)) mair++;
+			if (s.equals(EssenceBender.class)) mbend++;
+			if (s.equals(MasterBuildersEssence.class)) mbuild++;
+			if (s.equals(EssenceBrightness.class)) mlight++;
+			if (s.equals(EssenceDarkness.class)) mdark++;
+		}
+		
+		if (mfire > 0 && wand.getValues().getElement(Element.FIRE) <= 0) return "Feuer Upgrade nicht möglich, da der Stab kein Feuer besitzt!";
+		if (mwater > 0 && wand.getValues().getElement(Element.WATER) <= 0) return "Wasser Upgrade nicht möglich, da der Stab kein Wasser besitzt!";
+		if (mair > 0 && wand.getValues().getElement(Element.AIR) <= 0) return "Luft Upgrade nicht möglich, da der Stab keine Luft besitzt!";
+		if (mearth > 0 && wand.getValues().getElement(Element.EARTH) <= 0) return "Erd Upgrade nicht möglich, da der Stab keine Erde besitzt!";
+		if (mdark > 0 && wand.getValues().getElement(Element.ESSENCE_DARK) <= 0) return "Dunkelessenz Upgrade nicht möglich, da der Stab keine Dunkelessenz besitzt!";
+		if (mlight > 0 && wand.getValues().getElement(Element.ESSENCE_LIGHT) <= 0) return "Lichtessenz Upgrade nicht möglich, da der Stab keine Lichtssenz besitzt!";
+		if (mbuild > 0 && wand.getValues().getElement(Element.ESSENCE_BUILDER) <= 0) return "Baumeister Upgrade nicht möglich, da der Stab keine Baumeisteressenz besitzt!";
+		if (mbend > 0 && wand.getValues().getElement(Element.ESSENCE_BENDER) <= 0) return "Bendigungs Upgrade nicht möglich, da der Stab keine Bendigungsessenz besitzt!";
+		
+		return "";
+	}
+	
+	private void applyWandUpgrade(Wand w, List<ItemStack> modifiers) {
+		List<Class<? extends MagicSpell>> mods = modifiersToClass(modifiers);
+		int mfire = 0, mwater = 0, mair = 0, mearth = 0, mdark = 0, mlight = 0, mbuild = 0, mbend = 0;
+		for (Class<? extends MagicSpell> s : mods) {
+			if (s.equals(FireSpirit.class)) mfire++;
+			if (s.equals(WaterSpirit.class)) mwater++;
+			if (s.equals(EarthSpirit.class)) mearth++;
+			if (s.equals(AirSpirit.class)) mair++;
+			if (s.equals(EssenceBender.class)) mbend++;
+			if (s.equals(MasterBuildersEssence.class)) mbuild++;
+			if (s.equals(EssenceBrightness.class)) mlight++;
+			if (s.equals(EssenceDarkness.class)) mdark++;
+		}
+		if (mfire == 6) mfire = 10;
+		if (mwater == 6) mwater = 10;
+		if (mearth == 6) mearth = 10;
+		if (mair == 6) mair = 10;
+		if (mbend == 6) mbend = 10;
+		if (mbuild == 6) mbuild = 10;
+		if (mlight == 6) mlight = 10;
+		if (mdark == 6) mdark = 10;
+
+		if (mfire > 0) w.getValues().setElement(Element.FIRE, w.getValues().getElement(Element.FIRE) + mfire);
+		if (mwater > 0) w.getValues().setElement(Element.WATER, w.getValues().getElement(Element.WATER) + mwater);
+		if (mearth > 0) w.getValues().setElement(Element.EARTH, w.getValues().getElement(Element.EARTH) + mearth);
+		if (mair > 0) w.getValues().setElement(Element.AIR, w.getValues().getElement(Element.AIR) + mair);
+		if (mbend > 0) w.getValues().setElement(Element.ESSENCE_BENDER, w.getValues().getElement(Element.ESSENCE_BENDER) + mbend);
+		if (mbuild > 0) w.getValues().setElement(Element.ESSENCE_BUILDER, w.getValues().getElement(Element.ESSENCE_BUILDER) + mbuild);
+		if (mlight > 0) w.getValues().setElement(Element.ESSENCE_LIGHT, w.getValues().getElement(Element.ESSENCE_LIGHT) + mlight);
+		if (mdark > 0) w.getValues().setElement(Element.ESSENCE_DARK, w.getValues().getElement(Element.ESSENCE_DARK) + mdark);
+		
+		w.getValues().setUpgrades(w.getValues().getUpgrades() - 1);
 	}
 
 	//

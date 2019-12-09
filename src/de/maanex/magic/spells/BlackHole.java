@@ -25,7 +25,7 @@ import de.maanex.utils.TargetEntityFinder;
 public class BlackHole extends MagicSpell {
 
 	public BlackHole() {
-		super(71, "Schwarzes Loch", "Huch!", 5, 30, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.EPIC);
+		super(71, "Schwarzes Loch", "Huch!", 5, 30, SpellType.ACTIVE, SpellCategory.COMBAT, SpellRarity.MYTHIC);
 	}
 
 	@Override

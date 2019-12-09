@@ -11,6 +11,7 @@ import de.maanex.magic.basic.Element;
 public class WandValues {
 
 	int										xp			= 0;
+	int										upgrades    = 0;
 	private HashMap<Element, Integer>		elements	= new HashMap<>();
 	private HashMap<WandModifier, Integer>	mods		= new HashMap<>();
 
@@ -28,6 +29,27 @@ public class WandValues {
 
 	public int getXp() {
 		return xp;
+	}
+
+	public WandValues setUpgrades(int upgrades) {
+		this.upgrades = upgrades;
+		return this;
+	}
+
+	public int getUpgrades() {
+		return upgrades;
+	}
+	
+	public int getLevel() {
+		int level = 0;
+		do level++;
+		while (xp >= getReqXp(level));
+		if (level > 10) level = 10;
+		return level;
+	}
+	
+	public int getReqXp(int level) {
+		return (int) (Math.pow(2, level - 1) * 20);
 	}
 
 	public WandValues setElement(Element e, int i) {
@@ -59,8 +81,13 @@ public class WandValues {
 	public void addLore(List<String> lore) {
 		meta = "";
 
-		// lore.add(xp + ""); // TODO
-		// lore.add("");
+		meta += "x" + xp;
+		meta += ";u" + upgrades;
+
+		lore.add("§f§lLevel §e§l" + getLevel());
+		lore.add("§8§o(" + getXp() + "xp/" + getReqXp(getLevel() + 1) + "xp)");
+		if (getUpgrades() > 0) lore.add("§d§l" + getUpgrades() + (getUpgrades() > 1 ? " Upgrades" : " Upgrade") + " möglich!");
+		lore.add("");
 
 		elements.forEach((e, a) -> {
 			lore.add(e.getLoredisplay() + a);
@@ -76,7 +103,7 @@ public class WandValues {
 		}
 
 		lore.add("");
-		lore.add("§0" + meta.substring(1));
+		lore.add("§0" + meta);
 	}
 
 	public static WandValues fromLore(List<String> lore) {
@@ -86,11 +113,15 @@ public class WandValues {
 		for (String s : last.split(";")) {
 			String a = s.charAt(0) + "";
 			String sub = s.charAt(1) + "";
-			int val = Integer.parseInt(s.substring(2));
+			int val = s.length() > 2 ? Integer.parseInt(s.substring(2)) : 0;
 
 			switch (a) {
 				case "x":
 					v.xp = Integer.parseInt(s.substring(1));
+					break;
+					
+				case "u":
+					v.upgrades = Integer.parseInt(s.substring(1));
 					break;
 
 				case "e":
