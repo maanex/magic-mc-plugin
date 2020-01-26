@@ -69,4 +69,9 @@ public class StunMissile extends MagicMissile {
 		ParticleUtil.spawn(Particle.REDSTONE, pa3loc, 1, 1, 0, 0, 0, Color.PURPLE, 1f);
 	}
 
+	@Override
+	public void magicRedirect(Vector vector) {
+		dir.setDirection(vector);
+	}
+
 }

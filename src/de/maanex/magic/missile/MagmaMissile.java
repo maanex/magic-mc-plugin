@@ -59,4 +59,9 @@ public class MagmaMissile extends MagicMissile {
 		}
 	}
 
+	@Override
+	public void magicRedirect(Vector vector) {
+		position.setDirection(vector);
+	}
+
 }

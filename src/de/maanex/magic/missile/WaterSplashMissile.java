@@ -75,4 +75,9 @@ public class WaterSplashMissile extends MagicMissile {
 		}, 20 * 5 + new Random().nextInt(40));
 	}
 
+	@Override
+	public void magicRedirect(Vector vector) {
+		position.setDirection(vector);
+	}
+
 }

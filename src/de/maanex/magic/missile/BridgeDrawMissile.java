@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
 import de.maanex.main.Main;
@@ -39,6 +40,11 @@ public class BridgeDrawMissile extends MagicMissile {
 		}
 
 		if (position.distance(target) <= 1.1) destroy();
+	}
+
+	@Override
+	public void magicRedirect(Vector vector) {
+		// Ignore
 	}
 
 }

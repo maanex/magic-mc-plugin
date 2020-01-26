@@ -45,4 +45,9 @@ public class PainfullStingMissile extends MagicMissile {
 		ParticleUtil.spawn(Particle.DRIP_LAVA, position, 1, 1, 0, 0, 0);
 	}
 
+	@Override
+	public void magicRedirect(Vector vector) {
+		position.setDirection(vector);
+	}
+
 }

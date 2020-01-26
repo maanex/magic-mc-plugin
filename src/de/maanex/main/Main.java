@@ -31,6 +31,7 @@ import de.maanex.magic.spells.ArrowAirstrike;
 import de.maanex.magic.spells.ArrowStorm;
 import de.maanex.magic.spells.BlackHole;
 import de.maanex.magic.spells.Blast;
+import de.maanex.magic.spells.Burst;
 import de.maanex.magic.spells.Clarity;
 import de.maanex.magic.spells.Comet;
 import de.maanex.magic.spells.CustomSpell;
@@ -133,6 +134,12 @@ public class Main extends JavaPlugin {
 	 * fortschritt in item meta speichern
 	 * wenn fertig dann als erforschtes rezept item -> rechtsklick um wissen freizuschalten -> nur möglich wenn dies im codex freigeschaltet ist
 	 * im codex mehrere kategorien, jeweils nach rechts und links scrollbar
+	 * 
+	 * evtl entities mit z.b. feuer sprüchen töten für feuer irgendwas
+	 * das dann zum bewegen aufm grid benutzen
+	 * 
+	 * evtl sprüche modifizierbar machen
+	 * z.b. feuerring: mana, cooldown, anz. bälle, radius, geschwindigkeit, feuerrate, damage, ....
 	 * 
 	 */
 
@@ -320,6 +327,8 @@ public class Main extends JavaPlugin {
 		MagicManager.registerSpell(new Homing());
 		MagicManager.registerSpell(new Digger());
 		MagicManager.registerSpell(new ArrowAirstrike());
+		MagicManager.registerSpell(new Burst());
+//		MagicManager.registerSpell(new Detain()); broken wegen magic spells: nicht anhaltbar
 		
 		MagicManager.registerSpell(new CustomSpell());
 	}

@@ -64,4 +64,9 @@ public class WaterPunchMissile extends MagicMissile {
 		}
 	}
 
+	@Override
+	public void magicRedirect(Vector vector) {
+		dir.setDirection(vector);
+	}
+
 }

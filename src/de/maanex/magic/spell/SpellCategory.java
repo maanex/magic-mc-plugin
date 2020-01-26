@@ -3,7 +3,13 @@ package de.maanex.magic.spell;
 
 public enum SpellCategory {
 
-	COMBAT("Kampf"), PROTECTION("Schutz"), UTILITY("Werkzeug"), BENDER("Bendigung"), HALLUCINATION("Halluzination"), BUILDING("Konstruktion")
+	COMBAT("Kampf"),
+	PROTECTION("Schutz"),
+	UTILITY("Werkzeug"),
+	BENDER("Bendigung"),
+	HALLUCINATION("Halluzination"),
+	BUILDING("Konstruktion"),
+	ELEMENTALIST("Elementalist"),
 
 	;
 

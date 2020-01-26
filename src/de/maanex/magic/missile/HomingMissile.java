@@ -45,4 +45,9 @@ public class HomingMissile extends MagicMissile {
 		ParticleUtil.spawn(Particle.EXPLOSION_NORMAL, position, 5, .02, .2, .2, .2);
 	}
 
+	@Override
+	public void magicRedirect(Vector vector) {
+		position.setDirection(vector);
+	}
+
 }

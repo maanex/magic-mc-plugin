@@ -2,6 +2,8 @@ package de.maanex.magic.spells;
 
 import java.util.Random;
 
+import org.bukkit.Material;
+
 import de.maanex.magic.MagicPlayer;
 import de.maanex.magic.spell.MagicSpell;
 import de.maanex.magic.spell.SpellCategory;
@@ -25,6 +27,10 @@ public class CustomSpell extends MagicSpell {
 
 	@Override
 	protected void onCastPerform(MagicPlayer caster, WandType type, WandValues val) {
+		caster.getMCPlayer().sendBlockChange(caster.getMCPlayer().getLocation(), Material.END_GATEWAY.createBlockData());
+		
+		if (true) return;
+		
 		DynamicSpell s = new DynamicSpell(spell, caster, type, val);
 		if (type.equals(WandType.DARK)) {
 			spell = "t;" + DEntity.randomEntity(new Random()) + ";" + DLocation.randomLocation(5);

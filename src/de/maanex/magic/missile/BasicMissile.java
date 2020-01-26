@@ -88,4 +88,9 @@ public class BasicMissile extends MagicMissile {
 	public static enum BlockHitBehaviour {
 		PASS_THRU, ABSORB, REFLECT
 	}
+
+	@Override
+	public void magicRedirect(Vector vector) {
+		dir.setDirection(vector);
+	}
 }

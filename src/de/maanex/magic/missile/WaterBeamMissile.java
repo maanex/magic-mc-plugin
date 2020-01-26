@@ -82,4 +82,9 @@ public class WaterBeamMissile extends MagicMissile {
 		}, 20 + new Random().nextInt(3));
 	}
 
+	@Override
+	public void magicRedirect(Vector vector) {
+		position.setDirection(vector);
+	}
+
 }

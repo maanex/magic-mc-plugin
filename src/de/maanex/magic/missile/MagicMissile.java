@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Location;
+import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
 
@@ -20,6 +21,8 @@ public abstract class MagicMissile {
 	}
 
 	public abstract void tick();
+	
+	public abstract void magicRedirect(Vector vector);
 
 	/*
 	 * 
@@ -38,5 +41,11 @@ public abstract class MagicMissile {
 	public static void doTick() {
 		new ArrayList<>(activeMissiles).forEach(a -> a.tick());
 	}
+
+	public static List<MagicMissile> getActiveMissiles() {
+		return activeMissiles;
+	}
+	
+	
 
 }

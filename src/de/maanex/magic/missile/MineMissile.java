@@ -5,6 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
+import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
 import de.maanex.utils.ParticleUtil;
@@ -62,6 +63,11 @@ public class MineMissile extends MagicMissile {
 
 	public static abstract class EntityEnterMineListener {
 		public abstract void onEnter(Entity e);
+	}
+
+	@Override
+	public void magicRedirect(Vector vector) {
+		// Ignore
 	}
 
 }

@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 import de.maanex.magic.MagicPlayer;
 import de.maanex.main.Main;
@@ -47,6 +48,11 @@ public class EarthPotterMissile extends MagicMissile {
 		}
 
 		if (life-- <= 0) destroy();
+	}
+
+	@Override
+	public void magicRedirect(Vector vector) {
+		position.setDirection(vector);
 	}
 
 }
